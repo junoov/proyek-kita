@@ -1,0 +1,73 @@
+---
+type Props = {
+  readonly inverted?: boolean
+}
+
+const { inverted = false } = Astro.props
+const className = inverted ? "brand-mark brand-mark--inverse" : "brand-mark"
+---
+
+<span class={className} aria-label="Karsa Uniform">
+  <span class="brand-mark__glyph" aria-hidden="true">K</span>
+  <span class="brand-mark__copy">
+    <strong>Karsa</strong>
+    <span>Uniform</span>
+  </span>
+</span>
+
+<style>
+  .brand-mark {
+    align-items: center;
+    color: var(--color-text);
+    display: inline-flex;
+    gap: var(--space-2);
+    line-height: 1;
+  }
+
+  .brand-mark__glyph {
+    align-items: center;
+    background: var(--color-ink);
+    border-radius: var(--panel-radius);
+    color: var(--color-text-inverse);
+    display: inline-flex;
+    font-size: var(--type-small);
+    font-weight: 800;
+    height: var(--space-10);
+    justify-content: center;
+    letter-spacing: -0.08em;
+    width: var(--space-10);
+  }
+
+  .brand-mark__copy {
+    display: grid;
+    font-size: var(--type-small);
+    gap: var(--space-1);
+    letter-spacing: -0.03em;
+  }
+
+  .brand-mark__copy strong {
+    font-size: var(--type-body);
+  }
+
+  .brand-mark__copy span {
+    color: var(--color-text-muted);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .brand-mark--inverse {
+    color: var(--color-text-inverse);
+  }
+
+  .brand-mark--inverse .brand-mark__glyph {
+    background: var(--color-text-inverse);
+    color: var(--color-ink);
+  }
+
+  .brand-mark--inverse .brand-mark__copy span {
+    color: var(--color-text-inverse);
+    opacity: 0.7;
+  }
+</style>

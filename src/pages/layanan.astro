@@ -1,0 +1,110 @@
+---
+import Footer from "../components/layout/Footer.astro"
+import Header from "../components/layout/Header.astro"
+import PageHero from "../components/sections/PageHero.astro"
+import ServiceGrid from "../components/sections/ServiceGrid.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Layanan Karsa Uniform"
+  description="Dari konsultasi material sampai produksi batch, Karsa Uniform menjaga proses seragam kerja tetap jelas dan terkendali."
+  path="/layanan"
+>
+  <Header />
+  <main id="main">
+    <PageHero
+      label="Layanan"
+      title="Satu alur untuk seragam yang siap bekerja."
+      lede="Kami membantu tim procurement bergerak dari kebutuhan yang belum rapi menjadi pesanan yang jelas, terukur, dan siap diproduksi."
+    />
+    <ServiceGrid
+      heading="Keputusan kecil yang dijaga sejak awal akan menghindari biaya besar di akhir."
+      lede="Setiap fase menyisakan jejak keputusan yang bisa dibaca kembali oleh tim Anda."
+    />
+    <section class="assurance" aria-labelledby="assurance-title">
+      <div>
+        <p>Kontrol mutu</p>
+        <h2 id="assurance-title">Pemeriksaan yang mengikuti ritme produksi, bukan menunggu di ujung.</h2>
+      </div>
+      <ol>
+        <li><span>01</span><p>Material dan warna diverifikasi sebelum pemotongan berjalan.</p></li>
+        <li><span>02</span><p>Ukuran dan pola diperiksa terhadap sampel yang telah disetujui.</p></li>
+        <li><span>03</span><p>Batch akhir diperiksa kembali sebelum dipacking dan dikirim.</p></li>
+      </ol>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .assurance {
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+    display: grid;
+    gap: var(--space-12);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  .assurance > div,
+  .assurance ol {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    width: 100%;
+  }
+
+  .assurance > div > p {
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--space-4);
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0;
+    max-width: 20ch;
+  }
+
+  ol {
+    border-top: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 24%, transparent);
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    align-items: start;
+    border-bottom: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 24%, transparent);
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: var(--space-10) minmax(0, 1fr);
+    padding: var(--space-5) 0;
+  }
+
+  li span {
+    color: var(--color-signal);
+    font-size: var(--type-small);
+    font-weight: 800;
+  }
+
+  li p {
+    margin: 0;
+    max-width: 28rem;
+    opacity: 0.8;
+  }
+
+  @media (min-width: 64rem) {
+    .assurance {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .assurance > div,
+    .assurance ol {
+      max-width: none;
+    }
+  }
+</style>

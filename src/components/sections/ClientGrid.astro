@@ -1,0 +1,113 @@
+---
+import { clients } from "../../data/company"
+
+type Props = {
+  readonly heading?: string
+}
+
+const { heading = "Kepercayaan dibangun dari hasil yang konsisten." } = Astro.props
+---
+
+<section class="clients" aria-labelledby="clients-title">
+  <div class="clients__heading">
+    <h2 id="clients-title">{heading}</h2>
+    <p>Kami membantu tim lintas industri menjaga tampilan yang seragam tanpa mengorbankan fungsi kerja.</p>
+  </div>
+  <div class="clients__grid">
+    {clients.map((client) => (
+      <article class="client">
+        <span class="client__mark" aria-hidden="true">{client.initials}</span>
+        <div>
+          <h3>{client.name}</h3>
+          <p>{client.sector}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .clients {
+    background: var(--color-mist);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  .clients__heading,
+  .clients__grid {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+  }
+
+  .clients__heading {
+    max-width: 40rem;
+  }
+
+  h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0;
+  }
+
+  .clients__heading p {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    margin: var(--space-5) 0 0;
+  }
+
+  .clients__grid {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-12);
+  }
+
+  .client {
+    align-items: center;
+    background: var(--color-canvas);
+    border: var(--rule-width) solid var(--color-rule);
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .client__mark {
+    align-items: center;
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+    display: inline-flex;
+    font-size: var(--type-label);
+    font-weight: 800;
+    height: var(--space-10);
+    justify-content: center;
+    letter-spacing: 0.06em;
+    width: var(--space-10);
+  }
+
+  h3,
+  .client p {
+    margin: 0;
+  }
+
+  h3 {
+    font-size: var(--type-body);
+    letter-spacing: -0.025em;
+  }
+
+  .client p {
+    color: var(--color-text-muted);
+    font-size: var(--type-small);
+    margin-top: var(--space-1);
+  }
+
+  @media (min-width: 48rem) {
+    .clients__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .clients__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+import Footer from "../components/layout/Footer.astro"
+import Header from "../components/layout/Header.astro"
+import ClientGrid from "../components/sections/ClientGrid.astro"
+import ContactCTA from "../components/sections/ContactCTA.astro"
+import PageHero from "../components/sections/PageHero.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Pelanggan Karsa Uniform"
+  description="Karsa Uniform mendukung kebutuhan seragam kerja untuk tim hospitality, logistik, healthcare, retail, dan layanan."
+  path="/pelanggan"
+>
+  <Header />
+  <main id="main">
+    <PageHero
+      label="Pelanggan"
+      title="Standar yang sama, konteks kerja yang berbeda."
+      lede="Kami mengubah kebutuhan khas setiap industri menjadi sistem seragam yang dapat diterapkan dengan konsisten."
+    />
+    <ClientGrid heading="Dipercaya oleh tim yang selalu terlihat di garis depan." />
+    <section class="sectors" aria-labelledby="sectors-title">
+      <h2 id="sectors-title">Kami memahami titik tekan di tiap sektor.</h2>
+      <div>
+        <article><strong>Hospitality</strong><p>Seragam yang memberi kesan pertama tanpa menghambat gerak.</p></article>
+        <article><strong>Logistics</strong><p>Material dan detail yang tetap jelas di lingkungan kerja yang cepat.</p></article>
+        <article><strong>Healthcare</strong><p>Komposisi yang rapi, mudah dirawat, dan nyaman untuk shift panjang.</p></article>
+      </div>
+    </section>
+    <ContactCTA />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .sectors {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  .sectors > div {
+    border-top: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    margin-top: var(--space-12);
+  }
+
+  article {
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    padding: var(--space-6) 0;
+  }
+
+  article strong {
+    font-size: var(--type-h3);
+    letter-spacing: -0.035em;
+  }
+
+  article p {
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+    max-width: 22rem;
+  }
+
+  @media (min-width: 48rem) {
+    .sectors > div {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    article {
+      border-bottom: 0;
+      border-right: var(--rule-width) solid var(--color-rule);
+      padding: 0 var(--space-6);
+    }
+
+    article:first-child {
+      padding-left: 0;
+    }
+
+    article:last-child {
+      border-right: 0;
+      padding-right: 0;
+    }
+  }
+</style>

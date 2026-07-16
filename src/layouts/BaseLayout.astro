@@ -1,0 +1,49 @@
+---
+import { company } from "../data/company"
+import "../styles/global.css"
+
+type Props = {
+  readonly title: string
+  readonly description: string
+  readonly path: string
+}
+
+const { title, description, path } = Astro.props
+const site = Astro.site ?? new URL("https://karsa-uniform.example")
+const canonicalUrl = new URL(path, site).toString()
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: company.legalName,
+  url: site.toString(),
+  email: company.email,
+  telephone: company.phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: company.address,
+    addressCountry: "ID"
+  }
+}
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)}></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

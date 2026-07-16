@@ -1,0 +1,23 @@
+{
+  "name": "karsa-uniform",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "biome check package.json astro.config.ts tsconfig.json biome.json src/data src/styles",
+    "format": "biome format --write package.json astro.config.ts tsconfig.json biome.json src/data src/styles"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.2.5",
+    "astro": "^5.13.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@biomejs/biome": "^2.2.0",
+    "typescript": "^5.9.2"
+  }
+}

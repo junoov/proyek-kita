@@ -1,0 +1,62 @@
+---
+type Props = {
+  readonly label: string
+  readonly title: string
+  readonly lede: string
+}
+
+const { label, title, lede } = Astro.props
+---
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="page-hero__inner">
+    <p>{label}</p>
+    <h1 id="page-title">{title}</h1>
+    <span aria-hidden="true" class="page-hero__rule"></span>
+    <div>{lede}</div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    padding: var(--space-20) var(--layout-edge) var(--space-16);
+  }
+
+  .page-hero__inner {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+  }
+
+  .page-hero p {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--space-4);
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: var(--type-h1);
+    letter-spacing: -0.07em;
+    line-height: 0.98;
+    margin: 0;
+    max-width: 15ch;
+  }
+
+  .page-hero__rule {
+    background: var(--color-signal);
+    display: block;
+    height: var(--space-1);
+    margin: var(--space-8) 0;
+    width: var(--space-16);
+  }
+
+  .page-hero__inner > div {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    line-height: 1.55;
+    max-width: 38rem;
+  }
+</style>

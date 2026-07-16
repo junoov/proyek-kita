@@ -1,0 +1,180 @@
+---
+import Footer from "../components/layout/Footer.astro"
+import Header from "../components/layout/Header.astro"
+import PageHero from "../components/sections/PageHero.astro"
+import { company, stats } from "../data/company"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Tentang Karsa Uniform"
+  description="Kenali cara Karsa Uniform menyatukan fungsi, identitas, dan kontrol produksi dalam setiap seragam kerja."
+  path="/tentang"
+>
+  <Header />
+  <main id="main">
+    <PageHero
+      label="Tentang Karsa"
+      title="Seragam yang jelas tujuannya, rapi pengerjaannya."
+      lede="Kami percaya seragam kerja adalah titik temu antara kenyamanan seseorang dan standar sebuah perusahaan."
+    />
+    <section class="story">
+      <div class="story__copy">
+        <p class="story__lead">
+          Karsa dibangun untuk membantu perusahaan yang tidak ingin berkompromi antara tampilan profesional dan
+          kebutuhan kerja sehari-hari.
+        </p>
+        <p>
+          Dari briefing pertama hingga pengiriman, kami menempatkan keputusan teknis di depan: bagaimana bahan
+          dipakai, siapa yang memakainya, dan detail apa yang harus tetap konsisten ketika jumlah bertambah.
+        </p>
+      </div>
+      <figure>
+        <img src={company.studioImage.src} alt={company.studioImage.alt} width="1200" height="1500" loading="lazy" decoding="async" />
+        <figcaption>Ruang kerja yang memperhatikan detail sebelum produksi dimulai.</figcaption>
+      </figure>
+    </section>
+    <section class="principles" aria-labelledby="principles-title">
+      <h2 id="principles-title">Apa yang kami jaga di setiap pesanan.</h2>
+      <div>
+        <article><strong>Fungsi</strong><p>Material dan konstruksi dipilih dari kebutuhan kerja, bukan tren sesaat.</p></article>
+        <article><strong>Konsistensi</strong><p>Warna, ukuran, dan detail merek dikontrol untuk setiap batch yang berjalan.</p></article>
+        <article><strong>Kejelasan</strong><p>Tim Anda tahu apa yang dikerjakan, kapan sampel siap, dan apa yang dikirim.</p></article>
+      </div>
+    </section>
+    <section class="story-stats" aria-label="Pencapaian Karsa Uniform">
+      {stats.map((stat) => <p><strong>{stat.value}</strong><span>{stat.label}</span></p>)}
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .story,
+  .principles,
+  .story-stats {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding-left: var(--layout-edge);
+    padding-right: var(--layout-edge);
+  }
+
+  .story {
+    display: grid;
+    gap: var(--space-12);
+    padding-bottom: var(--space-20);
+    padding-top: var(--space-20);
+  }
+
+  .story__copy {
+    max-width: 35rem;
+  }
+
+  .story__lead {
+    font-size: var(--type-h3);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .story__copy p:last-child {
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+    margin-top: var(--space-5);
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  figure img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  figcaption {
+    color: var(--color-text-muted);
+    font-size: var(--type-small);
+    margin-top: var(--space-3);
+  }
+
+  .principles {
+    background: var(--color-mist);
+    max-width: none;
+    padding-bottom: var(--space-20);
+    padding-top: var(--space-20);
+  }
+
+  .principles > h2,
+  .principles > div,
+  .story-stats {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--layout-max);
+  }
+
+  .principles h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin-bottom: var(--space-12);
+    margin-top: 0;
+    max-width: 17ch;
+  }
+
+  .principles > div,
+  .story-stats {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .principles article {
+    border-top: var(--rule-width) solid var(--color-rule);
+    padding-top: var(--space-5);
+  }
+
+  .principles strong {
+    font-size: var(--type-h3);
+  }
+
+  .principles p {
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .story-stats {
+    padding-bottom: var(--space-20);
+    padding-top: var(--space-20);
+  }
+
+  .story-stats p {
+    border-top: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding-top: var(--space-4);
+  }
+
+  .story-stats strong {
+    font-size: var(--type-h2);
+    letter-spacing: -0.06em;
+  }
+
+  .story-stats span {
+    color: var(--color-text-muted);
+    font-size: var(--type-small);
+  }
+
+  @media (min-width: 48rem) {
+    .story {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .principles > div,
+    .story-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

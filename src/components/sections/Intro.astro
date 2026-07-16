@@ -1,0 +1,138 @@
+---
+import { company } from "../../data/company"
+
+---
+
+<section class="intro" aria-labelledby="intro-title">
+  <div class="intro__wave-top" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path d="M0,0 L1440,0 L1440,20 C1080,60 720,0 360,40 C180,55 0,30 0,20 Z" fill="var(--color-signal)" />
+    </svg>
+  </div>
+  <div class="intro__red-block">
+    <div class="intro__red-inner">
+      <p class="intro__red-text">
+        <strong>{company.name}</strong> adalah perusahaan garmen dengan <strong>spesialisasi di bidang seragam.</strong> Kami membantu perusahaan dalam upaya menghargai karyawan sebagai aset, agar karyawan lebih percaya diri dalam bekerja dan mampu membangun citra Perusahaan yang baik di mata pelanggan.
+      </p>
+    </div>
+  </div>
+  <div class="intro__white-block">
+    <div class="intro__white-inner">
+      <div class="intro__info-grid">
+        <article class="intro__info-item">
+          <span class="intro__info-num">01</span>
+          <div>
+            <h2>Layanan Konsultasi</h2>
+            <p>Kami memahami kebutuhan perusahaan untuk menghasilkan seragam yang tepat.</p>
+          </div>
+        </article>
+        <article class="intro__info-item">
+          <span class="intro__info-num">02</span>
+          <div>
+            <h2>Desain & Produksi</h2>
+            <p>Tim kami merancang dan memproduksi seragam sesuai standar kualitas tinggi.</p>
+          </div>
+        </article>
+        <article class="intro__info-item">
+          <span class="intro__info-num">03</span>
+          <div>
+            <h2>Pengiriman Tepat Waktu</h2>
+            <p>Ketepatan waktu pengiriman menjadi prioritas utama layanan kami.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    position: relative;
+  }
+
+  .intro__wave-top {
+    display: block;
+    height: auto;
+    line-height: 0;
+    margin-bottom: -1px;
+    width: 100%;
+  }
+
+  .intro__wave-top svg {
+    display: block;
+    width: 100%;
+  }
+
+  .intro__red-block {
+    background: var(--color-signal);
+    color: var(--color-text-inverse);
+    padding: 0 var(--layout-edge) var(--space-16);
+  }
+
+  .intro__red-inner {
+    margin: 0 auto;
+    max-width: 56rem;
+  }
+
+  .intro__red-text {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .intro__red-text strong {
+    font-weight: 700;
+  }
+
+  .intro__white-block {
+    background: var(--color-canvas);
+    padding: var(--space-16) var(--layout-edge) var(--space-20);
+  }
+
+  .intro__white-inner {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+  }
+
+  .intro__info-grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .intro__info-item {
+    border-top: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: auto 1fr;
+    padding-top: var(--space-5);
+  }
+
+  .intro__info-num {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding-top: var(--space-1);
+  }
+
+  h2 {
+    font-size: var(--type-h3);
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+    margin: 0 0 var(--space-2);
+  }
+
+  .intro__info-item p {
+    color: var(--color-text-muted);
+    font-size: var(--type-body);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .intro__info-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
