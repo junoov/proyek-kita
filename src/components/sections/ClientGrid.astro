@@ -1,0 +1,199 @@
+---
+import { clients } from "../../data/company"
+
+type Props = {
+  readonly heading?: string
+}
+
+const logoImages = [
+  "X10.png",
+  "X12.png",
+  "X14.png",
+  "X16.png",
+  "X18.png",
+  "X19.png",
+  "X21.png",
+  "X23.png",
+  "X25.png",
+  "X27.png",
+  "X29.png",
+  "X31.png",
+  "X33.png",
+  "X35.png",
+  "X37.png",
+  "X39.png",
+  "X41.png",
+  "X43.png"
+]
+
+const { heading = "Kepercayaan dibangun dari hasil yang konsisten." } = Astro.props
+---
+
+<section class="clients" aria-labelledby="clients-title">
+  <div class="clients__heading">
+    <h2 id="clients-title">{heading}</h2>
+    <p>Kami dipercaya oleh berbagai universitas, instansi pemerintah, BUMN, dan perusahaan swasta nasional.</p>
+  </div>
+
+  <!-- LOGO GRID SECTION -->
+  <div class="clients__logos">
+    {logoImages.map((logo) => (
+      <div class="client-logo">
+        <img src={`/clients/${logo}`} alt="Logo Mitra Roller Customize" loading="lazy" />
+      </div>
+    ))}
+  </div>
+
+  <div class="clients__divider"></div>
+
+  <div class="clients__grid">
+    {clients.map((client) => (
+      <article class="client">
+        <span class="client__mark" aria-hidden="true">{client.initials}</span>
+        <div>
+          <h3>{client.name}</h3>
+          <p>{client.sector}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .clients {
+    background: var(--color-mist);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  .clients__heading,
+  .clients__logos,
+  .clients__grid {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+  }
+
+  .clients__heading {
+    max-width: 40rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0;
+  }
+
+  .clients__heading p {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    margin: var(--space-5) 0 0;
+  }
+
+  /* Logos Showcase Grid */
+  .clients__logos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+    align-items: center;
+    justify-items: center;
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-12);
+  }
+
+  .client-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    background: var(--color-canvas);
+    border: var(--rule-width) solid var(--color-rule);
+    padding: var(--space-3);
+    border-radius: 0.5rem;
+    transition: transform var(--transition-micro), box-shadow var(--transition-micro);
+  }
+
+  .client-logo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(52, 35, 19, 0.08);
+  }
+
+  .client-logo img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(1) contrast(0.95) opacity(0.85);
+    transition: filter var(--transition-micro);
+  }
+
+  .client-logo:hover img {
+    filter: none;
+  }
+
+  .clients__divider {
+    border-top: var(--rule-width) solid var(--color-rule);
+    margin: var(--space-12) auto;
+    max-width: var(--layout-max);
+  }
+
+  .clients__grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .client {
+    align-items: center;
+    background: var(--color-canvas);
+    border: var(--rule-width) solid var(--color-rule);
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .client__mark {
+    align-items: center;
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+    display: inline-flex;
+    font-size: var(--type-label);
+    font-weight: 800;
+    height: var(--space-10);
+    justify-content: center;
+    letter-spacing: 0.06em;
+    width: var(--space-10);
+  }
+
+  h3,
+  .client p {
+    margin: 0;
+  }
+
+  h3 {
+    font-size: var(--type-body);
+    letter-spacing: -0.025em;
+  }
+
+  .client p {
+    color: var(--color-text-muted);
+    font-size: var(--type-small);
+    margin-top: var(--space-1);
+  }
+
+  @media (min-width: 48rem) {
+    .clients__logos {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: var(--space-8);
+    }
+
+    .clients__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .clients__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

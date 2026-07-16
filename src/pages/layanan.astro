@@ -1,0 +1,1143 @@
+---
+import Footer from "../components/layout/Footer.astro"
+import Header from "../components/layout/Header.astro"
+import PageHero from "../components/sections/PageHero.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Layanan & Portofolio Roller Customize"
+  description="Dari konsultasi material, katalog workshirt, tabel ukuran, sampai proses produksi batch, Roller Customize menjaga seragam Anda tetap presisi."
+  path="/layanan"
+>
+  <Header />
+  <main id="main">
+    <PageHero
+      label="Layanan & Spesifikasi"
+      title="Satu alur untuk seragam yang siap bekerja."
+      lede="Kami membantu tim procurement bergerak dari kebutuhan yang belum rapi menjadi pesanan yang jelas, terukur, dan siap diproduksi."
+    />
+
+    <!-- SECTION: PRODUCT CATALOG & PRICELIST -->
+    <section class="catalog" aria-labelledby="catalog-title">
+      <div class="catalog__inner">
+        <div class="catalog__intro">
+          <span class="catalog__tag">Katalog Utama</span>
+          <h2 id="catalog-title">Custom Workshirt</h2>
+          <p class="catalog__moq"><strong>Minimal Order:</strong> 24 Pcs <span class="catalog__moq-sub">(Pemesanan di bawah MOQ dikenakan biaya tambahan Rp15.000 - Rp35.000/pcs)</span></p>
+          
+          <div class="catalog__specs">
+            <h3>Spesifikasi Standar</h3>
+            <ul>
+              <li><strong>Model:</strong> Lengan Pendek</li>
+              <li><strong>Desain:</strong> Termasuk 2 titik bordir komputer</li>
+              <li><strong>Potongan:</strong> Reguler Cut</li>
+              <li><strong>Ukuran Standar:</strong> S sampai XL</li>
+            </ul>
+          </div>
+
+          <div class="catalog__notes">
+            <h3>Ketentuan Tambahan</h3>
+            <ul>
+              <li>Kenaikan ukuran di atas XL dikenakan tambahan +Rp5.000 per tingkat size (XXL, 3XL, dst).</li>
+              <li>Bordir punggung ukuran besar (di atas 27 x 15 cm) dikenakan biaya sesuai dengan kerumitan desain.</li>
+              <li>Aksen scotlight/reflector, velcro, dan kombinasi kain dihitung berdasarkan kerumitan produksi.</li>
+              <li>Penggunaan resleting tambahan disesuaikan dengan merk yang diminta.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="catalog__pricing-panel">
+          <div class="pricing-card">
+            <h3>Pricelist Bahan Utama</h3>
+            <div class="pricing-list">
+              <div class="pricing-item">
+                <span>American Drill</span>
+                <strong>Rp100.000 <small>/ pcs</small></strong>
+              </div>
+              <div class="pricing-item">
+                <span>Nagata Drill</span>
+                <strong>Rp120.000 <small>/ pcs</small></strong>
+              </div>
+              <div class="pricing-item">
+                <span>Tropical</span>
+                <strong>Rp145.000 <small>/ pcs</small></strong>
+              </div>
+              <div class="pricing-item">
+                <span>Ripstop</span>
+                <strong>Rp145.000 <small>/ pcs</small></strong>
+              </div>
+              <div class="pricing-item">
+                <span>Bahan Lain (By Request)</span>
+                <strong>Sesuai Material</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="variations-card">
+            <h3>Variasi & Biaya Tambahan</h3>
+            <div class="variations-grid">
+              <div class="var-item"><span>Up Size (&gt; XL)</span><strong>+Rp5.000</strong></div>
+              <div class="var-item"><span>Boxy Cut</span><strong>+Rp7.000</strong></div>
+              <div class="var-item"><span>Lengan Panjang</span><strong>+Rp10.000</strong></div>
+              <div class="var-item"><span>Reflector / Scotlight</span><strong>Rp3.000 - Rp10.000</strong></div>
+              <div class="var-item"><span>Velcro (Perekat)</span><strong>Rp3.000 - Rp10.000</strong></div>
+              <div class="var-item"><span>Resleting Custom</span><strong>Rp7.000 - Rp20.000</strong></div>
+              <div class="var-item"><span>Kombinasi Warna</span><strong>Rp5.000 - Rp20.000</strong></div>
+              <div class="var-item"><span>Bordir Tambahan</span><strong>Rp5.000 - Rp30.000</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: ORDER FLOW SNAKE -->
+    <section class="flow" aria-labelledby="flow-title">
+      <div class="flow__panel">
+
+        <!-- Bold header block -->
+        <div class="flow__hero">
+          <span class="flow__tag">Prosedur Kerja</span>
+          <h2 id="flow-title">ALUR<br>PEMESANAN</h2>
+        </div>
+
+        <!-- Snake diagram -->
+        <div class="flow__diagram" id="flow-diagram">
+
+          <!-- ROW 1: steps 1–5, left to right -->
+          <div class="flow__row flow__row--ltr">
+
+            <div class="flow__node" data-step="1">
+              <div class="flow__bubble flow__bubble--accent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              </div>
+              <div class="flow__label">
+                <span class="flow__step-num">01</span>
+                <span class="flow__step-name">Konsultasi<br>Kebutuhan</span>
+              </div>
+            </div>
+
+            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="flow__node" data-step="2">
+              <div class="flow__bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <div class="flow__label">
+                <span class="flow__step-num">02</span>
+                <span class="flow__step-name">Order Form<br>Submission</span>
+              </div>
+            </div>
+
+            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="flow__node" data-step="3">
+              <div class="flow__bubble flow__bubble--accent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 7V5a2 2 0 012-2h2M9 7h6"/><path d="M13 3v4m0 0l4 4m0 0l-4 4m4-4H7"/></svg>
+              </div>
+              <div class="flow__label">
+                <span class="flow__step-num">03</span>
+                <span class="flow__step-name">Quotation &amp;<br>Invoice</span>
+              </div>
+            </div>
+
+            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="flow__node" data-step="4">
+              <div class="flow__bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+              </div>
+              <div class="flow__label">
+                <span class="flow__step-num">04</span>
+                <span class="flow__step-name">Down Payment<br>(DP 60%)</span>
+              </div>
+            </div>
+
+            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="flow__node" data-step="5">
+              <div class="flow__bubble flow__bubble--accent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+              </div>
+              <div class="flow__label">
+                <span class="flow__step-num">05</span>
+                <span class="flow__step-name">Spec &amp;<br>Techpack</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- U-turn connector -->
+          <div class="flow__uturn" aria-hidden="true">
+            <svg viewBox="0 0 100 60" fill="none" preserveAspectRatio="none">
+              <path d="M10 5 Q10 55 50 55 Q90 55 90 5" stroke="currentColor" stroke-width="2" stroke-dasharray="8 5" fill="none"/>
+              <polyline points="84,12 90,2 96,12" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" transform="rotate(180 90 5)"/>
+            </svg>
+          </div>
+
+          <!-- ROW 2: steps 6–9, right to left -->
+          <div class="flow__row flow__row--rtl">
+
+            <div class="flow__node" data-step="9">
+              <div class="flow__bubble flow__bubble--final">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+              </div>
+              <div class="flow__label flow__label--above">
+                <span class="flow__step-num">09</span>
+                <span class="flow__step-name">Final Payment<br>&amp; Shipping</span>
+              </div>
+            </div>
+
+            <div class="flow__arrow flow__arrow--left" aria-hidden="true">
+              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="60" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="14,2 2,8 14,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="flow__node" data-step="8">
+              <div class="flow__bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+              </div>
+              <div class="flow__label flow__label--above">
+                <span class="flow__step-num">08</span>
+                <span class="flow__step-name">Quality<br>Control</span>
+              </div>
+            </div>
+
+            <div class="flow__arrow flow__arrow--left" aria-hidden="true">
+              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="60" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="14,2 2,8 14,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="flow__node" data-step="7">
+              <div class="flow__bubble flow__bubble--accent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div class="flow__label flow__label--above">
+                <span class="flow__step-num">07</span>
+                <span class="flow__step-name">Proses<br>Produksi</span>
+              </div>
+            </div>
+
+            <div class="flow__arrow flow__arrow--left" aria-hidden="true">
+              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="60" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="14,2 2,8 14,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="flow__node" data-step="6">
+              <div class="flow__bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="flow__label flow__label--above">
+                <span class="flow__step-num">06</span>
+                <span class="flow__step-name">Design &amp;<br>Approval</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: SIZE CHART TABS -->
+    <section class="sizechart" aria-labelledby="sizechart-title">
+      <div class="sizechart__inner">
+        <div class="sizechart__header">
+          <span class="sizechart__tag">Panduan Ukuran</span>
+          <h2 id="sizechart-title">Standar Size Chart</h2>
+          <p>Tersedia dua tipe pola potongan (Reguler dan Boxy) yang disesuaikan dengan profil seragam kerja Anda.</p>
+        </div>
+
+        <div class="sizechart__tabs-container">
+          <div class="tab-buttons" role="tablist">
+            <button class="tab-button active" data-tab="reguler" role="tab" aria-selected="true">Pola Reguler Cut</button>
+            <button class="tab-button" data-tab="boxy" role="tab" aria-selected="false">Pola Boxy Cut</button>
+          </div>
+
+          <div class="tab-panels">
+            <!-- TAB 1: REGULER -->
+            <div class="tab-panel active" id="reguler" role="tabpanel">
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Ukuran</th>
+                      <th>Panjang Badan (cm)</th>
+                      <th>Lebar Dada (cm)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>S</td><td>68</td><td>50</td></tr>
+                    <tr><td>M</td><td>70</td><td>52</td></tr>
+                    <tr><td>L</td><td>72</td><td>54</td></tr>
+                    <tr><td>XL</td><td>74</td><td>56</td></tr>
+                    <tr><td>XXL</td><td>76</td><td>60</td></tr>
+                    <tr class="table-add"><td>Per kenaikan size (+X)</td><td>+2</td><td>+2</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB 2: BOXY -->
+            <div class="tab-panel" id="boxy" role="tabpanel">
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Ukuran</th>
+                      <th>Panjang Badan (cm)</th>
+                      <th>Lebar Dada (cm)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>S</td><td>64</td><td>52</td></tr>
+                    <tr><td>M</td><td>66</td><td>54</td></tr>
+                    <tr><td>L</td><td>68</td><td>56</td></tr>
+                    <tr><td>XL</td><td>70</td><td>58</td></tr>
+                    <tr><td>XXL</td><td>72</td><td>60</td></tr>
+                    <tr class="table-add"><td>Per kenaikan size (+X)</td><td>+2</td><td>+2</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+          <div class="sizechart__footer">
+            <p>* Panduan ukuran di atas berlaku untuk produk <strong>Kemeja & Kaos</strong>.</p>
+            <p>* Celana panjang, celana pendek, dan totebag menggunakan ukuran custom dari klien.</p>
+            <p>* Pola ukuran kustom khusus dikenakan biaya tambahan dan dapat mempengaruhi durasi produksi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: TERMS & CONDITIONS ACCORDION -->
+    <section class="terms" aria-labelledby="terms-title">
+      <div class="terms__inner">
+        <div class="terms__header">
+          <span class="terms__tag">Kebijakan Vendor</span>
+          <h2 id="terms-title">Terms & Conditions</h2>
+          <p>Harap membaca ketentuan kerja berikut sebelum mengunci pesanan Anda bersama kami.</p>
+        </div>
+
+        <div class="accordion">
+          <details class="accordion__item">
+            <summary>1. Waktu Produksi (Production Time)</summary>
+            <div class="accordion__content">
+              <p>Waktu produksi normal berkisar antara 14-20 hari kerja. Hitungan ini dimulai H+1 setelah desain final disetujui secara tertulis dan pembayaran DP minimal diterima. Hari Minggu serta hari libur nasional tidak dihitung sebagai hari kerja.</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>2. Toleransi Ukuran (Size Tolerance)</summary>
+            <div class="accordion__content">
+              <p>Terdapat toleransi perbedaan ukuran sebesar ±1–2 cm dari size chart panduan yang digunakan. Hal ini wajar dalam standar produksi jahit konveksi massal.</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>3. Akurasi Warna (Color Accuracy)</summary>
+            <div class="accordion__content">
+              <p>Akurasi warna produk akhir berkisar 90% dari referensi digital yang diberikan. Deviasi minor disebabkan oleh perbedaan lot celupan kain dari supplier, rendering tampilan layar gadget (RGB vs CMYK), serta faktor pencahayaan saat foto produksi.</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>4. Desain & Persetujuan (Design & Approval)</summary>
+            <div class="accordion__content">
+              <p>Proses pemotongan kain hanya dilakukan setelah lembar persetujuan desain ditandatangani/disetujui klien. Segala bentuk revisi desain tidak dapat dilakukan apabila proses produksi jahit sudah berjalan. Kesalahan akibat kelalaian file desain dari klien menjadi tanggung jawab penuh pihak pembeli.</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>5. Ketentuan Pembayaran (Payment Terms)</summary>
+            <div class="accordion__content">
+              <p>Produksi baru akan dimasukkan antrean jahit setelah pembayaran DP (Down Payment) minimal 60% lunas. Pelunasan tagihan sisa wajib ditransfer sebelum barang dikirim dari workshop. Pembayaran yang sudah masuk tidak dapat dikembalikan dengan alasan apa pun (non-refundable).</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>6. Keterlambatan Produksi (Production Delays)</summary>
+            <div class="accordion__content">
+              <p>Jika terjadi kendala teknis atau antrean bahan di pabrik supplier, tim kami akan menginformasikan keterlambatan tersebut kepada Anda selambat-lambatnya H-2 sebelum tenggat waktu pengiriman yang disepakati.</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>7. Pengiriman (Shipping)</summary>
+            <div class="accordion__content">
+              <p>Barang dikirim segera setelah pelunasan tagihan terverifikasi. Biaya pengiriman ditanggung sepenuhnya oleh customer. Keterlambatan atau kerusakan akibat kelalaian pihak ekspedisi/kurir di luar tanggung jawab kami.</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>8. Pemesanan Event (Event Order)</summary>
+            <div class="accordion__content">
+              <p>Untuk kebutuhan seragam yang akan dipakai pada tanggal event tertentu, kami sangat menyarankan pemesanan dilakukan selambat-lambatnya H-20 sebelum tanggal pemakaian demi menghindari resiko keterlambatan ekspedisi.</p>
+            </div>
+          </details>
+
+          <details class="accordion__item">
+            <summary>9. Klaim & Revisi (Claim & Revision)</summary>
+            <div class="accordion__content">
+              <p>Komplain kerusakan atau ketidaksesuaian pesanan hanya dilayani maksimal 2x24 jam setelah barang diterima di alamat tujuan. Klien wajib melampirkan bukti unboxing berupa foto/video jelas. Perbaikan/revisi gratis hanya berlaku jika kesalahan jahit murni berasal dari pihak produksi kami.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: ASSURANCE (Existing Quality Control Section) -->
+    <section class="assurance" aria-labelledby="assurance-title">
+      <div>
+        <p>Kontrol mutu</p>
+        <h2 id="assurance-title">Pemeriksaan yang mengikuti ritme produksi, bukan menunggu di ujung.</h2>
+      </div>
+      <ol>
+        <li><span>01</span><p>Material dan warna diverifikasi sebelum pemotongan berjalan.</p></li>
+        <li><span>02</span><p>Ukuran dan pola diperiksa terhadap sampel yang telah disetujui.</p></li>
+        <li><span>03</span><p>Batch akhir diperiksa kembali sebelum dipacking dan dikirim.</p></li>
+      </ol>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  // Simple Tab Switcher logic for Size Chart
+  document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const tabId = button.getAttribute('data-tab');
+      
+      // Update buttons active states
+      document.querySelectorAll('.tab-button').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+
+      // Update panels active states
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      const activePanel = document.getElementById(tabId);
+      if (activePanel) activePanel.classList.add('active');
+    });
+  });
+
+  // Scroll-reveal animation for snake flow
+  const snakeEls = document.querySelectorAll('.flow__node, .flow__arrow, .flow__uturn');
+  if (snakeEls.length > 0) {
+    const snakeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          snakeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    snakeEls.forEach(el => snakeObserver.observe(el));
+  }
+</script>
+
+<style>
+  /* Base Layout Paddings */
+  .catalog, .flow, .sizechart, .terms {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  /* Catalog / Specs & Pricelist */
+  .catalog__inner {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  .catalog__tag, .flow__tag, .sizechart__tag, .terms__tag {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .catalog__intro h2, .flow__header h2, .sizechart__header h2, .terms__header h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0 0 var(--space-4);
+  }
+
+  .catalog__moq {
+    font-size: var(--type-lead);
+    margin-bottom: var(--space-8);
+  }
+
+  .catalog__moq-sub {
+    display: block;
+    font-size: var(--type-small);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+  }
+
+  .catalog__specs, .catalog__notes {
+    margin-top: var(--space-6);
+    border-top: var(--rule-width) solid var(--color-rule);
+    padding-top: var(--space-4);
+  }
+
+  .catalog__specs h3, .catalog__notes h3 {
+    font-size: var(--type-h3);
+    font-family: var(--font-display);
+    margin: 0 0 var(--space-3);
+  }
+
+  .catalog__specs ul, .catalog__notes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .catalog__specs li, .catalog__notes li {
+    font-size: var(--type-body);
+    position: relative;
+    padding-left: var(--space-4);
+  }
+
+  .catalog__specs li::before, .catalog__notes li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-text-muted);
+  }
+
+  /* Pricing Panels */
+  .catalog__pricing-panel {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .pricing-card, .variations-card {
+    background: var(--color-mist);
+    border: var(--rule-width) solid var(--color-rule);
+    border-radius: var(--panel-radius);
+    padding: var(--space-6);
+  }
+
+  .pricing-card h3, .variations-card h3 {
+    font-size: var(--type-h3);
+    font-family: var(--font-display);
+    margin: 0 0 var(--space-5);
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    padding-bottom: var(--space-3);
+  }
+
+  .pricing-list {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .pricing-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--color-rule);
+    padding-bottom: var(--space-2);
+  }
+
+  .pricing-item:last-child {
+    border-bottom: 0;
+  }
+
+  .pricing-item span {
+    font-weight: 650;
+    font-size: var(--type-body);
+  }
+
+  .pricing-item strong {
+    font-family: var(--font-display);
+    font-size: var(--type-lead);
+    color: var(--color-ink);
+  }
+
+  .pricing-item strong small {
+    font-size: var(--type-label);
+    font-weight: normal;
+    color: var(--color-text-muted);
+  }
+
+  .variations-grid {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  }
+
+  .var-item {
+    display: grid;
+    background: var(--color-canvas);
+    border: var(--rule-width) solid var(--color-rule);
+    padding: var(--space-3);
+  }
+
+  .var-item span {
+    font-size: var(--type-small);
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .var-item strong {
+    font-family: var(--font-display);
+    font-size: var(--type-body);
+    margin-top: var(--space-1);
+  }
+
+  /* =========================================
+     ORDER FLOW — Modern Snake Layout
+     ========================================= */
+  .sizechart__header, .terms__header {
+    max-width: 42rem;
+    margin-bottom: var(--space-12);
+  }
+
+  .sizechart__header p, .terms__header p {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    margin-top: var(--space-2);
+  }
+
+  /* Outer section override for full-bleed dark panel */
+  .flow {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Dark hero panel */
+  .flow__panel {
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    padding: var(--space-16) var(--layout-edge);
+    max-width: var(--layout-max);
+    margin: 0 auto;
+    border-radius: var(--panel-radius);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Subtle texture layer */
+  .flow__panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, oklch(35% 0.06 34 / 0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, oklch(40% 0.08 34 / 0.3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Hero title */
+  .flow__hero {
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--space-12);
+  }
+
+  .flow__tag {
+    display: inline-block;
+    font-size: var(--type-label);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(70% 0.05 34);
+    margin-bottom: var(--space-3);
+  }
+
+  .flow__hero h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--color-canvas);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /* Diagram wrapper */
+  .flow__diagram {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  /* Rows */
+  .flow__row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* LTR row: normal order */
+  .flow__row--ltr {
+    flex-direction: row;
+  }
+
+  /* RTL row: reversed */
+  .flow__row--rtl {
+    flex-direction: row-reverse;
+  }
+
+  /* Each node: bubble + label stacked */
+  .flow__node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .flow__node.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Label below (row 1) */
+  .flow__label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    text-align: center;
+  }
+
+  /* Label above (row 2) */
+  .flow__label--above {
+    order: -1;
+  }
+
+  .flow__step-num {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-signal);
+  }
+
+  .flow__step-name {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-canvas);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    max-width: 7rem;
+  }
+
+  /* Circular bubble */
+  .flow__bubble {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background: oklch(32% 0.06 34);
+    border: 2px solid oklch(45% 0.06 34);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: default;
+    position: relative;
+  }
+
+  .flow__bubble::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .flow__bubble:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 0 32px oklch(50% 0.08 34 / 0.5), 0 8px 24px rgba(0,0,0,0.4);
+    border-color: var(--color-signal);
+  }
+
+  .flow__bubble:hover::after {
+    border-color: oklch(60% 0.06 34 / 0.4);
+  }
+
+  /* Accent variant (alternating) */
+  .flow__bubble--accent {
+    background: var(--color-signal);
+    border-color: oklch(55% 0.055 34);
+  }
+
+  .flow__bubble--accent:hover {
+    background: oklch(50% 0.055 34);
+    box-shadow: 0 0 40px oklch(50% 0.08 34 / 0.7), 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  /* Final bubble — glowing gold/warm */
+  .flow__bubble--final {
+    background: var(--color-signal);
+    border-color: oklch(65% 0.06 34);
+    box-shadow: 0 0 24px oklch(50% 0.08 34 / 0.5);
+  }
+
+  .flow__bubble svg {
+    width: 2rem;
+    height: 2rem;
+    color: #fff;
+  }
+
+  /* Arrow connectors */
+  .flow__arrow {
+    flex: 1;
+    min-width: 1.5rem;
+    height: 1rem;
+    color: oklch(45% 0.05 34);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-1);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .flow__arrow.visible {
+    opacity: 1;
+  }
+
+  .flow__arrow svg {
+    width: 100%;
+    height: 1rem;
+  }
+
+  /* U-turn connector between rows */
+  .flow__uturn {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: calc(5.5rem / 2 - 1rem);
+    height: 3.5rem;
+    color: oklch(45% 0.05 34);
+    opacity: 0;
+    transition: opacity 0.8s ease 0.4s;
+  }
+
+  .flow__uturn.visible {
+    opacity: 1;
+  }
+
+  .flow__uturn svg {
+    width: 6rem;
+    height: 100%;
+  }
+
+  /* Stagger delays for nodes */
+  .flow__node[data-step="1"] { transition-delay: 0.05s; }
+  .flow__node[data-step="2"] { transition-delay: 0.15s; }
+  .flow__node[data-step="3"] { transition-delay: 0.25s; }
+  .flow__node[data-step="4"] { transition-delay: 0.35s; }
+  .flow__node[data-step="5"] { transition-delay: 0.45s; }
+  .flow__node[data-step="6"] { transition-delay: 0.55s; }
+  .flow__node[data-step="7"] { transition-delay: 0.65s; }
+  .flow__node[data-step="8"] { transition-delay: 0.75s; }
+  .flow__node[data-step="9"] { transition-delay: 0.85s; }
+
+  /* Arrow stagger */
+  .flow__row--ltr .flow__arrow:nth-child(2)  { transition-delay: 0.10s; }
+  .flow__row--ltr .flow__arrow:nth-child(4)  { transition-delay: 0.20s; }
+  .flow__row--ltr .flow__arrow:nth-child(6)  { transition-delay: 0.30s; }
+  .flow__row--ltr .flow__arrow:nth-child(8)  { transition-delay: 0.40s; }
+  .flow__row--rtl .flow__arrow:nth-child(2)  { transition-delay: 0.60s; }
+  .flow__row--rtl .flow__arrow:nth-child(4)  { transition-delay: 0.70s; }
+  .flow__row--rtl .flow__arrow:nth-child(6)  { transition-delay: 0.80s; }
+
+  /* Mobile: stack into vertical list */
+  @media (max-width: 900px) {
+    .flow__panel {
+      border-radius: 0;
+      padding: var(--space-12) var(--layout-edge);
+    }
+    .flow__row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6) 0;
+      align-items: start;
+    }
+    .flow__row--rtl {
+      direction: ltr;
+    }
+    .flow__arrow {
+      display: none;
+    }
+    .flow__uturn {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .flow__row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .flow__bubble {
+      width: 4rem;
+      height: 4rem;
+    }
+    .flow__bubble svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  /* Size Chart Sections */
+  .sizechart__tabs-container {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: var(--space-3);
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    padding-bottom: var(--space-2);
+  }
+
+  .tab-button {
+    background: none;
+    border: 0;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: var(--type-body);
+    font-weight: 800;
+    padding: var(--space-2) var(--space-4);
+    position: relative;
+    transition: color var(--transition-micro);
+  }
+
+  .tab-button.active {
+    color: var(--color-ink);
+  }
+
+  .tab-button.active::after {
+    background: var(--color-signal);
+    bottom: calc(var(--space-2) * -1 - 2px);
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  /* Table styling */
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+  }
+
+  th, td {
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    padding: var(--space-4) var(--space-2);
+  }
+
+  th {
+    font-family: var(--font-display);
+    font-size: var(--type-small);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  td {
+    font-size: var(--type-body);
+  }
+
+  .table-add {
+    background: var(--color-mist);
+    font-weight: 600;
+  }
+
+  .sizechart__footer {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .sizechart__footer p {
+    color: var(--color-text-muted);
+    font-size: var(--type-small);
+    margin: 0;
+  }
+
+  /* Terms & Conditions Accordion */
+  .accordion {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .accordion__item {
+    border: var(--rule-width) solid var(--color-rule);
+    background: var(--color-canvas);
+    transition: background-color var(--transition-micro);
+  }
+
+  .accordion__item[open] {
+    background: var(--color-mist);
+  }
+
+  .accordion__item summary {
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: var(--type-body);
+    font-weight: 800;
+    padding: var(--space-4);
+    list-style: none;
+    position: relative;
+    user-select: none;
+  }
+
+  .accordion__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .accordion__item summary::after {
+    content: "+";
+    font-family: var(--font-sans);
+    font-size: var(--type-h3);
+    font-weight: 500;
+    position: absolute;
+    right: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-signal);
+  }
+
+  .accordion__item[open] summary::after {
+    content: "−";
+  }
+
+  .accordion__content {
+    border-top: var(--rule-width) solid var(--color-rule);
+    padding: var(--space-4);
+  }
+
+  .accordion__content p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Assurance Section (Existing style matching) */
+  .assurance {
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+    display: grid;
+    gap: var(--space-12);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  .assurance > div,
+  .assurance ol {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    width: 100%;
+  }
+
+  .assurance > div > p {
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--space-4);
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
+
+  .assurance h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0;
+    max-width: 20ch;
+  }
+
+  .assurance ol {
+    border-top: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 24%, transparent);
+    list-style: none;
+    padding: 0;
+  }
+
+  .assurance li {
+    align-items: start;
+    border-bottom: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 24%, transparent);
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: var(--space-10) minmax(0, 1fr);
+    padding: var(--space-5) 0;
+  }
+
+  .assurance li span {
+    color: var(--color-signal);
+    font-size: var(--type-small);
+    font-weight: 800;
+  }
+
+  .assurance li p {
+    margin: 0;
+    max-width: 28rem;
+    opacity: 0.8;
+  }
+
+  /* Responsive media queries */
+  @media (min-width: 48rem) {
+    .catalog__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .timeline {
+      margin-left: 0;
+      padding-left: var(--space-12);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .assurance {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .assurance > div,
+    .assurance ol {
+      max-width: none;
+    }
+  }
+</style>

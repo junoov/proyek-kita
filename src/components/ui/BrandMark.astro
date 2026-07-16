@@ -1,0 +1,54 @@
+---
+type Props = {
+  readonly inverted?: boolean
+}
+
+const { inverted = false } = Astro.props
+const className = inverted ? "brand-mark brand-mark--inverse" : "brand-mark"
+---
+
+<span class={className} aria-label="Roller Customize">
+  <svg class="brand-mark__glyph" viewBox="0 0 100 100" aria-hidden="true" fill="currentColor">
+    <rect x="41" y="0" width="18" height="100" />
+    <rect x="41" y="0" width="18" height="100" transform="rotate(60 50 50)" />
+    <rect x="41" y="0" width="18" height="100" transform="rotate(120 50 50)" />
+  </svg>
+  <span class="brand-mark__copy">
+    <span>Roller</span>
+    <span>Customize</span>
+  </span>
+</span>
+
+<style>
+  .brand-mark {
+    align-items: center;
+    color: var(--color-text);
+    display: inline-flex;
+    gap: var(--space-3);
+    line-height: 1;
+  }
+
+  .brand-mark__glyph {
+    display: block;
+    height: var(--space-8);
+    width: var(--space-8);
+    flex-shrink: 0;
+  }
+
+  .brand-mark__copy {
+    display: grid;
+    font-size: var(--type-small);
+    gap: 0;
+    letter-spacing: 0.05em;
+    line-height: 1.05;
+  }
+
+  .brand-mark__copy span {
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .brand-mark--inverse {
+    color: var(--color-text-inverse);
+  }
+</style>

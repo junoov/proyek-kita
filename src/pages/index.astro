@@ -1,0 +1,26 @@
+---
+import Header from "../components/layout/Header.astro"
+import Footer from "../components/layout/Footer.astro"
+import ClientGrid from "../components/sections/ClientGrid.astro"
+import ContactCTA from "../components/sections/ContactCTA.astro"
+import Hero from "../components/sections/Hero.astro"
+import Intro from "../components/sections/Intro.astro"
+import ServiceGrid from "../components/sections/ServiceGrid.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Roller Customize — Seragam Kerja untuk Tim Anda"
+  description="Roller Customize merancang dan memproduksi seragam kerja yang konsisten, nyaman, dan siap untuk ritme kerja nyata."
+  path="/"
+>
+  <Header />
+  <main id="main">
+    <Hero />
+    <Intro />
+    <ServiceGrid />
+    <ClientGrid />
+    <ContactCTA />
+  </main>
+  <Footer />
+</BaseLayout>

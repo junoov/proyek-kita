@@ -1,0 +1,50 @@
+---
+import Button from "../ui/Button.astro"
+---
+
+<section class="contact-cta" aria-labelledby="contact-cta-title">
+  <div class="contact-cta__inner">
+    <p class="contact-cta__label">Siap ditinjau bersama</p>
+    <h2 id="contact-cta-title">Bawa kebutuhan tim Anda. Kami siapkan arah yang jelas.</h2>
+    <p>
+      Mulai dari satu pertanyaan singkat tentang jumlah, fungsi, atau jenis material yang sedang Anda
+      pertimbangkan.
+    </p>
+    <Button href="/kontak" label="Mulai Diskusi" variant="ink" />
+  </div>
+</section>
+
+<style>
+  .contact-cta {
+    background: var(--color-signal);
+    color: var(--color-text-inverse);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  .contact-cta__inner {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+  }
+
+  .contact-cta__label {
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--space-4);
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  .contact-cta__inner > p:not(.contact-cta__label) {
+    font-size: var(--type-lead);
+    margin: var(--space-5) 0 var(--space-8);
+    max-width: 38rem;
+  }
+</style>

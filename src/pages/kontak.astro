@@ -1,0 +1,124 @@
+---
+import Footer from "../components/layout/Footer.astro"
+import Header from "../components/layout/Header.astro"
+import Button from "../components/ui/Button.astro"
+import PageHero from "../components/sections/PageHero.astro"
+import { company, contactChannels } from "../data/company"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Kontak Roller Customize"
+  description="Mulai percakapan dengan Roller Customize untuk kebutuhan seragam kerja tim Anda."
+  path="/kontak"
+>
+  <Header />
+  <main id="main">
+    <PageHero
+      label="Kontak"
+      title="Ceritakan apa yang perlu tim Anda pakai setiap hari."
+      lede="Kami akan membantu menyusun langkah pertama, dari jumlah kebutuhan hingga pendekatan material yang sesuai."
+    />
+    <section class="contact-grid" aria-labelledby="contact-title">
+      <div class="contact-grid__intro">
+        <h2 id="contact-title">Mulai dari percakapan singkat.</h2>
+        <p>Untuk respons tercepat, hubungi kami lewat WhatsApp. Tim kami akan membantu menyiapkan kebutuhan awal.</p>
+        <Button href={company.whatsapp} label="Chat WhatsApp" />
+      </div>
+      <div class="contact-grid__details">
+        {contactChannels.map((channel) => (
+          <a href={channel.href}>
+            <span>{channel.label}</span>
+            <strong>{channel.value}</strong>
+            {channel.label === "Shopee" && (
+              <p class="shopee-warning">
+                * Order via Shopee dikenakan biaya administrasi 20% (lebih disarankan untuk upgrade bahan langsung via WA)
+              </p>
+            )}
+          </a>
+        ))}
+        <div>
+          <span>Studio & produksi</span>
+          <strong>{company.address}</strong>
+          <p>{company.hours}</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    gap: var(--space-12);
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  .contact-grid__intro h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin: 0;
+    max-width: 15ch;
+  }
+
+  .contact-grid__intro p {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    margin: var(--space-5) 0 var(--space-8);
+    max-width: 30rem;
+  }
+
+  .contact-grid__details {
+    border-top: var(--rule-width) solid var(--color-rule);
+  }
+
+  .contact-grid__details a,
+  .contact-grid__details > div {
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5) 0;
+  }
+
+  .contact-grid__details a:hover strong {
+    color: var(--color-signal);
+  }
+
+  .contact-grid__details span {
+    color: var(--color-text-muted);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .contact-grid__details strong {
+    font-size: var(--type-h3);
+    letter-spacing: -0.035em;
+    transition: color var(--transition-micro);
+  }
+
+  .contact-grid__details p {
+    color: var(--color-text-muted);
+    font-size: var(--type-small);
+    margin: 0;
+  }
+
+  @media (min-width: 64rem) {
+    .contact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .shopee-warning {
+    color: var(--color-signal) !important;
+    font-size: var(--type-small);
+    margin: var(--space-1) 0 0 !important;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+</style>

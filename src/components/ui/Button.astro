@@ -1,0 +1,70 @@
+---
+type Variant = "signal" | "ink" | "quiet"
+
+type Props = {
+  readonly href: string
+  readonly label: string
+  readonly variant?: Variant
+}
+
+const { href, label, variant = "signal" } = Astro.props
+---
+
+<a class={`button button--${variant}`} href={href}>
+  <span>{label}</span>
+  <span aria-hidden="true">→</span>
+</a>
+
+<style>
+  .button {
+    align-items: center;
+    border: var(--rule-width) solid transparent;
+    border-radius: var(--control-radius);
+    display: inline-flex;
+    font-size: var(--type-small);
+    font-weight: 720;
+    gap: var(--space-3);
+    justify-content: center;
+    min-height: calc(var(--space-10) + var(--space-1));
+    padding: var(--space-3) var(--space-5);
+    transition:
+      background-color var(--transition-micro),
+      border-color var(--transition-micro),
+      color var(--transition-micro),
+      transform var(--transition-micro);
+    white-space: nowrap;
+  }
+
+  .button:hover {
+    transform: translateY(calc(var(--space-1) * -1));
+  }
+
+  .button:active {
+    transform: translateY(0);
+  }
+
+  .button--signal {
+    background: var(--color-signal);
+    color: var(--color-text-inverse);
+  }
+
+  .button--signal:hover {
+    background: var(--color-signal-strong);
+  }
+
+  .button--ink {
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+  }
+
+  .button--quiet {
+    border-color: currentColor;
+    color: inherit;
+    opacity: 0.8;
+  }
+
+  .button--quiet:hover {
+    border-color: currentColor;
+    opacity: 1;
+  }
+</style>

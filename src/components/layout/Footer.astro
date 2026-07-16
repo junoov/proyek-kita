@@ -1,0 +1,106 @@
+---
+import { company, contactChannels, navigation } from "../../data/company"
+import BrandMark from "../ui/BrandMark.astro"
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__identity">
+      <BrandMark inverted />
+      <p>{company.description}</p>
+    </div>
+    <div class="site-footer__column">
+      <span class="site-footer__label">Kunjungi</span>
+      <p>{company.address}</p>
+      <p>{company.hours}</p>
+    </div>
+    <div class="site-footer__column">
+      <span class="site-footer__label">Hubungi</span>
+      {contactChannels.map((channel) => <a href={channel.href}>{channel.value}</a>)}
+    </div>
+    <div class="site-footer__column">
+      <span class="site-footer__label">Navigasi</span>
+      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <span>© {new Date().getFullYear()} {company.legalName}</span>
+    <span>Dirancang untuk ritme kerja yang nyata.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+  }
+
+  .site-footer__inner,
+  .site-footer__bottom {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding-left: var(--layout-edge);
+    padding-right: var(--layout-edge);
+  }
+
+  .site-footer__inner {
+    display: grid;
+    gap: var(--space-12);
+    padding-bottom: var(--space-16);
+    padding-top: var(--space-20);
+  }
+
+  .site-footer__identity p,
+  .site-footer__column p,
+  .site-footer__column a {
+    color: var(--color-text-inverse);
+    font-size: var(--type-small);
+    margin: 0;
+    opacity: 0.76;
+  }
+
+  .site-footer__identity p {
+    margin-top: var(--space-5);
+    max-width: 34rem;
+  }
+
+  .site-footer__column {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .site-footer__column a:hover {
+    opacity: 1;
+  }
+
+  .site-footer__label {
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-2);
+    text-transform: uppercase;
+  }
+
+  .site-footer__bottom {
+    border-top: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 22%, transparent);
+    color: var(--color-text-inverse);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--type-small);
+    gap: var(--space-2);
+    opacity: 0.7;
+    padding-bottom: var(--space-6);
+    padding-top: var(--space-6);
+  }
+
+  @media (min-width: 48rem) {
+    .site-footer__inner {
+      grid-template-columns: 2fr repeat(3, 1fr);
+    }
+
+    .site-footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>
