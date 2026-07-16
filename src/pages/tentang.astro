@@ -46,6 +46,59 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     <section class="story-stats" aria-label="Pencapaian Roller Customize">
       {stats.map((stat) => <p><strong>{stat.value}</strong><span>{stat.label}</span></p>)}
     </section>
+    <!-- GALLERY LOOKBOOK -->
+    <section class="gallery" aria-labelledby="gallery-title">
+      <div class="gallery__header">
+        <span class="gallery__tag">Lookbook</span>
+        <h2 id="gallery-title">Hasil yang bicara sendiri.</h2>
+        <p>Setiap foto adalah bukti standar produksi yang kami jaga — dari potongan, bordir, hingga finishing akhir.</p>
+      </div>
+
+      <div class="gallery__grid" id="gallery-grid">
+        {[
+          "dsc06413.jpg","dsc06414.jpg","dsc06418.jpg","dsc06420.jpg",
+          "dsc06421.jpg","dsc06423.jpg","dsc06424.jpg","dsc06425.jpg",
+          "dsc06426.jpg","dsc06437.jpg","dsc06446.jpg","dsc06450.jpg",
+          "dsc06475.jpg","dsc06558.jpg","dsc07020.jpg","dsc07066.jpg"
+        ].map((file, i) => (
+          <button
+            class="gallery__item"
+            data-index={i}
+            aria-label={`Buka foto produk ${i + 1}`}
+            style={`animation-delay: ${i * 0.05}s`}
+          >
+            <img
+              src={`/gallery/${file}`}
+              alt={`Foto produk Roller Customize ${i + 1}`}
+              loading="lazy"
+              decoding="async"
+              width="600"
+              height="800"
+            />
+            <div class="gallery__overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+            </div>
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox foto" hidden>
+      <button class="lightbox__close" id="lightbox-close" aria-label="Tutup lightbox">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <button class="lightbox__prev" id="lightbox-prev" aria-label="Foto sebelumnya">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="lightbox__next" id="lightbox-next" aria-label="Foto berikutnya">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="lightbox__img-wrap">
+        <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+      </div>
+      <div class="lightbox__counter" id="lightbox-counter">1 / 16</div>
+    </div>
   </main>
   <Footer />
 </BaseLayout>
@@ -178,4 +231,315 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+
+  /* ==============================
+     GALLERY LOOKBOOK
+  ============================== */
+  .gallery {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding: var(--space-20) var(--layout-edge);
+  }
+
+  .gallery__header {
+    max-width: 36rem;
+    margin-bottom: var(--space-12);
+  }
+
+  .gallery__tag {
+    display: inline-block;
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+  }
+
+  .gallery__header h2 {
+    font-family: var(--font-display);
+    font-size: var(--type-h2);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0 0 var(--space-4);
+  }
+
+  .gallery__header p {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    margin: 0;
+  }
+
+  /* Masonry-style grid */
+  .gallery__grid {
+    columns: 2;
+    column-gap: var(--space-4);
+  }
+
+  @media (min-width: 48rem) {
+    .gallery__grid {
+      columns: 3;
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .gallery__grid {
+      columns: 4;
+    }
+  }
+
+  /* Each gallery item */
+  .gallery__item {
+    break-inside: avoid;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-radius: var(--panel-radius);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: galleryFadeIn 0.6s ease forwards;
+  }
+
+  @keyframes galleryFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Hover overlay */
+  .gallery__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gallery__overlay svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+  }
+
+  .gallery__item:hover img {
+    transform: scale(1.06);
+  }
+
+  .gallery__item:hover .gallery__overlay {
+    opacity: 1;
+  }
+
+  .gallery__item:hover .gallery__overlay svg {
+    transform: scale(1);
+  }
+
+  /* ==============================
+     LIGHTBOX
+  ============================== */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    animation: lightboxIn 0.25s ease;
+  }
+
+  .lightbox[hidden] {
+    display: none;
+  }
+
+  @keyframes lightboxIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .lightbox__img-wrap {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox__img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    animation: imgPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes imgPop {
+    from { transform: scale(0.92); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .lightbox__close,
+  .lightbox__prev,
+  .lightbox__next {
+    position: fixed;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    color: #fff;
+  }
+
+  .lightbox__close:hover,
+  .lightbox__prev:hover,
+  .lightbox__next:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1);
+  }
+
+  .lightbox__close svg,
+  .lightbox__prev svg,
+  .lightbox__next svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .lightbox__close {
+    top: var(--space-5);
+    right: var(--space-5);
+  }
+
+  .lightbox__prev {
+    left: var(--space-5);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lightbox__prev:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .lightbox__next {
+    right: var(--space-5);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lightbox__next:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .lightbox__counter {
+    position: fixed;
+    bottom: var(--space-5);
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-display);
+    font-size: var(--type-small);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
 </style>
+
+<script is:inline>
+  const photos = [
+    "dsc06413.jpg","dsc06414.jpg","dsc06418.jpg","dsc06420.jpg",
+    "dsc06421.jpg","dsc06423.jpg","dsc06424.jpg","dsc06425.jpg",
+    "dsc06426.jpg","dsc06437.jpg","dsc06446.jpg","dsc06450.jpg",
+    "dsc06475.jpg","dsc06558.jpg","dsc07020.jpg","dsc07066.jpg"
+  ];
+
+  let currentIndex = 0;
+
+  const lightbox   = document.getElementById('lightbox');
+  const lbImg      = document.getElementById('lightbox-img');
+  const lbCounter  = document.getElementById('lightbox-counter');
+  const lbClose    = document.getElementById('lightbox-close');
+  const lbPrev     = document.getElementById('lightbox-prev');
+  const lbNext     = document.getElementById('lightbox-next');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    lbImg.src = `/gallery/${photos[currentIndex]}`;
+    lbImg.alt = `Foto produk Roller Customize ${currentIndex + 1}`;
+    lbCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
+    // trigger re-animation
+    lbImg.style.animation = 'none';
+    lbImg.offsetHeight;
+    lbImg.style.animation = '';
+  }
+
+  function prevPhoto() {
+    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+    updateLightbox();
+  }
+
+  function nextPhoto() {
+    currentIndex = (currentIndex + 1) % photos.length;
+    updateLightbox();
+  }
+
+  // Wire up gallery items
+  document.querySelectorAll('.gallery__item').forEach((btn) => {
+    btn.addEventListener('click', () => openLightbox(Number(btn.dataset.index)));
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', prevPhoto);
+  lbNext.addEventListener('click', nextPhoto);
+
+  // Click backdrop to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevPhoto();
+    if (e.key === 'ArrowRight') nextPhoto();
+  });
+</script>

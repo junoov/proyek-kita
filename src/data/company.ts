@@ -37,14 +37,13 @@ export const company = {
   instagramBrand: "https://www.instagram.com/rollercustomize/",
   shopee: "https://shopee.co.id/rollerdealer",
   heroImage: {
-    src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1280&q=85",
-    srcSet:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=640&q=85 640w, https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=960&q=85 960w, https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1280&q=85 1280w",
-    alt: "Deretan pakaian kerja yang tersusun rapi pada rak produksi",
+    src: "/gallery/dsc07066.jpg",
+    srcSet: "/gallery/dsc07066.jpg 1280w",
+    alt: "Foto produk custom workshirt Roller Customize",
   },
   studioImage: {
-    src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=85",
-    alt: "Profesional yang mengenakan pakaian kerja berwarna netral",
+    src: "/gallery/dsc06437.jpg",
+    alt: "Model mengenakan seragam custom produksi Roller Customize",
   },
 } as const
 
