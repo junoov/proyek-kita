@@ -57,3 +57,19 @@ textarea {
     transition-duration: 1ms;
   }
 }
+
+/* Typography Assignments */
+h1, h2, h3, h4, h5, h6,
+.button,
+.brand-mark,
+.site-header__nav a,
+.mobile-menu summary,
+.mobile-menu nav a,
+.site-footer__label,
+.site-footer__column a,
+.intro__info-num,
+.story-stats strong,
+.assurance ol li span {
+  font-family: var(--font-display);
+  font-weight: 800; /* Ensure Bold style is used */
+}

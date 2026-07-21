@@ -9,7 +9,7 @@ type Props = {
 }
 
 const { title, description, path } = Astro.props
-const site = Astro.site ?? new URL("https://karsa-uniform.example")
+const site = Astro.site ?? new URL("https://roller-customize.example")
 const canonicalUrl = new URL(path, site).toString()
 const organizationSchema = {
   "@context": "https://schema.org",

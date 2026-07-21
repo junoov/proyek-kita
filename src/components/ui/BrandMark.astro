@@ -7,11 +7,15 @@ const { inverted = false } = Astro.props
 const className = inverted ? "brand-mark brand-mark--inverse" : "brand-mark"
 ---
 
-<span class={className} aria-label="Karsa Uniform">
-  <span class="brand-mark__glyph" aria-hidden="true">K</span>
+<span class={className} aria-label="Roller Customize">
+  <svg class="brand-mark__glyph" viewBox="0 0 100 100" aria-hidden="true" fill="currentColor">
+    <rect x="41" y="0" width="18" height="100" />
+    <rect x="41" y="0" width="18" height="100" transform="rotate(60 50 50)" />
+    <rect x="41" y="0" width="18" height="100" transform="rotate(120 50 50)" />
+  </svg>
   <span class="brand-mark__copy">
-    <strong>Karsa</strong>
-    <span>Uniform</span>
+    <span>Roller</span>
+    <span>Customize</span>
   </span>
 </span>
 
@@ -20,54 +24,31 @@ const className = inverted ? "brand-mark brand-mark--inverse" : "brand-mark"
     align-items: center;
     color: var(--color-text);
     display: inline-flex;
-    gap: var(--space-2);
+    gap: var(--space-3);
     line-height: 1;
   }
 
   .brand-mark__glyph {
-    align-items: center;
-    background: var(--color-ink);
-    border-radius: var(--panel-radius);
-    color: var(--color-text-inverse);
-    display: inline-flex;
-    font-size: var(--type-small);
-    font-weight: 800;
-    height: var(--space-10);
-    justify-content: center;
-    letter-spacing: -0.08em;
-    width: var(--space-10);
+    display: block;
+    height: var(--space-8);
+    width: var(--space-8);
+    flex-shrink: 0;
   }
 
   .brand-mark__copy {
     display: grid;
     font-size: var(--type-small);
-    gap: var(--space-1);
-    letter-spacing: -0.03em;
-  }
-
-  .brand-mark__copy strong {
-    font-size: var(--type-body);
+    gap: 0;
+    letter-spacing: 0.05em;
+    line-height: 1.05;
   }
 
   .brand-mark__copy span {
-    color: var(--color-text-muted);
-    font-size: var(--type-label);
-    font-weight: 720;
-    letter-spacing: 0.1em;
+    font-weight: 800;
     text-transform: uppercase;
   }
 
   .brand-mark--inverse {
     color: var(--color-text-inverse);
-  }
-
-  .brand-mark--inverse .brand-mark__glyph {
-    background: var(--color-text-inverse);
-    color: var(--color-ink);
-  }
-
-  .brand-mark--inverse .brand-mark__copy span {
-    color: var(--color-text-inverse);
-    opacity: 0.7;
   }
 </style>

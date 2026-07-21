@@ -12,6 +12,7 @@
     "format": "biome format --write package.json astro.config.ts tsconfig.json biome.json src/data src/styles"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/manrope": "^5.2.5",
     "astro": "^5.13.5"
   },

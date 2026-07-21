@@ -23,25 +23,27 @@ export type Stat = {
 }
 
 export const company = {
-  name: "Karsa Uniform",
-  legalName: "PT Karsa Seragam Indonesia",
+  name: "Roller Customize",
+  legalName: "PT Roller Customize Indonesia",
   tagline: "Seragam yang bekerja sekeras tim Anda.",
   description:
-    "Karsa Uniform merancang dan memproduksi seragam kerja yang rapi, tahan pakai, dan konsisten untuk tim yang bergerak setiap hari.",
-  address: "Jl. Industri Cipta No. 18, Tangerang, Banten 15143",
-  hours: "Senin–Jumat, 08.00–17.00 WIB",
-  email: "halo@karsauniform.co.id",
-  phone: "+62 21 555 0188",
-  whatsapp: "https://wa.me/6281234567890",
+    "Roller Customize merancang dan memproduksi seragam kerja yang rapi, tahan pakai, dan konsisten untuk tim yang bergerak setiap hari.",
+  address: "Jalan Raflesia No. 23 Jamblangan, Seyegan, Sleman, Daerah Istimewa Yogyakarta",
+  hours: "Senin–Sabtu, 08.00–17.00 WIB",
+  email: "halo@rollercustomize.co.id",
+  phone: "+62 896 0580 0090",
+  whatsapp: "https://wa.me/6289605800090",
+  instagram: "https://www.instagram.com/rollercustomize/",
+  instagramBrand: "https://www.instagram.com/rollercustomize/",
+  shopee: "https://shopee.co.id/rollerdealer",
   heroImage: {
-    src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1280&q=85",
-    srcSet:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=640&q=85 640w, https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=960&q=85 960w, https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1280&q=85 1280w",
-    alt: "Deretan pakaian kerja yang tersusun rapi pada rak produksi",
+    src: "/gallery/dsc07066.jpg",
+    srcSet: "/gallery/dsc07066.jpg 1280w",
+    alt: "Foto produk custom workshirt Roller Customize",
   },
   studioImage: {
-    src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=85",
-    alt: "Profesional yang mengenakan pakaian kerja berwarna netral",
+    src: "/gallery/dsc06437.jpg",
+    alt: "Model mengenakan seragam custom produksi Roller Customize",
   },
 } as const
 
@@ -84,16 +86,19 @@ export const stats = [
 ] as const satisfies readonly Stat[]
 
 export const clients = [
-  { initials: "AP", name: "Arunika Prima", sector: "Hospitality" },
-  { initials: "RT", name: "Ruang Transit", sector: "Logistics" },
-  { initials: "SV", name: "Savana Ventures", sector: "Property" },
-  { initials: "KM", name: "Karya Medika", sector: "Healthcare" },
-  { initials: "NS", name: "Nusa Sentra", sector: "Retail" },
-  { initials: "TM", name: "Teras Maju", sector: "Services" },
+  { initials: "UNY", name: "Universitas Negeri Yogyakarta", sector: "Pendidikan" },
+  { initials: "UGM", name: "Universitas Gadjah Mada", sector: "Pendidikan" },
+  { initials: "UMY", name: "Universitas Muhammadiyah Yogyakarta", sector: "Pendidikan" },
+  { initials: "UNS", name: "Universitas Sebelas Maret", sector: "Pendidikan" },
+  { initials: "UII", name: "Universitas Islam Indonesia", sector: "Pendidikan" },
+  { initials: "SLB", name: "Schlumberger", sector: "Korporat & Industri" },
+  { initials: "DPRK", name: "DPRK Sabang", sector: "Pemerintahan" },
+  { initials: "PAN", name: "Partai Amanat Nasional", sector: "Organisasi" },
 ] as const satisfies readonly Client[]
 
 export const contactChannels = [
-  { label: "WhatsApp", value: "Mulai percakapan", href: company.whatsapp },
-  { label: "Email", value: company.email, href: `mailto:${company.email}` },
-  { label: "Telepon", value: company.phone, href: "tel:+62215550188" },
+  { label: "WhatsApp", value: "+62 896 0580 0090", href: company.whatsapp },
+  { label: "Instagram Konveksi", value: "@rollercustomize", href: company.instagram },
+  { label: "Instagram Brand", value: "@rollercustomize", href: company.instagramBrand },
+  { label: "Shopee", value: "Roller Dealer", href: company.shopee },
 ] as const satisfies readonly ContactChannel[]

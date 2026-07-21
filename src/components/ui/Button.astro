@@ -58,11 +58,13 @@ const { href, label, variant = "signal" } = Astro.props
   }
 
   .button--quiet {
-    border-color: var(--color-rule);
-    color: var(--color-text);
+    border-color: currentColor;
+    color: inherit;
+    opacity: 0.8;
   }
 
   .button--quiet:hover {
-    border-color: var(--color-ink);
+    border-color: currentColor;
+    opacity: 1;
   }
 </style>

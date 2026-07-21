@@ -8,8 +8,8 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 ---
 
 <BaseLayout
-  title="Kontak Karsa Uniform"
-  description="Mulai percakapan dengan Karsa Uniform untuk kebutuhan seragam kerja tim Anda."
+  title="Kontak Roller Customize"
+  description="Mulai percakapan dengan Roller Customize untuk kebutuhan seragam kerja tim Anda."
   path="/kontak"
 >
   <Header />
@@ -30,6 +30,11 @@ import BaseLayout from "../layouts/BaseLayout.astro"
           <a href={channel.href}>
             <span>{channel.label}</span>
             <strong>{channel.value}</strong>
+            {channel.label === "Shopee" && (
+              <p class="shopee-warning">
+                * Order via Shopee dikenakan biaya administrasi 20% (lebih disarankan untuk upgrade bahan langsung via WA)
+              </p>
+            )}
           </a>
         ))}
         <div>
@@ -107,5 +112,13 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     .contact-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
+
+  .shopee-warning {
+    color: var(--color-signal) !important;
+    font-size: var(--type-small);
+    margin: var(--space-1) 0 0 !important;
+    font-weight: 650;
+    line-height: 1.4;
   }
 </style>
