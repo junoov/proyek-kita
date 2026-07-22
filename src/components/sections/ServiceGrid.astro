@@ -7,70 +7,73 @@ type Props = {
 }
 
 const {
-  heading = "Dari kebutuhan tim sampai batch yang siap dipakai.",
-  lede = "Tiga fase yang membuat keputusan lebih jelas dan kualitas lebih konsisten."
+  heading = "Dari brief sampai batch.",
+  lede = "Tiga keputusan utama, dengan keluaran yang bisa diperiksa di setiap tahap."
 } = Astro.props
 ---
 
 <section class="services" aria-labelledby="services-title">
-  <div class="services__heading">
-    <p class="services__label">Cara kami bekerja</p>
+  <header class="services__heading">
+    <p>Alur kerja / 01—03</p>
     <h2 id="services-title">{heading}</h2>
-    <p>{lede}</p>
-  </div>
-  <div class="services__grid">
+    <span>{lede}</span>
+  </header>
+
+  <ol class="services__list">
     {services.map((service) => (
-      <article class="service">
+      <li>
         <span class="service__number">{service.number}</span>
         <h3>{service.title}</h3>
         <p>{service.description}</p>
-        <span class="service__deliverable">{service.deliverable}</span>
-      </article>
+        <strong>{service.deliverable}</strong>
+      </li>
     ))}
-  </div>
+  </ol>
 </section>
 
 <style>
   .services {
     margin: 0 auto;
     max-width: var(--layout-max);
-    padding: var(--space-20) var(--layout-edge);
+    padding: var(--space-24) var(--layout-edge);
   }
 
   .services__heading {
-    max-width: 42rem;
+    display: grid;
+    gap: var(--space-5);
+    margin-bottom: var(--space-12);
   }
 
-  .services__label {
+  .services__heading p {
     color: var(--color-signal);
     font-size: var(--type-label);
-    font-weight: 720;
+    font-weight: 800;
     letter-spacing: 0.1em;
-    margin: 0 0 var(--space-4);
+    margin: 0;
     text-transform: uppercase;
   }
 
   h2 {
     font-size: var(--type-h2);
     letter-spacing: -0.055em;
-    line-height: 1.04;
+    line-height: 1;
     margin: 0;
   }
 
-  .services__heading > p:last-child {
+  .services__heading span {
     color: var(--color-text-muted);
-    font-size: var(--type-lead);
-    margin: var(--space-5) 0 0;
-    max-width: 34rem;
+    max-width: 32rem;
   }
 
-  .services__grid {
-    border-top: var(--rule-width) solid var(--color-rule);
-    display: grid;
-    margin-top: var(--space-12);
+  .services__list {
+    border-top: 2px solid var(--color-ink);
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .service {
+  .services__list li {
+    align-items: baseline;
     border-bottom: var(--rule-width) solid var(--color-rule);
     display: grid;
     gap: var(--space-4);
@@ -81,7 +84,6 @@ const {
     color: var(--color-signal);
     font-size: var(--type-label);
     font-weight: 800;
-    letter-spacing: 0.1em;
   }
 
   h3 {
@@ -90,35 +92,24 @@ const {
     margin: 0;
   }
 
-  .service p {
+  .services__list p {
     color: var(--color-text-muted);
     margin: 0;
-    max-width: 27rem;
   }
 
-  .service__deliverable {
+  .services__list strong {
     font-size: var(--type-small);
-    font-weight: 720;
   }
 
   @media (min-width: 48rem) {
-    .services__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .services__heading {
+      align-items: end;
+      grid-template-columns: 0.6fr 1fr 1fr;
     }
 
-    .service {
-      border-bottom: 0;
-      border-right: var(--rule-width) solid var(--color-rule);
-      padding: var(--space-8);
+    .services__list li {
+      grid-template-columns: 0.6fr 1fr 1.4fr 1fr;
     }
 
-    .service:first-child {
-      padding-left: 0;
-    }
-
-    .service:last-child {
-      border-right: 0;
-      padding-right: 0;
-    }
   }
 </style>

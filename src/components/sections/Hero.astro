@@ -4,142 +4,307 @@ import Button from "../ui/Button.astro"
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero__bg">
+  <div class="hero__copy">
+    <p class="hero__index">Garmen kustom · Sleman, Yogyakarta</p>
+    <h1 id="hero-title">
+      <span class="hero__title-desktop">Seragam kerja<br />yang siap <em>dipakai.</em></span>
+      <span class="hero__title-mobile">Seragam kerja untuk tim Anda.</span>
+    </h1>
+    <p class="hero__lede">
+      <span class="hero__lede-desktop">Kami merancang workshirt untuk kebutuhan tim, lalu menjaganya tetap konsisten dari sampel sampai batch produksi.</span>
+      <span class="hero__lede-mobile">Ukuran, warna, dan detail dijaga dari sampel sampai produksi.</span>
+    </p>
+    <div class="hero__actions">
+      <span class="hero__action-desktop"><Button href="/kontak" label="Bahas kebutuhan tim" variant="ink" /></span>
+      <a class="hero__text-link" href="/layanan">Lihat cara kerja</a>
+    </div>
+    <dl class="hero__facts">
+      <div>
+        <dt>Fokus</dt>
+        <dd>Workshirt & seragam tim</dd>
+      </div>
+      <div>
+        <dt>Kontrol</dt>
+        <dd>Ukuran, jahitan, warna, identitas</dd>
+      </div>
+    </dl>
+  </div>
+
+  <figure class="hero__visual">
     <img
       src={company.heroImage.src}
       alt={company.heroImage.alt}
-      width="1600"
-      height="900"
+      width="1920"
+      height="1280"
       srcset={company.heroImage.srcSet}
-      sizes="100vw"
+      sizes="(min-width: 64rem) 58vw, 100vw"
       fetchpriority="high"
       decoding="async"
     />
-    <div class="hero__overlay" aria-hidden="true"></div>
-  </div>
-  <div class="hero__content">
-    <h1 id="hero-title">{company.name}</h1>
-    <p class="hero__quote">"{company.tagline}"</p>
-    <div class="hero__actions">
-      <Button href="/kontak" label="Selengkapnya" />
-      <Button href="/kontak" label="Hubungi Kami" variant="quiet" />
-    </div>
-  </div>
-  <svg class="hero__wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path
-      d="M0,64 C360,120 720,0 1080,80 C1260,110 1380,90 1440,80 L1440,120 L0,120 Z"
-      fill="var(--color-signal)"
-    />
-  </svg>
+    <figcaption>
+      <span>RC / 01</span>
+      Workshirt hitam, dokumentasi produk 2026
+    </figcaption>
+  </figure>
+  <div class="hero__mobile-action"><Button href="/kontak" label="Diskusikan seragam tim" variant="ink" /></div>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    overflow: hidden;
+    background: var(--color-canvas);
+    display: grid;
+    grid-template-areas:
+      "visual"
+      "copy";
+    min-height: calc(100svh - 4.5rem);
   }
 
-  .hero__bg {
-    position: relative;
-    min-height: 54vh;
+  .hero__copy {
+    align-content: center;
+    display: grid;
+    grid-area: copy;
+    padding: var(--space-12) var(--layout-edge) var(--space-10);
   }
 
-  .hero__bg img {
-    display: block;
-    height: 100%;
-    min-height: 54vh;
-    object-fit: cover;
-    object-position: center top;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-  }
-
-  .hero__overlay {
-    background: linear-gradient(
-      to bottom,
-      color-mix(in oklch, var(--color-ink) 15%, transparent) 0%,
-      color-mix(in oklch, var(--color-ink) 35%, transparent) 50%,
-      color-mix(in oklch, var(--color-ink) 50%, transparent) 100%
-    );
-    inset: 0;
-    position: absolute;
-  }
-
-  .hero__content {
-    align-items: center;
-    color: var(--color-text-inverse);
-    display: flex;
-    flex-direction: column;
-    inset: 0;
-    justify-content: center;
-    padding: var(--space-12) var(--layout-edge) var(--space-16);
-    position: absolute;
-    text-align: center;
-    z-index: 1;
+  .hero__index {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    margin: 0 0 var(--space-6);
+    text-transform: uppercase;
   }
 
   h1 {
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1;
+    font-size: clamp(2.75rem, 11vw, 7.6rem);
+    letter-spacing: -0.07em;
+    line-height: 0.88;
     margin: 0;
-    text-shadow: 0 2px 24px color-mix(in oklch, var(--color-ink) 60%, transparent);
   }
 
-  .hero__quote {
-    color: var(--color-text-inverse);
-    font-size: clamp(1.125rem, 2.5vw, 1.75rem);
-    font-style: italic;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+  h1 em {
+    color: var(--color-signal);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+  }
+
+  .hero__lede {
+    font-size: 1rem;
+    line-height: 1.55;
     margin: var(--space-6) 0 0;
-    text-shadow: 0 1px 12px color-mix(in oklch, var(--color-ink) 50%, transparent);
+    max-width: 34rem;
+  }
+
+  :global(.hero__title-mobile),
+  :global(.hero__lede-mobile),
+  :global(.hero__mobile-action) {
+    display: none;
   }
 
   .hero__actions {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-10);
+    gap: var(--space-4);
+    margin-top: var(--space-6);
   }
 
-  .hero__wave {
-    display: block;
-    height: auto;
-    margin-bottom: -2px;
+  .hero__text-link {
+    border-bottom: var(--rule-width) solid currentColor;
+    font-size: var(--type-small);
+    font-weight: 720;
+    padding-block: var(--space-2);
+  }
+
+  .hero__facts {
+    border-top: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: var(--space-8) 0 0;
+    padding-top: var(--space-5);
+  }
+
+  .hero__facts div {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .hero__facts dt {
+    color: var(--color-text-muted);
+    font-size: var(--type-label);
+    text-transform: uppercase;
+  }
+
+  .hero__facts dd {
+    font-size: var(--type-small);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .hero__visual {
+    background: var(--color-ink);
+    aspect-ratio: 4 / 3;
+    grid-area: visual;
+    margin: 0;
+    min-height: 0;
+    overflow: hidden;
     position: relative;
-    width: 100%;
-    z-index: 2;
   }
 
-  @media (min-width: 48rem) {
-    .hero__bg {
-      min-height: 85vh;
+  .hero__visual img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    width: 100%;
+  }
+
+  .hero__visual figcaption {
+    background: var(--color-canvas);
+    bottom: 0;
+    display: flex;
+    font-size: var(--type-small);
+    gap: var(--space-5);
+    left: 0;
+    padding: var(--space-3) var(--space-4);
+    position: absolute;
+  }
+
+  @media (max-width: 30rem) {
+    .hero {
+      display: flex;
+      min-height: 0;
     }
 
-    .hero__bg img {
-      min-height: 85vh;
+    .hero__copy {
+      display: contents;
+    }
+
+    .hero__index,
+    .hero__text-link,
+    .hero__facts {
+      display: none;
+    }
+
+    .hero__visual figcaption {
+      display: none;
+    }
+
+    h1 {
+      font-size: clamp(2.75rem, 13vw, 3.75rem);
+      letter-spacing: -0.065em;
+      line-height: 0.94;
+      margin: 0;
+      order: 1;
+      padding: var(--space-8) var(--layout-edge) 0;
+    }
+
+    :global(.hero__title-desktop),
+    :global(.hero__lede-desktop),
+    :global(.hero__action-desktop) {
+      display: none;
+    }
+
+    :global(.hero__title-mobile),
+    :global(.hero__lede-mobile) {
+      display: inline;
+    }
+
+    .hero__lede {
+      margin-top: var(--space-5);
+      order: 2;
+      padding-inline: var(--layout-edge);
+    }
+
+    .hero__visual img {
+      aspect-ratio: 3 / 2;
+      display: block;
+      object-fit: cover;
       object-position: center top;
+      width: 100%;
     }
 
-    .hero__content {
-      padding: var(--space-20) var(--layout-edge) var(--space-24);
+    .hero__visual {
+      order: 3;
+    }
+
+    :global(.hero__mobile-action) {
+      display: block;
+      order: 4;
+      padding: var(--space-6) var(--layout-edge) var(--space-8);
+    }
+
+    :global(.hero__mobile-action .button) {
+      width: 100%;
+    }
+  }
+
+  .hero__visual figcaption span {
+    color: var(--color-signal);
+    font-weight: 800;
+  }
+
+  @media (max-width: 63.99rem) {
+    .hero {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero__copy {
+      display: flex;
+      flex-direction: column;
+      order: 1;
+    }
+
+    .hero__visual {
+      aspect-ratio: auto;
+      display: flex;
+      flex-direction: column;
+      order: 2;
+    }
+
+    .hero__visual img {
+      aspect-ratio: 3 / 2;
+      height: auto;
+      object-position: center top;
+      position: static;
+    }
+
+    .hero__copy {
+      background: var(--color-canvas);
+      margin-top: 0;
+      padding-top: var(--space-8);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__visual figcaption {
+      inset: auto;
+      order: -1;
+      position: static;
     }
   }
 
   @media (min-width: 64rem) {
-    .hero__bg {
-      min-height: 90vh;
+    .hero {
+      grid-template-areas: none;
+      grid-template-columns: minmax(25rem, 42%) 1fr;
     }
 
-    .hero__bg img {
-      min-height: 90vh;
+    .hero__copy {
+      grid-area: auto;
+      padding: var(--space-20) clamp(2rem, 5vw, 6rem);
     }
 
-    .hero__content {
-      padding-bottom: var(--space-20);
+    h1 {
+      font-size: clamp(4.5rem, 6.5vw, 7.6rem);
+    }
+
+    .hero__visual {
+      aspect-ratio: auto;
+      grid-area: auto;
+      min-height: calc(100svh - 4.5rem);
     }
   }
 </style>

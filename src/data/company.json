@@ -12,8 +12,8 @@
   "instagramBrand": "https://www.instagram.com/rollercustomize/",
   "shopee": "https://shopee.co.id/rollerdealer",
   "heroImage": {
-    "src": "/gallery/dsc07066.jpg",
-    "srcSet": "/gallery/dsc07066.jpg 1280w",
+    "src": "/hero/hero.jpg",
+    "srcSet": "/hero/hero.jpg 1280w",
     "alt": "Foto produk custom workshirt Roller Customize"
   },
   "studioImage": {

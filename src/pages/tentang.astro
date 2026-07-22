@@ -1,10 +1,10 @@
 ---
 import Footer from "../components/layout/Footer.astro"
 import Header from "../components/layout/Header.astro"
-import PageHero from "../components/sections/PageHero.astro"
-import { company, stats } from "../data/company"
 import galleryData from "../data/gallery.json"
 import BaseLayout from "../layouts/BaseLayout.astro"
+
+const galleryItems = (galleryData.items || galleryData).filter((item) => item.image !== "/hero/hero.jpg")
 ---
 
 <BaseLayout
@@ -14,38 +14,27 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 >
   <Header />
   <main id="main">
-    <PageHero
-      label="Tentang Roller Customize"
-      title="Seragam yang jelas tujuannya, rapi pengerjaannya."
-      lede="Kami percaya seragam kerja adalah titik temu antara kenyamanan seseorang dan standar sebuah perusahaan."
-    />
-    <section class="story">
-      <div class="story__copy">
-        <p class="story__lead">
-          Roller Customize adalah konveksi yang berfokus pada produksi custom uniform dan workwear dengan pendekatan yang sederhana, rapi, dan presisi.
-        </p>
-        <p>
-          Kami percaya bahwa seragam bukan hanya kebutuhan, tetapi representasi identitas tim dan profesionalitas. Oleh karena itu, setiap produk dikerjakan dengan standar kualitas yang konsisten, mulai dari pemilihan bahan hingga proses finishing.
-        </p>
-        <p>
-          Dengan sistem kerja yang terstruktur dan berbasis spesifikasi yang jelas, Roller Customize memastikan setiap pesanan diproduksi secara efisien dan sesuai kebutuhan customer.
-        </p>
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="about-hero__heading">
+        <p>Tentang Roller Customize</p>
+        <h1 id="about-title">Kami membuat pakaian kerja yang memang enak dipakai bekerja.</h1>
       </div>
-      <figure>
-        <img src={company.studioImage.src} alt={company.studioImage.alt} width="1200" height="1500" loading="lazy" decoding="async" />
-        <figcaption>Ruang kerja yang memperhatikan detail sebelum produksi dimulai.</figcaption>
-      </figure>
-    </section>
-    <section class="principles" aria-labelledby="principles-title">
-      <h2 id="principles-title">Apa yang kami jaga di setiap pesanan.</h2>
-      <div>
-        <article><strong>Fungsi</strong><p>Material dan konstruksi dipilih dari kebutuhan kerja, bukan tren sesaat.</p></article>
-        <article><strong>Konsistensi</strong><p>Warna, ukuran, dan detail merek dikontrol untuk setiap batch yang berjalan.</p></article>
-        <article><strong>Kejelasan</strong><p>Tim Anda tahu apa yang dikerjakan, kapan sampel siap, dan apa yang dikirim.</p></article>
+      <div class="about-hero__story">
+        <p class="about-hero__lead">Roller Customize adalah konveksi workwear dan seragam kustom di Sleman, Yogyakarta.</p>
+        <p>Kami mulai dari kebutuhan orang yang akan mengenakannya: bagaimana mereka bergerak, kondisi tempat kerja, dan identitas yang perlu dibawa.</p>
+        <p>Setelah bentuknya disepakati lewat sampel, ukuran, warna, jahitan, dan penempatan identitas menjadi acuan untuk produksi berikutnya.</p>
       </div>
     </section>
-    <section class="story-stats" aria-label="Pencapaian Roller Customize">
-      {stats.map((stat) => <p><strong>{stat.value}</strong><span>{stat.label}</span></p>)}
+    <section class="standards" aria-labelledby="standards-title">
+      <div class="standards__heading">
+        <p>Yang kami periksa</p>
+        <h2 id="standards-title">Tiga hal sebelum barang dikirim.</h2>
+      </div>
+      <ol>
+        <li><span>01</span><strong>Fungsi</strong><p>Bahan dan konstruksi sesuai dengan gerak serta lingkungan kerja pemakainya.</p></li>
+        <li><span>02</span><strong>Konsistensi</strong><p>Ukuran, warna, jahitan, dan identitas mengikuti sampel yang telah disetujui.</p></li>
+        <li><span>03</span><strong>Kelengkapan</strong><p>Jumlah, variasi ukuran, dan detail pesanan diperiksa sebelum pengiriman.</p></li>
+      </ol>
     </section>
     <!-- GALLERY LOOKBOOK -->
     <section class="gallery" aria-labelledby="gallery-title">
@@ -56,14 +45,13 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       </div>
 
       <div class="gallery__grid" id="gallery-grid">
-        {(galleryData.items || galleryData).map((item, i) => (
+        {galleryItems.map((item, i) => (
           <button
             class="gallery__item"
             data-index={i}
             data-src={item.image}
             data-title={item.title || `Foto produk ${i + 1}`}
             aria-label={`Buka foto produk ${i + 1}`}
-            style={`animation-delay: ${i * 0.05}s`}
           >
             <img
               src={item.image}
@@ -73,9 +61,6 @@ import BaseLayout from "../layouts/BaseLayout.astro"
               width="600"
               height="800"
             />
-            <div class="gallery__overlay">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-            </div>
           </button>
         ))}
       </div>
@@ -102,131 +87,120 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 </BaseLayout>
 
 <style>
-  .story,
-  .principles,
-  .story-stats {
+  .about-hero,
+  .standards {
     margin: 0 auto;
     max-width: var(--layout-max);
-    padding-left: var(--layout-edge);
-    padding-right: var(--layout-edge);
+    padding-inline: var(--layout-edge);
   }
 
-  .story {
+  .about-hero {
     display: grid;
-    gap: var(--space-12);
-    padding-bottom: var(--space-20);
-    padding-top: var(--space-20);
+    gap: var(--space-8);
+    padding-bottom: var(--space-16);
+    padding-top: var(--space-12);
   }
 
-  .story__copy {
-    max-width: 35rem;
+  .about-hero__heading > p,
+  .standards__heading > p {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--space-4);
+    text-transform: uppercase;
   }
 
-  .story__lead {
-    font-size: var(--type-h3);
-    font-weight: 650;
-    letter-spacing: -0.035em;
-    line-height: 1.35;
+  .about-hero h1 {
+    font-size: clamp(2.5rem, 8vw, 6.5rem);
+    letter-spacing: -0.065em;
+    line-height: 0.98;
+    margin: 0;
+    max-width: 14ch;
+  }
+
+  .about-hero__story {
+    border-top: 2px solid var(--color-ink);
+    max-width: 42rem;
+    padding-top: var(--space-6);
+  }
+
+  .about-hero__story p {
     margin: 0;
   }
 
-  .story__copy p:last-child {
-    color: var(--color-text-muted);
-    margin-bottom: 0;
+  .about-hero__story p + p {
     margin-top: var(--space-5);
   }
 
-  figure {
-    margin: 0;
+  .about-hero__lead {
+    font-size: clamp(1.125rem, 3vw, 1.4rem);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.4;
   }
 
-  figure img {
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    width: 100%;
-  }
-
-  figcaption {
-    color: var(--color-text-muted);
-    font-size: var(--type-small);
-    margin-top: var(--space-3);
-  }
-
-  .principles {
-    background: var(--color-mist);
-    max-width: none;
+  .standards {
+    border-top: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    gap: var(--space-10);
     padding-bottom: var(--space-20);
-    padding-top: var(--space-20);
+    padding-top: var(--space-16);
   }
 
-  .principles > h2,
-  .principles > div,
-  .story-stats {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: var(--layout-max);
-  }
-
-  .principles h2 {
+  .standards h2 {
     font-size: var(--type-h2);
     letter-spacing: -0.055em;
     line-height: 1.04;
-    margin-bottom: var(--space-12);
-    margin-top: 0;
-    max-width: 17ch;
+    margin: 0;
+    max-width: 14ch;
   }
 
-  .principles > div,
-  .story-stats {
-    display: grid;
-    gap: var(--space-6);
+  .standards ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .principles article {
-    border-top: var(--rule-width) solid var(--color-rule);
-    padding-top: var(--space-5);
-  }
-
-  .principles strong {
-    font-size: var(--type-h3);
-  }
-
-  .principles p {
-    color: var(--color-text-muted);
-    margin-bottom: 0;
-  }
-
-  .story-stats {
-    padding-bottom: var(--space-20);
-    padding-top: var(--space-20);
-  }
-
-  .story-stats p {
+  .standards li {
     border-top: var(--rule-width) solid var(--color-rule);
     display: grid;
     gap: var(--space-2);
-    margin: 0;
-    padding-top: var(--space-4);
+    grid-template-columns: 2.5rem 1fr;
+    padding-block: var(--space-5);
   }
 
-  .story-stats strong {
-    font-size: var(--type-h2);
-    letter-spacing: -0.06em;
-  }
-
-  .story-stats span {
+  .standards li > span {
     color: var(--color-text-muted);
     font-size: var(--type-small);
+    grid-row: span 2;
+  }
+
+  .standards strong {
+    font-size: var(--type-h3);
+  }
+
+  .standards li p {
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   @media (min-width: 48rem) {
-    .story {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .about-hero {
+      align-items: start;
+      column-gap: var(--space-16);
+      grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+      padding-bottom: var(--space-20);
+      padding-top: var(--space-20);
     }
 
-    .principles > div,
-    .story-stats {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .about-hero__story {
+      align-self: end;
+      margin-top: var(--space-16);
+    }
+
+    .standards {
+      grid-template-columns: minmax(16rem, 0.7fr) minmax(24rem, 1.3fr);
     }
   }
 
@@ -299,18 +273,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     border: none;
     cursor: pointer;
     position: relative;
-    border-radius: var(--panel-radius);
     overflow: hidden;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: galleryFadeIn 0.6s ease forwards;
-  }
-
-  @keyframes galleryFadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   .gallery__item img {
@@ -318,40 +281,10 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     height: auto;
     display: block;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* Hover overlay */
-  .gallery__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .gallery__overlay svg {
-    width: 2.5rem;
-    height: 2.5rem;
-    color: #fff;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
-    transform: scale(0.8);
-    transition: transform 0.3s ease;
   }
 
   .gallery__item:hover img {
-    transform: scale(1.06);
-  }
-
-  .gallery__item:hover .gallery__overlay {
-    opacity: 1;
-  }
-
-  .gallery__item:hover .gallery__overlay svg {
-    transform: scale(1);
+    opacity: 0.82;
   }
 
   /* ==============================

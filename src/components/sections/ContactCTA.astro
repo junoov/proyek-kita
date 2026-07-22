@@ -1,50 +1,65 @@
 ---
+import { company } from "../../data/company"
 import Button from "../ui/Button.astro"
 ---
 
 <section class="contact-cta" aria-labelledby="contact-cta-title">
-  <div class="contact-cta__inner">
-    <p class="contact-cta__label">Siap ditinjau bersama</p>
-    <h2 id="contact-cta-title">Bawa kebutuhan tim Anda. Kami siapkan arah yang jelas.</h2>
-    <p>
-      Mulai dari satu pertanyaan singkat tentang jumlah, fungsi, atau jenis material yang sedang Anda
-      pertimbangkan.
-    </p>
-    <Button href="/kontak" label="Mulai Diskusi" variant="ink" />
+  <p class="contact-cta__label">Mulai dari informasi yang ada</p>
+  <div class="contact-cta__body">
+    <h2 id="contact-cta-title">Kirim jumlah, jenis seragam, dan target waktu.</h2>
+    <div>
+      <p>Kami bantu merapikan kebutuhan Anda menjadi brief yang bisa diproduksi.</p>
+      <Button href={company.whatsapp} label="Buka WhatsApp" variant="ink" />
+    </div>
   </div>
 </section>
 
 <style>
   .contact-cta {
-    background: var(--color-signal);
-    color: var(--color-text-inverse);
-    padding: var(--space-20) var(--layout-edge);
-  }
-
-  .contact-cta__inner {
-    margin: 0 auto;
-    max-width: var(--layout-max);
+    background: var(--color-canvas);
+    display: grid;
+    gap: var(--space-8);
+    padding: var(--space-24) max(var(--layout-edge), calc((100vw - var(--layout-max)) / 2));
   }
 
   .contact-cta__label {
+    color: var(--color-signal);
     font-size: var(--type-label);
-    font-weight: 720;
+    font-weight: 800;
     letter-spacing: 0.1em;
-    margin: 0 0 var(--space-4);
+    margin: 0;
     text-transform: uppercase;
   }
 
-  h2 {
-    font-size: var(--type-h2);
-    letter-spacing: -0.055em;
-    line-height: 1.04;
-    margin: 0;
-    max-width: 18ch;
+  .contact-cta__body {
+    border-top: 2px solid var(--color-ink);
+    display: grid;
+    gap: var(--space-10);
+    padding-top: var(--space-8);
   }
 
-  .contact-cta__inner > p:not(.contact-cta__label) {
+  h2 {
+    font-size: clamp(3rem, 7vw, 6.8rem);
+    letter-spacing: -0.07em;
+    line-height: 0.9;
+    margin: 0;
+    max-width: 13ch;
+  }
+
+  .contact-cta__body p {
     font-size: var(--type-lead);
-    margin: var(--space-5) 0 var(--space-8);
-    max-width: 38rem;
+    margin: 0 0 var(--space-8);
+    max-width: 28rem;
+  }
+
+  @media (min-width: 64rem) {
+    .contact-cta {
+      grid-template-columns: 1fr 3fr;
+    }
+
+    .contact-cta__body {
+      align-items: end;
+      grid-template-columns: 1.7fr 0.8fr;
+    }
   }
 </style>

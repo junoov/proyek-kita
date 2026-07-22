@@ -26,7 +26,7 @@ import Button from "../ui/Button.astro"
 
 <style>
   .site-header {
-    background: color-mix(in oklch, var(--color-canvas) 94%, transparent);
+    background: color-mix(in oklch, var(--color-canvas) 84%, var(--color-mist));
     border-bottom: var(--rule-width) solid var(--color-rule);
     position: sticky;
     top: 0;
@@ -41,6 +41,13 @@ import Button from "../ui/Button.astro"
     max-width: var(--layout-max);
     min-height: calc(var(--space-12) + var(--space-6));
     padding: var(--space-3) var(--layout-edge);
+  }
+
+  @media (max-width: 30rem) {
+    .site-header__inner {
+      min-height: 4rem;
+      padding-block: var(--space-2);
+    }
   }
 
   .site-header__nav,

@@ -12,53 +12,48 @@ const { href, label, variant = "signal" } = Astro.props
 
 <a class={`button button--${variant}`} href={href}>
   <span>{label}</span>
-  <span aria-hidden="true">→</span>
 </a>
 
 <style>
   .button {
     align-items: center;
-    border: var(--rule-width) solid transparent;
-    border-radius: var(--control-radius);
+    border: var(--rule-width) solid currentColor;
     display: inline-flex;
     font-size: var(--type-small);
     font-weight: 720;
-    gap: var(--space-3);
     justify-content: center;
-    min-height: calc(var(--space-10) + var(--space-1));
-    padding: var(--space-3) var(--space-5);
+    min-height: var(--space-12);
+    padding: var(--space-3) var(--space-4);
     transition:
       background-color var(--transition-micro),
       border-color var(--transition-micro),
-      color var(--transition-micro),
-      transform var(--transition-micro);
+      color var(--transition-micro);
     white-space: nowrap;
   }
 
   .button:hover {
-    transform: translateY(calc(var(--space-1) * -1));
-  }
-
-  .button:active {
-    transform: translateY(0);
+    background: var(--color-canvas);
+    color: var(--color-ink);
   }
 
   .button--signal {
     background: var(--color-signal);
+    border-color: var(--color-signal);
     color: var(--color-text-inverse);
   }
 
   .button--signal:hover {
-    background: var(--color-signal-strong);
+    background: transparent;
+    border-color: var(--color-ink);
   }
 
   .button--ink {
     background: var(--color-ink);
+    border-color: var(--color-ink);
     color: var(--color-text-inverse);
   }
 
   .button--quiet {
-    border-color: currentColor;
     color: inherit;
     opacity: 0.8;
   }

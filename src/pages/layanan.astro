@@ -1,8 +1,19 @@
 ---
 import Footer from "../components/layout/Footer.astro"
 import Header from "../components/layout/Header.astro"
-import PageHero from "../components/sections/PageHero.astro"
 import BaseLayout from "../layouts/BaseLayout.astro"
+
+const orderFlow = [
+  ["01", "Konsultasi kebutuhan", "Jumlah, fungsi pakaian, bahan, dan target waktu dibahas di awal."],
+  ["02", "Formulir pesanan", "Rincian ukuran, warna, serta penempatan identitas dicatat."],
+  ["03", "Penawaran", "Harga dan ruang lingkup pekerjaan dikirim untuk diperiksa."],
+  ["04", "Pembayaran awal", "DP 60% menempatkan pesanan ke antrean kerja."],
+  ["05", "Spesifikasi produksi", "Detail yang disepakati dirangkum sebagai acuan tim produksi."],
+  ["06", "Desain dan persetujuan", "Visual serta detail akhir dikunci sebelum kain dipotong."],
+  ["07", "Produksi", "Pemotongan, bordir, dan jahit berjalan sesuai spesifikasi."],
+  ["08", "Pemeriksaan", "Ukuran, jumlah, jahitan, dan identitas diperiksa per batch."],
+  ["09", "Pelunasan dan kirim", "Barang dikirim setelah hasil pemeriksaan dan pelunasan selesai."],
+] as const
 ---
 
 <BaseLayout
@@ -12,22 +23,22 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 >
   <Header />
   <main id="main">
-    <PageHero
-      label="Layanan & Spesifikasi"
-      title="Satu alur untuk seragam yang siap bekerja."
-      lede="Kami membantu tim procurement bergerak dari kebutuhan yang belum rapi menjadi pesanan yang jelas, terukur, dan siap diproduksi."
-    />
+    <section class="service-hero" aria-labelledby="service-title">
+      <p>Layanan & spesifikasi</p>
+      <h1 id="service-title">Workshirt kustom, dengan rincian yang bisa diperiksa sebelum produksi.</h1>
+      <div>Katalog di bawah memuat bahan, biaya, ukuran, dan urutan kerja yang kami gunakan.</div>
+    </section>
 
     <!-- SECTION: PRODUCT CATALOG & PRICELIST -->
     <section class="catalog" aria-labelledby="catalog-title">
       <div class="catalog__inner">
         <div class="catalog__intro">
-          <span class="catalog__tag">Katalog Utama</span>
+          <span class="catalog__tag">Katalog utama</span>
           <h2 id="catalog-title">Custom Workshirt</h2>
-          <p class="catalog__moq"><strong>Minimal Order:</strong> 24 Pcs <span class="catalog__moq-sub">(Pemesanan di bawah MOQ dikenakan biaya tambahan Rp15.000 - Rp35.000/pcs)</span></p>
+          <p class="catalog__moq"><strong>Pesanan minimum:</strong> 24 pcs <span class="catalog__moq-sub">Pesanan di bawah jumlah minimum dikenakan tambahan Rp15.000–Rp35.000 per pcs.</span></p>
           
           <div class="catalog__specs">
-            <h3>Spesifikasi Standar</h3>
+            <h3>Spesifikasi standar</h3>
             <ul>
               <li><strong>Model:</strong> Lengan Pendek</li>
               <li><strong>Desain:</strong> Termasuk 2 titik bordir komputer</li>
@@ -37,7 +48,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
           </div>
 
           <div class="catalog__notes">
-            <h3>Ketentuan Tambahan</h3>
+            <h3>Ketentuan tambahan</h3>
             <ul>
               <li>Kenaikan ukuran di atas XL dikenakan tambahan +Rp5.000 per tingkat size (XXL, 3XL, dst).</li>
               <li>Bordir punggung ukuran besar (di atas 27 x 15 cm) dikenakan biaya sesuai dengan kerumitan desain.</li>
@@ -49,7 +60,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
         <div class="catalog__pricing-panel">
           <div class="pricing-card">
-            <h3>Pricelist Bahan Utama</h3>
+            <h3>Harga bahan utama</h3>
             <div class="pricing-list">
               <div class="pricing-item">
                 <span>American Drill</span>
@@ -75,7 +86,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
           </div>
 
           <div class="variations-card">
-            <h3>Variasi & Biaya Tambahan</h3>
+            <h3>Variasi dan biaya tambahan</h3>
             <div class="variations-grid">
               <div class="var-item"><span>Up Size (&gt; XL)</span><strong>+Rp5.000</strong></div>
               <div class="var-item"><span>Boxy Cut</span><strong>+Rp7.000</strong></div>
@@ -91,156 +102,21 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       </div>
     </section>
 
-    <!-- SECTION: ORDER FLOW SNAKE -->
     <section class="flow" aria-labelledby="flow-title">
       <div class="flow__panel">
-
-        <!-- Bold header block -->
         <div class="flow__hero">
-          <span class="flow__tag">Prosedur Kerja</span>
-          <h2 id="flow-title">ALUR<br>PEMESANAN</h2>
+          <span class="flow__tag">Prosedur kerja</span>
+          <h2 id="flow-title">Dari percakapan pertama sampai barang dikirim.</h2>
+          <p>Sembilan tahap, dengan keputusan yang jelas sebelum pekerjaan berpindah ke tahap berikutnya.</p>
         </div>
-
-        <!-- Snake diagram -->
-        <div class="flow__diagram" id="flow-diagram">
-
-          <!-- ROW 1: steps 1–5, left to right -->
-          <div class="flow__row flow__row--ltr">
-
-            <div class="flow__node" data-step="1">
-              <div class="flow__bubble flow__bubble--accent">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-              </div>
-              <div class="flow__label">
-                <span class="flow__step-num">01</span>
-                <span class="flow__step-name">Konsultasi<br>Kebutuhan</span>
-              </div>
-            </div>
-
-            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
-              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-
-            <div class="flow__node" data-step="2">
-              <div class="flow__bubble">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-              </div>
-              <div class="flow__label">
-                <span class="flow__step-num">02</span>
-                <span class="flow__step-name">Order Form<br>Submission</span>
-              </div>
-            </div>
-
-            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
-              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-
-            <div class="flow__node" data-step="3">
-              <div class="flow__bubble flow__bubble--accent">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 7V5a2 2 0 012-2h2M9 7h6"/><path d="M13 3v4m0 0l4 4m0 0l-4 4m4-4H7"/></svg>
-              </div>
-              <div class="flow__label">
-                <span class="flow__step-num">03</span>
-                <span class="flow__step-name">Quotation &amp;<br>Invoice</span>
-              </div>
-            </div>
-
-            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
-              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-
-            <div class="flow__node" data-step="4">
-              <div class="flow__bubble">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-              </div>
-              <div class="flow__label">
-                <span class="flow__step-num">04</span>
-                <span class="flow__step-name">Down Payment<br>(DP 60%)</span>
-              </div>
-            </div>
-
-            <div class="flow__arrow flow__arrow--right" aria-hidden="true">
-              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="0" y1="8" x2="52" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="46,2 58,8 46,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-
-            <div class="flow__node" data-step="5">
-              <div class="flow__bubble flow__bubble--accent">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-              </div>
-              <div class="flow__label">
-                <span class="flow__step-num">05</span>
-                <span class="flow__step-name">Spec &amp;<br>Techpack</span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- U-turn connector -->
-          <div class="flow__uturn" aria-hidden="true">
-            <svg viewBox="0 0 100 60" fill="none" preserveAspectRatio="none">
-              <path d="M10 5 Q10 55 50 55 Q90 55 90 5" stroke="currentColor" stroke-width="2" stroke-dasharray="8 5" fill="none"/>
-              <polyline points="84,12 90,2 96,12" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" transform="rotate(180 90 5)"/>
-            </svg>
-          </div>
-
-          <!-- ROW 2: steps 6–9, right to left -->
-          <div class="flow__row flow__row--rtl">
-
-            <div class="flow__node" data-step="9">
-              <div class="flow__bubble flow__bubble--final">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-              </div>
-              <div class="flow__label flow__label--above">
-                <span class="flow__step-num">09</span>
-                <span class="flow__step-name">Final Payment<br>&amp; Shipping</span>
-              </div>
-            </div>
-
-            <div class="flow__arrow flow__arrow--left" aria-hidden="true">
-              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="60" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="14,2 2,8 14,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-
-            <div class="flow__node" data-step="8">
-              <div class="flow__bubble">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-              </div>
-              <div class="flow__label flow__label--above">
-                <span class="flow__step-num">08</span>
-                <span class="flow__step-name">Quality<br>Control</span>
-              </div>
-            </div>
-
-            <div class="flow__arrow flow__arrow--left" aria-hidden="true">
-              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="60" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="14,2 2,8 14,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-
-            <div class="flow__node" data-step="7">
-              <div class="flow__bubble flow__bubble--accent">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              </div>
-              <div class="flow__label flow__label--above">
-                <span class="flow__step-num">07</span>
-                <span class="flow__step-name">Proses<br>Produksi</span>
-              </div>
-            </div>
-
-            <div class="flow__arrow flow__arrow--left" aria-hidden="true">
-              <svg viewBox="0 0 60 16" fill="none" preserveAspectRatio="none"><line x1="60" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><polyline points="14,2 2,8 14,14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-
-            <div class="flow__node" data-step="6">
-              <div class="flow__bubble">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              </div>
-              <div class="flow__label flow__label--above">
-                <span class="flow__step-num">06</span>
-                <span class="flow__step-name">Design &amp;<br>Approval</span>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
+        <ol class="flow__list">
+          {orderFlow.map(([number, title, description]) => (
+            <li>
+              <span>{number}</span>
+              <div><strong>{title}</strong><p>{description}</p></div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
@@ -249,8 +125,8 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       <div class="sizechart__inner">
         <div class="sizechart__header">
           <span class="sizechart__tag">Panduan Ukuran</span>
-          <h2 id="sizechart-title">Standar Size Chart</h2>
-          <p>Tersedia dua tipe pola potongan (Reguler dan Boxy) yang disesuaikan dengan profil seragam kerja Anda.</p>
+          <h2 id="sizechart-title">Panduan ukuran</h2>
+          <p>Dua pola dasar yang dapat dipilih sebelum sampel dibuat.</p>
         </div>
 
         <div class="sizechart__tabs-container">
@@ -320,9 +196,9 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     <section class="terms" aria-labelledby="terms-title">
       <div class="terms__inner">
         <div class="terms__header">
-          <span class="terms__tag">Kebijakan Vendor</span>
-          <h2 id="terms-title">Terms & Conditions</h2>
-          <p>Harap membaca ketentuan kerja berikut sebelum mengunci pesanan Anda bersama kami.</p>
+          <span class="terms__tag">Ketentuan kerja</span>
+          <h2 id="terms-title">Sebelum pesanan dikunci</h2>
+          <p>Waktu, toleransi produksi, pembayaran, dan pengiriman yang perlu disepakati.</p>
         </div>
 
         <div class="accordion">
@@ -429,20 +305,6 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     });
   });
 
-  // Scroll-reveal animation for snake flow
-  const snakeEls = document.querySelectorAll('.flow__node, .flow__arrow, .flow__uturn');
-  if (snakeEls.length > 0) {
-    const snakeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          snakeObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-
-    snakeEls.forEach(el => snakeObserver.observe(el));
-  }
 </script>
 
 <style>
@@ -451,6 +313,38 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     margin: 0 auto;
     max-width: var(--layout-max);
     padding: var(--space-20) var(--layout-edge);
+  }
+
+  .service-hero {
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding: var(--space-20) var(--layout-edge) var(--space-16);
+  }
+
+  .service-hero > p {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--space-4);
+    text-transform: uppercase;
+  }
+
+  .service-hero h1 {
+    font-size: var(--type-h1);
+    letter-spacing: -0.07em;
+    line-height: 0.98;
+    margin: 0;
+    max-width: 17ch;
+  }
+
+  .service-hero > div {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    line-height: 1.55;
+    margin-top: var(--space-8);
+    max-width: 38rem;
   }
 
   /* Catalog / Specs & Pricelist */
@@ -528,10 +422,8 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   }
 
   .pricing-card, .variations-card {
-    background: var(--color-mist);
-    border: var(--rule-width) solid var(--color-rule);
-    border-radius: var(--panel-radius);
-    padding: var(--space-6);
+    border-top: var(--rule-width) solid var(--color-rule);
+    padding-top: var(--space-5);
   }
 
   .pricing-card h3, .variations-card h3 {
@@ -584,9 +476,8 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
   .var-item {
     display: grid;
-    background: var(--color-canvas);
-    border: var(--rule-width) solid var(--color-rule);
-    padding: var(--space-3);
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    padding-block: var(--space-3);
   }
 
   .var-item span {
@@ -601,9 +492,6 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     margin-top: var(--space-1);
   }
 
-  /* =========================================
-     ORDER FLOW — Modern Snake Layout
-     ========================================= */
   .sizechart__header, .terms__header {
     max-width: 42rem;
     margin-bottom: var(--space-12);
@@ -615,296 +503,89 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     margin-top: var(--space-2);
   }
 
-  /* Outer section override for full-bleed dark panel */
   .flow {
-    padding: 0 !important;
-    max-width: 100% !important;
+    padding-block: 0;
   }
 
-  /* Dark hero panel */
   .flow__panel {
-    background: var(--color-ink);
-    color: var(--color-canvas);
-    padding: var(--space-16) var(--layout-edge);
-    max-width: var(--layout-max);
-    margin: 0 auto;
-    border-radius: var(--panel-radius);
-    overflow: hidden;
-    position: relative;
+    border-block: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    gap: var(--space-12);
+    padding-block: var(--space-16);
   }
 
-  /* Subtle texture layer */
-  .flow__panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 50%, oklch(35% 0.06 34 / 0.5) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 10% 80%, oklch(40% 0.08 34 / 0.3) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  /* Hero title */
   .flow__hero {
-    position: relative;
-    z-index: 1;
-    margin-bottom: var(--space-12);
+    max-width: 38rem;
   }
 
   .flow__tag {
-    display: inline-block;
-    font-size: var(--type-label);
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: oklch(70% 0.05 34);
+    color: var(--color-signal);
     margin-bottom: var(--space-3);
   }
 
   .flow__hero h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
-    font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    color: var(--color-canvas);
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1.04;
     margin: 0;
-    text-transform: uppercase;
   }
 
-  /* Diagram wrapper */
-  .flow__diagram {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
+  .flow__hero > p {
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+    margin-top: var(--space-4);
+  }
+
+  .flow__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .flow__list li {
+    border-top: var(--rule-width) solid var(--color-rule);
+    display: grid;
     gap: var(--space-4);
-  }
-
-  /* Rows */
-  .flow__row {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-
-  /* LTR row: normal order */
-  .flow__row--ltr {
-    flex-direction: row;
-  }
-
-  /* RTL row: reversed */
-  .flow__row--rtl {
-    flex-direction: row-reverse;
-  }
-
-  /* Each node: bubble + label stacked */
-  .flow__node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-    flex-shrink: 0;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .flow__node.visible {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Label below (row 1) */
-  .flow__label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.15rem;
-    text-align: center;
-  }
-
-  /* Label above (row 2) */
-  .flow__label--above {
-    order: -1;
-  }
-
-  .flow__step-num {
-    font-family: var(--font-display);
-    font-size: 0.6rem;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-signal);
-  }
-
-  .flow__step-name {
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--color-canvas);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    max-width: 7rem;
-  }
-
-  /* Circular bubble */
-  .flow__bubble {
-    width: 5.5rem;
-    height: 5.5rem;
-    border-radius: 50%;
-    background: oklch(32% 0.06 34);
-    border: 2px solid oklch(45% 0.06 34);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-    cursor: default;
+    grid-template-columns: 2.5rem 1fr;
+    padding-block: var(--space-5);
     position: relative;
   }
 
-  .flow__bubble::after {
+  .flow__list li:not(:last-child)::before {
+    border-left: var(--rule-width) solid var(--color-signal);
+    bottom: -0.55rem;
     content: "";
+    height: 1.1rem;
+    left: 0.55rem;
     position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 1.5px solid transparent;
-    transition: border-color 0.3s ease;
   }
 
-  .flow__bubble:hover {
-    transform: scale(1.1) translateY(-3px);
-    box-shadow: 0 0 32px oklch(50% 0.08 34 / 0.5), 0 8px 24px rgba(0,0,0,0.4);
-    border-color: var(--color-signal);
+  .flow__list li:not(:last-child)::after {
+    border-bottom: var(--rule-width) solid var(--color-signal);
+    border-right: var(--rule-width) solid var(--color-signal);
+    bottom: -0.55rem;
+    content: "";
+    height: 0.4rem;
+    left: 0.36rem;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 0.4rem;
   }
 
-  .flow__bubble:hover::after {
-    border-color: oklch(60% 0.06 34 / 0.4);
+  .flow__list li > span {
+    color: var(--color-signal);
+    font-size: var(--type-small);
+    font-weight: 720;
   }
 
-  /* Accent variant (alternating) */
-  .flow__bubble--accent {
-    background: var(--color-signal);
-    border-color: oklch(55% 0.055 34);
+  .flow__list strong {
+    font-size: var(--type-h3);
   }
 
-  .flow__bubble--accent:hover {
-    background: oklch(50% 0.055 34);
-    box-shadow: 0 0 40px oklch(50% 0.08 34 / 0.7), 0 8px 24px rgba(0,0,0,0.4);
-  }
-
-  /* Final bubble — glowing gold/warm */
-  .flow__bubble--final {
-    background: var(--color-signal);
-    border-color: oklch(65% 0.06 34);
-    box-shadow: 0 0 24px oklch(50% 0.08 34 / 0.5);
-  }
-
-  .flow__bubble svg {
-    width: 2rem;
-    height: 2rem;
-    color: #fff;
-  }
-
-  /* Arrow connectors */
-  .flow__arrow {
-    flex: 1;
-    min-width: 1.5rem;
-    height: 1rem;
-    color: oklch(45% 0.05 34);
-    display: flex;
-    align-items: center;
-    padding: 0 var(--space-1);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-
-  .flow__arrow.visible {
-    opacity: 1;
-  }
-
-  .flow__arrow svg {
-    width: 100%;
-    height: 1rem;
-  }
-
-  /* U-turn connector between rows */
-  .flow__uturn {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: calc(5.5rem / 2 - 1rem);
-    height: 3.5rem;
-    color: oklch(45% 0.05 34);
-    opacity: 0;
-    transition: opacity 0.8s ease 0.4s;
-  }
-
-  .flow__uturn.visible {
-    opacity: 1;
-  }
-
-  .flow__uturn svg {
-    width: 6rem;
-    height: 100%;
-  }
-
-  /* Stagger delays for nodes */
-  .flow__node[data-step="1"] { transition-delay: 0.05s; }
-  .flow__node[data-step="2"] { transition-delay: 0.15s; }
-  .flow__node[data-step="3"] { transition-delay: 0.25s; }
-  .flow__node[data-step="4"] { transition-delay: 0.35s; }
-  .flow__node[data-step="5"] { transition-delay: 0.45s; }
-  .flow__node[data-step="6"] { transition-delay: 0.55s; }
-  .flow__node[data-step="7"] { transition-delay: 0.65s; }
-  .flow__node[data-step="8"] { transition-delay: 0.75s; }
-  .flow__node[data-step="9"] { transition-delay: 0.85s; }
-
-  /* Arrow stagger */
-  .flow__row--ltr .flow__arrow:nth-child(2)  { transition-delay: 0.10s; }
-  .flow__row--ltr .flow__arrow:nth-child(4)  { transition-delay: 0.20s; }
-  .flow__row--ltr .flow__arrow:nth-child(6)  { transition-delay: 0.30s; }
-  .flow__row--ltr .flow__arrow:nth-child(8)  { transition-delay: 0.40s; }
-  .flow__row--rtl .flow__arrow:nth-child(2)  { transition-delay: 0.60s; }
-  .flow__row--rtl .flow__arrow:nth-child(4)  { transition-delay: 0.70s; }
-  .flow__row--rtl .flow__arrow:nth-child(6)  { transition-delay: 0.80s; }
-
-  /* Mobile: stack into vertical list */
-  @media (max-width: 900px) {
-    .flow__panel {
-      border-radius: 0;
-      padding: var(--space-12) var(--layout-edge);
-    }
-    .flow__row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-6) 0;
-      align-items: start;
-    }
-    .flow__row--rtl {
-      direction: ltr;
-    }
-    .flow__arrow {
-      display: none;
-    }
-    .flow__uturn {
-      display: none;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .flow__row {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .flow__bubble {
-      width: 4rem;
-      height: 4rem;
-    }
-    .flow__bubble svg {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
+  .flow__list p {
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+    margin-top: var(--space-2);
   }
 
   /* Size Chart Sections */
