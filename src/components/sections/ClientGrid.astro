@@ -123,12 +123,7 @@ const { heading = "Kepercayaan dibangun dari hasil yang konsisten." } = Astro.pr
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
-    filter: grayscale(1) contrast(0.95) opacity(0.85);
-    transition: filter var(--transition-micro);
-  }
-
-  .client-logo:hover img {
-    filter: none;
+    transition: transform var(--transition-micro);
   }
 
   .clients__divider {

@@ -41,15 +41,15 @@ import Button from "../ui/Button.astro"
 
   .hero__bg {
     position: relative;
-    min-height: 80vh;
+    min-height: 54vh;
   }
 
   .hero__bg img {
     display: block;
     height: 100%;
-    min-height: 80vh;
+    min-height: 54vh;
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center top;
     position: absolute;
     inset: 0;
     width: 100%;
@@ -73,7 +73,7 @@ import Button from "../ui/Button.astro"
     flex-direction: column;
     inset: 0;
     justify-content: center;
-    padding: var(--space-20) var(--layout-edge) var(--space-24);
+    padding: var(--space-12) var(--layout-edge) var(--space-16);
     position: absolute;
     text-align: center;
     z-index: 1;
@@ -121,6 +121,11 @@ import Button from "../ui/Button.astro"
 
     .hero__bg img {
       min-height: 85vh;
+      object-position: center top;
+    }
+
+    .hero__content {
+      padding: var(--space-20) var(--layout-edge) var(--space-24);
     }
   }
 
