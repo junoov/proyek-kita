@@ -1,0 +1,23 @@
+{
+  "name": "Roller Customize",
+  "legalName": "PT Roller Customize Indonesia",
+  "tagline": "Seragam yang bekerja sekeras tim Anda.",
+  "description": "Roller Customize merancang dan memproduksi seragam kerja yang rapi, tahan pakai, dan konsisten untuk tim yang bergerak setiap hari.",
+  "address": "Jalan Raflesia No. 23 Jamblangan, Seyegan, Sleman, Daerah Istimewa Yogyakarta",
+  "hours": "Senin–Sabtu, 08.00–17.00 WIB",
+  "email": "halo@rollercustomize.co.id",
+  "phone": "+62 896 0580 0090",
+  "whatsapp": "https://wa.me/6289605800090",
+  "instagram": "https://www.instagram.com/rollercustomize/",
+  "instagramBrand": "https://www.instagram.com/rollercustomize/",
+  "shopee": "https://shopee.co.id/rollerdealer",
+  "heroImage": {
+    "src": "/gallery/dsc07066.jpg",
+    "srcSet": "/gallery/dsc07066.jpg 1280w",
+    "alt": "Foto produk custom workshirt Roller Customize"
+  },
+  "studioImage": {
+    "src": "/gallery/dsc06437.jpg",
+    "alt": "Model mengenakan seragam custom produksi Roller Customize"
+  }
+}

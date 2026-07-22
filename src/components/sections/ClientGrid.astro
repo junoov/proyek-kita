@@ -1,30 +1,10 @@
 ---
 import { clients } from "../../data/company"
+import clientLogos from "../../data/client_logos.json"
 
 type Props = {
   readonly heading?: string
 }
-
-const logoImages = [
-  "X10.png",
-  "X12.png",
-  "X14.png",
-  "X16.png",
-  "X18.png",
-  "X19.png",
-  "X21.png",
-  "X23.png",
-  "X25.png",
-  "X27.png",
-  "X29.png",
-  "X31.png",
-  "X33.png",
-  "X35.png",
-  "X37.png",
-  "X39.png",
-  "X41.png",
-  "X43.png"
-]
 
 const { heading = "Kepercayaan dibangun dari hasil yang konsisten." } = Astro.props
 ---
@@ -37,9 +17,9 @@ const { heading = "Kepercayaan dibangun dari hasil yang konsisten." } = Astro.pr
 
   <!-- LOGO GRID SECTION -->
   <div class="clients__logos">
-    {logoImages.map((logo) => (
+    {(clientLogos.logos || clientLogos).map((item) => (
       <div class="client-logo">
-        <img src={`/clients/${logo}`} alt="Logo Mitra Roller Customize" loading="lazy" />
+        <img src={item.image} alt={item.title || "Logo Mitra Roller Customize"} loading="lazy" />
       </div>
     ))}
   </div>

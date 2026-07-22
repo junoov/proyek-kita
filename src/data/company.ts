@@ -1,3 +1,7 @@
+import companyData from "./company.json"
+import servicesData from "./services.json"
+import clientsData from "./clients.json"
+
 export type ContactChannel = {
   readonly label: string
   readonly value: string
@@ -22,30 +26,7 @@ export type Stat = {
   readonly label: string
 }
 
-export const company = {
-  name: "Roller Customize",
-  legalName: "PT Roller Customize Indonesia",
-  tagline: "Seragam yang bekerja sekeras tim Anda.",
-  description:
-    "Roller Customize merancang dan memproduksi seragam kerja yang rapi, tahan pakai, dan konsisten untuk tim yang bergerak setiap hari.",
-  address: "Jalan Raflesia No. 23 Jamblangan, Seyegan, Sleman, Daerah Istimewa Yogyakarta",
-  hours: "Senin–Sabtu, 08.00–17.00 WIB",
-  email: "halo@rollercustomize.co.id",
-  phone: "+62 896 0580 0090",
-  whatsapp: "https://wa.me/6289605800090",
-  instagram: "https://www.instagram.com/rollercustomize/",
-  instagramBrand: "https://www.instagram.com/rollercustomize/",
-  shopee: "https://shopee.co.id/rollerdealer",
-  heroImage: {
-    src: "/gallery/dsc07066.jpg",
-    srcSet: "/gallery/dsc07066.jpg 1280w",
-    alt: "Foto produk custom workshirt Roller Customize",
-  },
-  studioImage: {
-    src: "/gallery/dsc06437.jpg",
-    alt: "Model mengenakan seragam custom produksi Roller Customize",
-  },
-} as const
+export const company = companyData
 
 export const navigation = [
   { label: "Beranda", href: "/" },
@@ -55,29 +36,7 @@ export const navigation = [
   { label: "Kontak", href: "/kontak" },
 ] as const
 
-export const services = [
-  {
-    number: "01",
-    title: "Konsultasi Kebutuhan",
-    description:
-      "Kami memetakan peran, lingkungan kerja, dan standar tampilan sebelum satu pola dibuat.",
-    deliverable: "Brief fungsi dan arah material",
-  },
-  {
-    number: "02",
-    title: "Desain & Sampel",
-    description:
-      "Tim desain menerjemahkan identitas perusahaan menjadi sistem seragam yang nyaman dan mudah dikenali.",
-    deliverable: "Desain terukur dan sampel revisi",
-  },
-  {
-    number: "03",
-    title: "Produksi Terkendali",
-    description:
-      "Setiap batch melewati pemeriksaan ukuran, jahitan, warna, dan detail identitas sebelum dikirim.",
-    deliverable: "Produksi batch dengan kontrol mutu",
-  },
-] as const satisfies readonly Service[]
+export const services: readonly Service[] = servicesData.services
 
 export const stats = [
   { value: "12+", label: "tahun membangun kepercayaan tim" },
@@ -85,16 +44,7 @@ export const stats = [
   { value: "99%", label: "ketepatan pengiriman batch terakhir" },
 ] as const satisfies readonly Stat[]
 
-export const clients = [
-  { initials: "UNY", name: "Universitas Negeri Yogyakarta", sector: "Pendidikan" },
-  { initials: "UGM", name: "Universitas Gadjah Mada", sector: "Pendidikan" },
-  { initials: "UMY", name: "Universitas Muhammadiyah Yogyakarta", sector: "Pendidikan" },
-  { initials: "UNS", name: "Universitas Sebelas Maret", sector: "Pendidikan" },
-  { initials: "UII", name: "Universitas Islam Indonesia", sector: "Pendidikan" },
-  { initials: "SLB", name: "Schlumberger", sector: "Korporat & Industri" },
-  { initials: "DPRK", name: "DPRK Sabang", sector: "Pemerintahan" },
-  { initials: "PAN", name: "Partai Amanat Nasional", sector: "Organisasi" },
-] as const satisfies readonly Client[]
+export const clients: readonly Client[] = clientsData.clients
 
 export const contactChannels = [
   { label: "WhatsApp", value: "+62 896 0580 0090", href: company.whatsapp },

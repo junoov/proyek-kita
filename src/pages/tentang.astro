@@ -3,6 +3,7 @@ import Footer from "../components/layout/Footer.astro"
 import Header from "../components/layout/Header.astro"
 import PageHero from "../components/sections/PageHero.astro"
 import { company, stats } from "../data/company"
+import galleryData from "../data/gallery.json"
 import BaseLayout from "../layouts/BaseLayout.astro"
 ---
 
@@ -55,21 +56,18 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       </div>
 
       <div class="gallery__grid" id="gallery-grid">
-        {[
-          "dsc06413.jpg","dsc06414.jpg","dsc06418.jpg","dsc06420.jpg",
-          "dsc06421.jpg","dsc06423.jpg","dsc06424.jpg","dsc06425.jpg",
-          "dsc06426.jpg","dsc06437.jpg","dsc06446.jpg","dsc06450.jpg",
-          "dsc06475.jpg","dsc06558.jpg","dsc07020.jpg","dsc07066.jpg"
-        ].map((file, i) => (
+        {(galleryData.items || galleryData).map((item, i) => (
           <button
             class="gallery__item"
             data-index={i}
+            data-src={item.image}
+            data-title={item.title || `Foto produk ${i + 1}`}
             aria-label={`Buka foto produk ${i + 1}`}
             style={`animation-delay: ${i * 0.05}s`}
           >
             <img
-              src={`/gallery/${file}`}
-              alt={`Foto produk Roller Customize ${i + 1}`}
+              src={item.image}
+              alt={item.title || `Foto produk Roller Customize ${i + 1}`}
               loading="lazy"
               decoding="async"
               width="600"
@@ -472,12 +470,11 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 </style>
 
 <script is:inline>
-  const photos = [
-    "dsc06413.jpg","dsc06414.jpg","dsc06418.jpg","dsc06420.jpg",
-    "dsc06421.jpg","dsc06423.jpg","dsc06424.jpg","dsc06425.jpg",
-    "dsc06426.jpg","dsc06437.jpg","dsc06446.jpg","dsc06450.jpg",
-    "dsc06475.jpg","dsc06558.jpg","dsc07020.jpg","dsc07066.jpg"
-  ];
+  const galleryItems = Array.from(document.querySelectorAll('.gallery__item'));
+  const photos = galleryItems.map((btn) => ({
+    src: btn.dataset.src || '',
+    title: btn.dataset.title || ''
+  }));
 
   let currentIndex = 0;
 
@@ -489,6 +486,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   const lbNext     = document.getElementById('lightbox-next');
 
   function openLightbox(index) {
+    if (photos.length === 0) return;
     currentIndex = index;
     updateLightbox();
     lightbox.hidden = false;
@@ -502,8 +500,9 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   }
 
   function updateLightbox() {
-    lbImg.src = `/gallery/${photos[currentIndex]}`;
-    lbImg.alt = `Foto produk Roller Customize ${currentIndex + 1}`;
+    if (!photos[currentIndex]) return;
+    lbImg.src = photos[currentIndex].src;
+    lbImg.alt = photos[currentIndex].title || `Foto produk Roller Customize ${currentIndex + 1}`;
     lbCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
     // trigger re-animation
     lbImg.style.animation = 'none';

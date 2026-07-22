@@ -1,0 +1,22 @@
+{
+  "logos": [
+    { "image": "/clients/X10.png", "title": "Logo Mitra UNY" },
+    { "image": "/clients/X12.png", "title": "Logo Mitra UGM" },
+    { "image": "/clients/X14.png", "title": "Logo Mitra UMY" },
+    { "image": "/clients/X16.png", "title": "Logo Mitra UNS" },
+    { "image": "/clients/X18.png", "title": "Logo Mitra UII" },
+    { "image": "/clients/X19.png", "title": "Logo Mitra Schlumberger" },
+    { "image": "/clients/X21.png", "title": "Logo Mitra DPRK" },
+    { "image": "/clients/X23.png", "title": "Logo Mitra PAN" },
+    { "image": "/clients/X25.png", "title": "Logo Mitra 9" },
+    { "image": "/clients/X27.png", "title": "Logo Mitra 10" },
+    { "image": "/clients/X29.png", "title": "Logo Mitra 11" },
+    { "image": "/clients/X31.png", "title": "Logo Mitra 12" },
+    { "image": "/clients/X33.png", "title": "Logo Mitra 13" },
+    { "image": "/clients/X35.png", "title": "Logo Mitra 14" },
+    { "image": "/clients/X37.png", "title": "Logo Mitra 15" },
+    { "image": "/clients/X39.png", "title": "Logo Mitra 16" },
+    { "image": "/clients/X41.png", "title": "Logo Mitra 17" },
+    { "image": "/clients/X43.png", "title": "Logo Mitra 18" }
+  ]
+}

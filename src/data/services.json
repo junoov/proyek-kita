@@ -1,0 +1,22 @@
+{
+  "services": [
+    {
+      "number": "01",
+      "title": "Konsultasi Kebutuhan",
+      "description": "Kami memetakan peran, lingkungan kerja, dan standar tampilan sebelum satu pola dibuat.",
+      "deliverable": "Brief fungsi dan arah material"
+    },
+    {
+      "number": "02",
+      "title": "Desain & Sampel",
+      "description": "Tim desain menerjemahkan identitas perusahaan menjadi sistem seragam yang nyaman dan mudah dikenali.",
+      "deliverable": "Desain terukur dan sampel revisi"
+    },
+    {
+      "number": "03",
+      "title": "Produksi Terkendali",
+      "description": "Setiap batch melewati pemeriksaan ukuran, jahitan, warna, dan detail identitas sebelum dikirim.",
+      "deliverable": "Produksi batch dengan kontrol mutu"
+    }
+  ]
+}

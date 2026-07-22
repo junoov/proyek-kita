@@ -1,0 +1,12 @@
+{
+  "clients": [
+    { "initials": "UNY", "name": "Universitas Negeri Yogyakarta", "sector": "Pendidikan" },
+    { "initials": "UGM", "name": "Universitas Gadjah Mada", "sector": "Pendidikan" },
+    { "initials": "UMY", "name": "Universitas Muhammadiyah Yogyakarta", "sector": "Pendidikan" },
+    { "initials": "UNS", "name": "Universitas Sebelas Maret", "sector": "Pendidikan" },
+    { "initials": "UII", "name": "Universitas Islam Indonesia", "sector": "Pendidikan" },
+    { "initials": "SLB", "name": "Schlumberger", "sector": "Korporat & Industri" },
+    { "initials": "DPRK", "name": "DPRK Sabang", "sector": "Pemerintahan" },
+    { "initials": "PAN", "name": "Partai Amanat Nasional", "sector": "Organisasi" }
+  ]
+}
