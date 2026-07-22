@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Karsa Uniform">
-  <rect width="64" height="64" rx="20" fill="oklch(23% 0.035 255)"/>
-  <text x="32" y="43" fill="oklch(98% 0.004 247)" font-family="Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle">K</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" rx="22" fill="#140f0c"/>
+  <g fill="#f7a361">
+    <rect x="42" y="15" width="16" height="70" rx="4" />
+    <rect x="42" y="15" width="16" height="70" rx="4" transform="rotate(60 50 50)" />
+    <rect x="42" y="15" width="16" height="70" rx="4" transform="rotate(120 50 50)" />
+  </g>
 </svg>

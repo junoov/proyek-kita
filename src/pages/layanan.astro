@@ -3,16 +3,16 @@ import Footer from "../components/layout/Footer.astro"
 import Header from "../components/layout/Header.astro"
 import BaseLayout from "../layouts/BaseLayout.astro"
 
-const orderFlow = [
-  ["01", "Konsultasi kebutuhan", "Jumlah, fungsi pakaian, bahan, dan target waktu dibahas di awal."],
-  ["02", "Formulir pesanan", "Rincian ukuran, warna, serta penempatan identitas dicatat."],
-  ["03", "Penawaran", "Harga dan ruang lingkup pekerjaan dikirim untuk diperiksa."],
-  ["04", "Pembayaran awal", "DP 60% menempatkan pesanan ke antrean kerja."],
-  ["05", "Spesifikasi produksi", "Detail yang disepakati dirangkum sebagai acuan tim produksi."],
-  ["06", "Desain dan persetujuan", "Visual serta detail akhir dikunci sebelum kain dipotong."],
-  ["07", "Produksi", "Pemotongan, bordir, dan jahit berjalan sesuai spesifikasi."],
-  ["08", "Pemeriksaan", "Ukuran, jumlah, jahitan, dan identitas diperiksa per batch."],
-  ["09", "Pelunasan dan kirim", "Barang dikirim setelah hasil pemeriksaan dan pelunasan selesai."],
+const orderSteps = [
+  { number: "01", title: "Konsultasi", fullTitle: "Konsultasi Kebutuhan", desc: "Jumlah, fungsi pakaian, bahan, dan target waktu dibahas di awal.", icon: "chat", phase: "01 · Inisiasi" },
+  { number: "02", title: "Form Pesanan", fullTitle: "Formulir Pesanan", desc: "Rincian ukuran, warna, serta penempatan identitas dicatat.", icon: "document", phase: "01 · Inisiasi" },
+  { number: "03", title: "Penawaran", fullTitle: "Penawaran & Scope", desc: "Harga dan ruang lingkup pekerjaan dikirim untuk diperiksa.", icon: "calculator", phase: "01 · Inisiasi" },
+  { number: "04", title: "DP 60%", fullTitle: "Pembayaran Awal", desc: "DP 60% menempatkan pesanan ke antrean kerja resmi.", icon: "wallet", phase: "02 · Persetujuan" },
+  { number: "05", title: "Spesifikasi", fullTitle: "Spesifikasi Produksi", desc: "Detail yang disepakati dirangkum sebagai acuan tim produksi.", icon: "clipboard", phase: "02 · Persetujuan" },
+  { number: "06", title: "ACC Desain", fullTitle: "Desain & ACC Final", desc: "Visual serta detail akhir dikunci sebelum kain dipotong.", icon: "check-circle", phase: "02 · Persetujuan" },
+  { number: "07", title: "Produksi", fullTitle: "Proses Produksi", desc: "Pemotongan, bordir, dan jahit berjalan sesuai spesifikasi.", icon: "scissors", phase: "03 · Eksekusi" },
+  { number: "08", title: "QC Check", fullTitle: "Pemeriksaan Mutu", desc: "Ukuran, jumlah, jahitan, dan identitas diperiksa per batch.", icon: "search", phase: "03 · Eksekusi" },
+  { number: "09", title: "Pengiriman", fullTitle: "Pelunasan & Kirim", desc: "Barang dikirim setelah hasil pemeriksaan & pelunasan selesai.", icon: "truck", phase: "03 · Eksekusi" },
 ] as const
 ---
 
@@ -102,21 +102,194 @@ const orderFlow = [
       </div>
     </section>
 
+    <!-- SECTION: PROSEDUR KERJA (S-CURVE ROADMAP FLOW) -->
     <section class="flow" aria-labelledby="flow-title">
-      <div class="flow__panel">
-        <div class="flow__hero">
-          <span class="flow__tag">Prosedur kerja</span>
-          <h2 id="flow-title">Dari percakapan pertama sampai barang dikirim.</h2>
-          <p>Sembilan tahap, dengan keputusan yang jelas sebelum pekerjaan berpindah ke tahap berikutnya.</p>
+      <div class="flow__inner">
+        <header class="flow__header">
+          <div class="flow__header-main">
+            <span class="flow__tag">Prosedur Kerja</span>
+            <h2 id="flow-title">Roadmap Produksi Seragam.</h2>
+          </div>
+          <p class="flow__lede">9 tahap transparan dan terukur dari diskusi awal hingga produk tiba di tempat Anda.</p>
+        </header>
+
+        <!-- S-CURVE ROADMAP TRACK -->
+        <div class="roadmap">
+          <!-- ROW 1 (01 -> 02 -> 03) -->
+          <div class="roadmap__row roadmap__row--1">
+            <div class="roadmap__step">
+              <div class="roadmap__node">
+                <span class="roadmap__num">01</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 1 · Inisiasi</span>
+                <h4>Konsultasi Kebutuhan</h4>
+                <p>Jumlah, fungsi pakaian, bahan, dan target waktu dibahas di awal.</p>
+              </div>
+            </div>
+
+            <div class="roadmap__arrow roadmap__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+
+            <div class="roadmap__step">
+              <div class="roadmap__node">
+                <span class="roadmap__num">02</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 1 · Inisiasi</span>
+                <h4>Formulir Pesanan</h4>
+                <p>Rincian ukuran, warna, serta penempatan identitas dicatat.</p>
+              </div>
+            </div>
+
+            <div class="roadmap__arrow roadmap__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+
+            <div class="roadmap__step">
+              <div class="roadmap__node">
+                <span class="roadmap__num">03</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 1 · Inisiasi</span>
+                <h4>Penawaran & Scope</h4>
+                <p>Harga dan ruang lingkup pekerjaan dikirim untuk diperiksa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOOP TURN 1 (Right side curve down to Row 2) -->
+          <div class="roadmap__turn roadmap__turn--right" aria-hidden="true">
+            <div class="roadmap__turn-arc"></div>
+            <div class="roadmap__turn-arrow">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </div>
+          </div>
+
+          <!-- ROW 2 (04 <- 05 <- 06 on desktop, 04 -> 05 -> 06 on mobile) -->
+          <div class="roadmap__row roadmap__row--2">
+            <div class="roadmap__step roadmap__step--04">
+              <div class="roadmap__node">
+                <span class="roadmap__num">04</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 2 · Persetujuan</span>
+                <h4>Pembayaran Awal (DP)</h4>
+                <p>DP 60% menempatkan pesanan ke antrean kerja resmi.</p>
+              </div>
+            </div>
+
+            <div class="roadmap__arrow roadmap__arrow--left roadmap__arrow--2-1" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </div>
+
+            <div class="roadmap__step roadmap__step--05">
+              <div class="roadmap__node">
+                <span class="roadmap__num">05</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 2 · Persetujuan</span>
+                <h4>Spesifikasi Produksi</h4>
+                <p>Detail yang disepakati dirangkum sebagai acuan tim produksi.</p>
+              </div>
+            </div>
+
+            <div class="roadmap__arrow roadmap__arrow--left roadmap__arrow--2-2" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </div>
+
+            <div class="roadmap__step roadmap__step--06">
+              <div class="roadmap__node">
+                <span class="roadmap__num">06</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 2 · Persetujuan</span>
+                <h4>Desain & ACC Final</h4>
+                <p>Visual serta detail akhir dikunci sebelum kain dipotong.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOOP TURN 2 (Left side curve down to Row 3) -->
+          <div class="roadmap__turn roadmap__turn--left" aria-hidden="true">
+            <div class="roadmap__turn-arc"></div>
+            <div class="roadmap__turn-arrow">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- ROW 3 (07 -> 08 -> 09) -->
+          <div class="roadmap__row roadmap__row--3">
+            <div class="roadmap__step">
+              <div class="roadmap__node">
+                <span class="roadmap__num">07</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 3 · Eksekusi</span>
+                <h4>Proses Produksi</h4>
+                <p>Pemotongan, bordir, dan jahit berjalan sesuai spesifikasi.</p>
+              </div>
+            </div>
+
+            <div class="roadmap__arrow roadmap__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+
+            <div class="roadmap__step">
+              <div class="roadmap__node">
+                <span class="roadmap__num">08</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag">Fase 3 · Eksekusi</span>
+                <h4>Pemeriksaan Mutu (QC)</h4>
+                <p>Ukuran, jumlah, jahitan, dan identitas diperiksa per batch.</p>
+              </div>
+            </div>
+
+            <div class="roadmap__arrow roadmap__arrow--right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+
+            <div class="roadmap__step">
+              <div class="roadmap__node roadmap__node--finish">
+                <span class="roadmap__num">09</span>
+                <div class="roadmap__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                </div>
+              </div>
+              <div class="roadmap__card">
+                <span class="roadmap__tag roadmap__tag--finish">Selesai & Kirim 📦</span>
+                <h4>Pelunasan & Kirim</h4>
+                <p>Barang dikirim setelah hasil pemeriksaan & pelunasan selesai.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <ol class="flow__list">
-          {orderFlow.map(([number, title, description]) => (
-            <li>
-              <span>{number}</span>
-              <div><strong>{title}</strong><p>{description}</p></div>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
 
@@ -471,7 +644,13 @@ const orderFlow = [
   .variations-grid {
     display: grid;
     gap: var(--space-3);
-    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 26rem) {
+    .variations-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .var-item {
@@ -504,88 +683,291 @@ const orderFlow = [
   }
 
   .flow {
-    padding-block: 0;
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding: var(--space-16) var(--layout-edge);
   }
 
-  .flow__panel {
-    border-block: var(--rule-width) solid var(--color-rule);
-    display: grid;
-    gap: var(--space-12);
-    padding-block: var(--space-16);
+  .flow__inner {
+    border-top: var(--rule-width) solid var(--color-rule);
+    padding-top: var(--space-12);
   }
 
-  .flow__hero {
-    max-width: 38rem;
+  .flow {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    padding: var(--space-16) var(--layout-edge);
+  }
+
+  .flow__inner {
+    border-top: var(--rule-width) solid var(--color-rule);
+    padding-top: var(--space-12);
+  }
+
+  .flow__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 48rem) {
+    .flow__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
   }
 
   .flow__tag {
     color: var(--color-signal);
-    margin-bottom: var(--space-3);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-2);
   }
 
-  .flow__hero h2 {
+  .flow__header h2 {
     font-size: var(--type-h2);
     letter-spacing: -0.055em;
     line-height: 1.04;
     margin: 0;
+    max-width: 20ch;
   }
 
-  .flow__hero > p {
+  .flow__lede {
     color: var(--color-text-muted);
-    margin-bottom: 0;
-    margin-top: var(--space-4);
-  }
-
-  .flow__list {
-    list-style: none;
+    font-size: var(--type-lead);
+    max-width: 26rem;
     margin: 0;
-    padding: 0;
+    line-height: 1.5;
   }
 
-  .flow__list li {
-    border-top: var(--rule-width) solid var(--color-rule);
-    display: grid;
+  /* S-CURVE ROADMAP STYLING */
+  .roadmap {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-4);
-    grid-template-columns: 2.5rem 1fr;
-    padding-block: var(--space-5);
     position: relative;
   }
 
-  .flow__list li:not(:last-child)::before {
-    border-left: var(--rule-width) solid var(--color-signal);
-    bottom: -0.55rem;
-    content: "";
-    height: 1.1rem;
-    left: 0.55rem;
-    position: absolute;
+  .roadmap__row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: flex-start;
+    gap: var(--space-3);
+    position: relative;
   }
 
-  .flow__list li:not(:last-child)::after {
-    border-bottom: var(--rule-width) solid var(--color-signal);
-    border-right: var(--rule-width) solid var(--color-signal);
-    bottom: -0.55rem;
-    content: "";
-    height: 0.4rem;
-    left: 0.36rem;
-    position: absolute;
-    transform: rotate(45deg);
-    width: 0.4rem;
+  @media (min-width: 48rem) {
+    .roadmap__row--2 {
+      direction: rtl;
+    }
+    .roadmap__row--2 .roadmap__step,
+    .roadmap__row--2 .roadmap__card {
+      direction: ltr;
+    }
   }
 
-  .flow__list li > span {
+  .roadmap__step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: relative;
+  }
+
+  .roadmap__node {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: var(--color-ink);
+    color: var(--color-signal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 0 4px color-mix(in oklch, var(--color-signal) 24%, transparent);
+    transition: all var(--transition-micro);
+    margin-bottom: var(--space-1);
+    flex-shrink: 0;
+  }
+
+  .roadmap__step:hover .roadmap__node {
+    transform: scale(1.1);
+    background: var(--color-signal);
+    color: #ffffff;
+    box-shadow: 0 0 0 6px color-mix(in oklch, var(--color-signal) 35%, transparent), 0 8px 24px rgba(247, 163, 97, 0.35);
+  }
+
+  .roadmap__node--finish {
+    background: var(--color-signal);
+    color: #ffffff;
+    box-shadow: 0 0 0 6px color-mix(in oklch, var(--color-signal) 30%, transparent), 0 8px 24px rgba(247, 163, 97, 0.3);
+  }
+
+  .roadmap__num {
+    position: absolute;
+    top: -0.35rem;
+    right: -0.35rem;
+    background: var(--color-signal);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 900;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .roadmap__step:hover .roadmap__num {
+    background: var(--color-ink);
+    color: var(--color-signal);
+  }
+
+  .roadmap__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-signal);
+    padding-top: 1.1rem;
+    opacity: 0.8;
+  }
+
+  /* ROADMAP TURN LOOPS */
+  .roadmap__turn {
+    position: relative;
+    height: 48px;
+    margin-block: 0.25rem;
+  }
+
+  .roadmap__turn--right {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: calc(16.66% - 1.75rem);
+  }
+
+  .roadmap__turn--right .roadmap__turn-arc {
+    width: calc(66.66% + 3.5rem);
+    height: 38px;
+    border-right: 2.5px dashed var(--color-signal);
+    border-bottom: 2.5px dashed var(--color-signal);
+    border-bottom-right-radius: 20px;
+  }
+
+  .roadmap__turn--right .roadmap__turn-arrow {
+    position: absolute;
+    left: calc(16.66% - 1rem);
+    bottom: -8px;
+    color: var(--color-signal);
+  }
+
+  .roadmap__turn--left {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: calc(16.66% - 1.75rem);
+  }
+
+  .roadmap__turn--left .roadmap__turn-arc {
+    width: calc(66.66% + 3.5rem);
+    height: 38px;
+    border-left: 2.5px dashed var(--color-signal);
+    border-bottom: 2.5px dashed var(--color-signal);
+    border-bottom-left-radius: 20px;
+  }
+
+  .roadmap__turn--left .roadmap__turn-arrow {
+    position: absolute;
+    right: calc(16.66% - 1rem);
+    bottom: -8px;
+    color: var(--color-signal);
+  }
+
+  .roadmap__card {
+    background: var(--color-mist);
+    border: var(--rule-width) solid var(--color-rule);
+    border-radius: 12px;
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    transition: all var(--transition-micro);
+  }
+
+  .roadmap__step:hover .roadmap__card {
+    transform: translateY(-4px);
+    background: var(--color-canvas);
+    border-color: var(--color-signal);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+  }
+
+  .roadmap__tag {
+    align-self: flex-start;
+    background: color-mix(in oklch, var(--color-signal) 14%, transparent);
     color: var(--color-signal);
     font-size: var(--type-small);
-    font-weight: 720;
+    font-weight: 800;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
   }
 
-  .flow__list strong {
-    font-size: var(--type-h3);
+  .roadmap__tag--finish {
+    background: var(--color-signal);
+    color: #ffffff;
   }
 
-  .flow__list p {
+  .roadmap__card h4 {
+    font-size: var(--type-lead);
+    font-weight: 800;
+    margin: var(--space-1) 0 0;
+    color: var(--color-ink);
+  }
+
+  .roadmap__card p {
+    font-size: var(--type-small);
     color: var(--color-text-muted);
-    margin-bottom: 0;
-    margin-top: var(--space-2);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* MOBILE ROADMAP OVERRIDES (< 768px) */
+  @media (max-width: 47.99rem) {
+    .roadmap {
+      gap: var(--space-6);
+    }
+
+    .roadmap__curve,
+    .roadmap__arrow {
+      display: none !important;
+    }
+
+    .roadmap__row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .roadmap__step {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-4);
+      position: relative;
+    }
+
+    .roadmap__step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 1.7rem;
+      top: 3.5rem;
+      bottom: -1.75rem;
+      width: 2px;
+      background: linear-gradient(180deg, var(--color-signal) 0%, var(--color-rule) 100%);
+    }
+
+    .roadmap__card {
+      flex: 1;
+    }
   }
 
   /* Size Chart Sections */

@@ -4,18 +4,36 @@ import Button from "../ui/Button.astro"
 ---
 
 <section class="hero" aria-labelledby="hero-title">
+  <figure class="hero__visual">
+    <img
+      src={company.heroImage.src}
+      alt={company.heroImage.alt}
+      width="1920"
+      height="1280"
+      srcset={company.heroImage.srcSet}
+      sizes="100vw"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="hero__overlay"></div>
+    <figcaption>
+      <span>RC / 01</span>
+      Workshirt hitam, dokumentasi produk 2026
+    </figcaption>
+  </figure>
+
   <div class="hero__copy">
     <p class="hero__index">Garmen kustom · Sleman, Yogyakarta</p>
     <h1 id="hero-title">
       <span class="hero__title-desktop">Seragam kerja<br />yang siap <em>dipakai.</em></span>
-      <span class="hero__title-mobile">Seragam kerja untuk tim Anda.</span>
+      <span class="hero__title-mobile">Seragam kerja<br />yang siap <em>dipakai.</em></span>
     </h1>
     <p class="hero__lede">
       <span class="hero__lede-desktop">Kami merancang workshirt untuk kebutuhan tim, lalu menjaganya tetap konsisten dari sampel sampai batch produksi.</span>
-      <span class="hero__lede-mobile">Ukuran, warna, dan detail dijaga dari sampel sampai produksi.</span>
+      <span class="hero__lede-mobile">Merancang workshirt kustom konsisten dari sampel hingga batch produksi.</span>
     </p>
     <div class="hero__actions">
-      <span class="hero__action-desktop"><Button href="/kontak" label="Bahas kebutuhan tim" variant="ink" /></span>
+      <span class="hero__action-desktop"><Button href="/kontak" label="Bahas kebutuhan tim" variant="signal" /></span>
       <a class="hero__text-link" href="/layanan">Lihat cara kerja</a>
     </div>
     <dl class="hero__facts">
@@ -29,70 +47,118 @@ import Button from "../ui/Button.astro"
       </div>
     </dl>
   </div>
-
-  <figure class="hero__visual">
-    <img
-      src={company.heroImage.src}
-      alt={company.heroImage.alt}
-      width="1920"
-      height="1280"
-      srcset={company.heroImage.srcSet}
-      sizes="(min-width: 64rem) 58vw, 100vw"
-      fetchpriority="high"
-      decoding="async"
-    />
-    <figcaption>
-      <span>RC / 01</span>
-      Workshirt hitam, dokumentasi produk 2026
-    </figcaption>
-  </figure>
-  <div class="hero__mobile-action"><Button href="/kontak" label="Diskusikan seragam tim" variant="ink" /></div>
+  <div class="hero__mobile-action"><Button href="/kontak" label="Diskusikan seragam tim" variant="signal" /></div>
 </section>
 
 <style>
   .hero {
-    background: var(--color-canvas);
-    display: grid;
-    grid-template-areas:
-      "visual"
-      "copy";
-    min-height: calc(100svh - 4.5rem);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 4.5rem);
+    padding: var(--space-16) var(--layout-edge) var(--space-12);
+    overflow: hidden;
+    color: #ffffff;
+    background: var(--color-ink);
+  }
+
+  .hero__visual {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 1;
+  }
+
+  .hero__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 15% top;
+    transform: scale(1.08);
+    transform-origin: 15% top;
+    filter: brightness(1.12) contrast(1.03);
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(15, 12, 10, 0.12) 0%,
+      rgba(15, 12, 10, 0.28) 50%,
+      rgba(15, 12, 10, 0.48) 100%
+    );
+    z-index: 2;
+  }
+
+  .hero__visual figcaption {
+    position: absolute;
+    bottom: var(--space-4);
+    left: var(--layout-edge);
+    z-index: 3;
+    display: flex;
+    gap: var(--space-3);
+    font-size: var(--type-small);
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.4);
+    padding: var(--space-2) var(--space-3);
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+  }
+
+  .hero__visual figcaption span {
+    color: #f7a361;
+    font-weight: 800;
   }
 
   .hero__copy {
-    align-content: center;
-    display: grid;
-    grid-area: copy;
-    padding: var(--space-12) var(--layout-edge) var(--space-10);
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 58rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-8) 0;
   }
 
   .hero__index {
-    color: var(--color-signal);
+    color: #f7a361;
     font-size: var(--type-label);
     font-weight: 800;
-    letter-spacing: 0.11em;
-    margin: 0 0 var(--space-6);
+    letter-spacing: 0.14em;
+    margin: 0 0 var(--space-4);
     text-transform: uppercase;
   }
 
   h1 {
-    font-size: clamp(2.75rem, 11vw, 7.6rem);
-    letter-spacing: -0.07em;
-    line-height: 0.88;
+    font-size: clamp(2.75rem, 8vw, 6.2rem);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
     margin: 0;
+    color: #ffffff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
   }
 
   h1 em {
-    color: var(--color-signal);
+    color: #f7a361;
     font-family: Georgia, "Times New Roman", serif;
     font-weight: 400;
+    font-style: italic;
   }
 
   .hero__lede {
-    font-size: 1rem;
-    line-height: 1.55;
-    margin: var(--space-6) 0 0;
-    max-width: 34rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.6;
+    margin: var(--space-6) auto 0;
+    max-width: 38rem;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   :global(.hero__title-mobile),
@@ -102,102 +168,136 @@ import Button from "../ui/Button.astro"
   }
 
   .hero__actions {
-    align-items: center;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: var(--space-4);
-    margin-top: var(--space-6);
+    gap: var(--space-5);
+    margin-top: var(--space-8);
   }
 
   .hero__text-link {
     border-bottom: var(--rule-width) solid currentColor;
     font-size: var(--type-small);
     font-weight: 720;
+    color: #ffffff;
     padding-block: var(--space-2);
+    transition: opacity var(--transition-micro);
+  }
+
+  .hero__text-link:hover {
+    opacity: 0.8;
   }
 
   .hero__facts {
-    border-top: var(--rule-width) solid var(--color-rule);
+    border-top: var(--rule-width) solid rgba(255, 255, 255, 0.2);
     display: grid;
-    gap: var(--space-5);
+    gap: var(--space-8);
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin: var(--space-8) 0 0;
-    padding-top: var(--space-5);
+    margin: var(--space-10) auto 0;
+    padding-top: var(--space-6);
+    width: 100%;
+    max-width: 32rem;
+    text-align: center;
   }
 
   .hero__facts div {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-1);
   }
 
   .hero__facts dt {
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.6);
     font-size: var(--type-label);
     text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   .hero__facts dd {
+    color: #ffffff;
     font-size: var(--type-small);
     font-weight: 700;
     margin: 0;
   }
 
-  .hero__visual {
-    background: var(--color-ink);
-    aspect-ratio: 4 / 3;
-    grid-area: visual;
-    margin: 0;
-    min-height: 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .hero__visual img {
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    position: absolute;
-    width: 100%;
-  }
-
-  .hero__visual figcaption {
-    background: var(--color-canvas);
-    bottom: 0;
-    display: flex;
-    font-size: var(--type-small);
-    gap: var(--space-5);
-    left: 0;
-    padding: var(--space-3) var(--space-4);
-    position: absolute;
-  }
-
-  @media (max-width: 30rem) {
+  @media (max-width: 48rem) {
     .hero {
+      position: relative;
       display: flex;
-      min-height: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: clamp(380px, 110vw, 500px);
+      padding: var(--space-6) var(--layout-edge) var(--space-6);
+      color: #ffffff;
+      background: var(--color-ink);
+      overflow: hidden;
     }
 
-    .hero__copy {
-      display: contents;
+    .hero__visual {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      z-index: 1;
+      border-radius: 0;
     }
 
-    .hero__index,
-    .hero__text-link,
-    .hero__facts {
-      display: none;
+    .hero__visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 38% 20%;
+      transform: scale(1);
+      transform-origin: center top;
+      filter: brightness(1.1) contrast(1.02);
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(15, 12, 10, 0.25) 0%,
+        rgba(15, 12, 10, 0.5) 50%,
+        rgba(15, 12, 10, 0.78) 100%
+      );
+      z-index: 2;
     }
 
     .hero__visual figcaption {
       display: none;
     }
 
-    h1 {
-      font-size: clamp(2.75rem, 13vw, 3.75rem);
-      letter-spacing: -0.065em;
-      line-height: 0.94;
+    .hero__copy {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      padding: 0;
       margin: 0;
-      order: 1;
-      padding: var(--space-8) var(--layout-edge) 0;
+    }
+
+    .hero__index {
+      font-size: 0.72rem;
+      margin-bottom: var(--space-1);
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 7.5vw, 2.7rem);
+      line-height: 1.05;
+    }
+
+    .hero__lede {
+      font-size: 0.9rem;
+      margin-top: var(--space-2);
+      max-width: 22rem;
+      line-height: 1.45;
     }
 
     :global(.hero__title-desktop),
@@ -211,100 +311,35 @@ import Button from "../ui/Button.astro"
       display: inline;
     }
 
-    .hero__lede {
-      margin-top: var(--space-5);
-      order: 2;
-      padding-inline: var(--layout-edge);
-    }
-
-    .hero__visual img {
-      aspect-ratio: 3 / 2;
-      display: block;
-      object-fit: cover;
-      object-position: center top;
-      width: 100%;
-    }
-
-    .hero__visual {
-      order: 3;
-    }
-
     :global(.hero__mobile-action) {
       display: block;
-      order: 4;
-      padding: var(--space-6) var(--layout-edge) var(--space-8);
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 100%;
+      margin-top: var(--space-3);
     }
 
     :global(.hero__mobile-action .button) {
       width: 100%;
     }
-  }
 
-  .hero__visual figcaption span {
-    color: var(--color-signal);
-    font-weight: 800;
-  }
-
-  @media (max-width: 63.99rem) {
-    .hero {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero__copy {
-      display: flex;
-      flex-direction: column;
-      order: 1;
-    }
-
-    .hero__visual {
-      aspect-ratio: auto;
-      display: flex;
-      flex-direction: column;
-      order: 2;
-    }
-
-    .hero__visual img {
-      aspect-ratio: 3 / 2;
-      height: auto;
-      object-position: center top;
-      position: static;
-    }
-
-    .hero__copy {
-      background: var(--color-canvas);
-      margin-top: 0;
-      padding-top: var(--space-8);
+    .hero__facts {
       position: relative;
-      z-index: 1;
+      z-index: 3;
+      margin-top: var(--space-3);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: var(--space-3);
+      gap: var(--space-4);
     }
 
-    .hero__visual figcaption {
-      inset: auto;
-      order: -1;
-      position: static;
-    }
-  }
-
-  @media (min-width: 64rem) {
-    .hero {
-      grid-template-areas: none;
-      grid-template-columns: minmax(25rem, 42%) 1fr;
+    .hero__facts dt {
+      font-size: 0.68rem;
     }
 
-    .hero__copy {
-      grid-area: auto;
-      padding: var(--space-20) clamp(2rem, 5vw, 6rem);
-    }
-
-    h1 {
-      font-size: clamp(4.5rem, 6.5vw, 7.6rem);
-    }
-
-    .hero__visual {
-      aspect-ratio: auto;
-      grid-area: auto;
-      min-height: calc(100svh - 4.5rem);
+    .hero__facts dd {
+      font-size: 0.78rem;
     }
   }
 </style>
+

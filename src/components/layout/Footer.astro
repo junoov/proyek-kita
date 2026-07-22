@@ -61,13 +61,18 @@ import BrandMark from "../ui/BrandMark.astro"
     opacity: 0.76;
   }
 
+  .site-footer__identity {
+    grid-column: 1 / -1;
+  }
+
   .site-footer__identity p {
     margin-top: var(--space-3);
     max-width: 34rem;
   }
 
   .site-footer__column {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-2);
   }
 
