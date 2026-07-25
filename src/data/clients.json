@@ -8,15 +8,15 @@
     { "initials": "UMY", "name": "Universitas Muhammadiyah Yogyakarta", "sector": "Pendidikan" },
     { "initials": "PAN", "name": "Partai Amanat Nasional", "sector": "Organisasi" },
     { "initials": "DPRK", "name": "DPRK Sabang", "sector": "Pemerintahan" },
-    { "initials": "UAY", "name": "Universitas Aisyiyah Yogyakarta", "sector": "Pendidikan" },
     { "initials": "UAJY", "name": "Universitas Atma Jaya Yogyakarta", "sector": "Pendidikan" },
-    { "initials": "UII", "name": "Universitas Islam Indonesia", "sector": "Pendidikan" },
-    { "initials": "UMY", "name": "Universitas Muhammadiyah Yogyakarta", "sector": "Pendidikan" },
     { "initials": "UJB", "name": "Universitas Janabadra", "sector": "Pendidikan" },
     { "initials": "SMAN2", "name": "SMAN 2 Yogyakarta", "sector": "Pendidikan" },
-    { "initials": "DPRK", "name": "DPRK Sabang", "sector": "Pemerintahan" },
     { "initials": "UP45", "name": "Universitas Proklamasi 45", "sector": "Pendidikan" },
     { "initials": "UHT", "name": "Universitas Hang Tuah", "sector": "Pendidikan" },
-    { "initials": "PAN", "name": "Partai Amanat Nasional", "sector": "Organisasi" }
+    { "initials": "UWKS", "name": "Universitas Wijaya Kusuma Surabaya", "sector": "Pendidikan" },
+    { "initials": "UPN", "name": "UPN \"Veteran\" Yogyakarta", "sector": "Pendidikan" },
+    { "initials": "IMAKAHI", "name": "IMAKAHI", "sector": "Organisasi" },
+    { "initials": "UNDIP", "name": "Universitas Diponegoro", "sector": "Pendidikan" },
+    { "initials": "UNAND", "name": "Universitas Andalas", "sector": "Pendidikan" }
   ]
 }

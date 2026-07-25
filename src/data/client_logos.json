@@ -1,22 +1,22 @@
 {
   "logos": [
-    { "image": "/clients/ugm.png", "title": "Logo Mitra UGM" },
-    { "image": "/clients/schlumberger.png", "title": "Logo Mitra Schlumberger" },
-    { "image": "/clients/uny.png", "title": "Logo Mitra UNY" },
-    { "image": "/clients/uns.png", "title": "Logo Mitra UNS" },
-    { "image": "/clients/uii.png", "title": "Logo Mitra UII" },
-    { "image": "/clients/umy.png", "title": "Logo Mitra UMY" },
-    { "image": "/clients/pan.png", "title": "Logo Mitra PAN" },
-    { "image": "/clients/dprk-sabang.png", "title": "Logo Mitra DPRK" },
-    { "image": "/clients/universitas-aisyiyah-yogyakarta.png", "title": "Logo Mitra Universitas Aisyiyah Yogyakarta" },
+    { "image": "/clients/dprk-sabang.png", "title": "Logo Mitra Universitas Gadjah Mada (UGM)" },
+    { "image": "/clients/uii.png", "title": "Logo Mitra Schlumberger" },
+    { "image": "/clients/schlumberger.png", "title": "Logo Mitra Universitas Negeri Yogyakarta (UNY)" },
+    { "image": "/clients/universitas-aisyiyah-yogyakarta.png", "title": "Logo Mitra Universitas Sebelas Maret (UNS)" },
+    { "image": "/clients/uii-2.png", "title": "Logo Mitra Universitas Islam Indonesia (UII)" },
+    { "image": "/clients/umy-2.png", "title": "Logo Mitra Universitas Muhammadiyah Yogyakarta (UMY)" },
+    { "image": "/clients/pan-2.png", "title": "Logo Mitra Partai Amanat Nasional (PAN)" },
+    { "image": "/clients/dprk-sabang-2.png", "title": "Logo Mitra DPRK Sabang" },
     { "image": "/clients/atma-jaya-yogyakarta.png", "title": "Logo Mitra Universitas Atma Jaya Yogyakarta" },
-    { "image": "/clients/uii-2.png", "title": "Logo Mitra Universitas Islam Indonesia" },
-    { "image": "/clients/umy-2.png", "title": "Logo Mitra Universitas Muhammadiyah Yogyakarta" },
     { "image": "/clients/universitas-janabadra.png", "title": "Logo Mitra Universitas Janabadra" },
     { "image": "/clients/sman-2-yogyakarta.png", "title": "Logo Mitra SMAN 2 Yogyakarta" },
-    { "image": "/clients/dprk-sabang-2.png", "title": "Logo Mitra DPRK Sabang" },
     { "image": "/clients/universitas-proklamasi-45.png", "title": "Logo Mitra Universitas Proklamasi 45" },
     { "image": "/clients/universitas-hang-tuah.png", "title": "Logo Mitra Universitas Hang Tuah" },
-    { "image": "/clients/pan-2.png", "title": "Logo Mitra Partai Amanat Nasional" }
+    { "image": "/clients/ugm.png", "title": "Logo Mitra Universitas Wijaya Kusuma Surabaya" },
+    { "image": "/clients/uny.png", "title": "Logo Mitra UPN Veteran Yogyakarta" },
+    { "image": "/clients/uns.png", "title": "Logo Mitra IMAKAHI" },
+    { "image": "/clients/umy.png", "title": "Logo Mitra Universitas Diponegoro" },
+    { "image": "/clients/pan.png", "title": "Logo Mitra Universitas Andalas" }
   ]
 }

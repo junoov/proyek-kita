@@ -1,10 +1,7 @@
 ---
 import Footer from "../components/layout/Footer.astro"
 import Header from "../components/layout/Header.astro"
-import galleryData from "../data/gallery.json"
 import BaseLayout from "../layouts/BaseLayout.astro"
-
-const galleryItems = (galleryData.items || galleryData).filter((item) => item.image !== "/hero/hero.jpg")
 ---
 
 <BaseLayout
@@ -17,71 +14,25 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
     <section class="about-hero" aria-labelledby="about-title">
       <div class="about-hero__heading">
         <p>Tentang Roller Customize</p>
-        <h1 id="about-title">Kami membuat pakaian kerja yang memang enak dipakai bekerja.</h1>
+        <h1 id="about-title">Meski mengawali langkah di tahun 2024, kami menerapkan standar manajemen produksi yang terstruktur, tepat waktu, dan bergaransi untuk setiap produk.</h1>
       </div>
       <div class="about-hero__story">
-        <p class="about-hero__lead">Roller Customize adalah konveksi workwear dan seragam kustom di Sleman, Yogyakarta.</p>
-        <p>Kami mulai dari kebutuhan orang yang akan mengenakannya: bagaimana mereka bergerak, kondisi tempat kerja, dan identitas yang perlu dibawa.</p>
-        <p>Setelah bentuknya disepakati lewat sampel, ukuran, warna, jahitan, dan penempatan identitas menjadi acuan untuk produksi berikutnya.</p>
+        <p class="about-hero__lead">Kami percaya bahwa seragam bukan hanya kebutuhan, tetapi representasi identitas tim dan profesionalitas. Oleh karena itu, setiap produk dikerjakan dengan standar kualitas yang konsisten, mulai dari pemilihan bahan hingga proses finishing.</p>
+        <p>Dengan sistem kerja yang terstruktur dan berbasis spesifikasi yang jelas, Roller Customize memastikan setiap pesanan diproduksi secara efisien dan sesuai kebutuhan customer.</p>
+        <p>Kami telah bekerja sama dengan beberapa universitas ternama di Indonesia, beberapa instansi, serta brand lokal yang menunjukkan kredibilitas kami sebagai vendor konveksi seragam yang dapat dipercaya.</p>
       </div>
     </section>
     <section class="standards" aria-labelledby="standards-title">
       <div class="standards__heading">
-        <p>Yang kami periksa</p>
-        <h2 id="standards-title">Tiga hal sebelum barang dikirim.</h2>
+        <p>Sebagai bentuk komitmen kami, berikut</p>
+        <h2 id="standards-title">Tiga standar utama kualitas produk kami.</h2>
       </div>
       <ol>
-        <li><span>01</span><strong>Fungsi</strong><p>Bahan dan konstruksi sesuai dengan gerak serta lingkungan kerja pemakainya.</p></li>
-        <li><span>02</span><strong>Konsistensi</strong><p>Ukuran, warna, jahitan, dan identitas mengikuti sampel yang telah disetujui.</p></li>
-        <li><span>03</span><strong>Kelengkapan</strong><p>Jumlah, variasi ukuran, dan detail pesanan diperiksa sebelum pengiriman.</p></li>
+        <li><span>01</span><strong>Bahan Baku Berkualitas</strong><p>Pemilihan kain dengan kualitas baik yang nyaman dan siap untuk aktivitas sesuai kebutuhan.</p></li>
+        <li><span>02</span><strong>Detail Bordir</strong><p>Hasil bordir presisi, padat, dan rapi mengikuti standar desain.</p></li>
+        <li><span>03</span><strong>Kualitas Jahitan</strong><p>Konstruksi rapi yang melalui kontrol kualitas sebelum dikemas.</p></li>
       </ol>
     </section>
-    <!-- GALLERY LOOKBOOK -->
-    <section class="gallery" aria-labelledby="gallery-title">
-      <div class="gallery__header">
-        <span class="gallery__tag">Lookbook</span>
-        <h2 id="gallery-title">Hasil yang bicara sendiri.</h2>
-        <p>Setiap foto adalah bukti standar produksi yang kami jaga — dari potongan, bordir, hingga finishing akhir.</p>
-      </div>
-
-      <div class="gallery__grid" id="gallery-grid">
-        {galleryItems.map((item, i) => (
-          <button
-            class="gallery__item"
-            data-index={i}
-            data-src={item.image}
-            data-title={item.title || `Foto produk ${i + 1}`}
-            aria-label={`Buka foto produk ${i + 1}`}
-          >
-            <img
-              src={item.image}
-              alt={item.title || `Foto produk Roller Customize ${i + 1}`}
-              loading="lazy"
-              decoding="async"
-              width="600"
-              height="800"
-            />
-          </button>
-        ))}
-      </div>
-    </section>
-
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox foto" hidden>
-      <button class="lightbox__close" id="lightbox-close" aria-label="Tutup lightbox">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-      <button class="lightbox__prev" id="lightbox-prev" aria-label="Foto sebelumnya">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="lightbox__next" id="lightbox-next" aria-label="Foto berikutnya">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-      <div class="lightbox__img-wrap">
-        <img class="lightbox__img" id="lightbox-img" src="" alt="" />
-      </div>
-      <div class="lightbox__counter" id="lightbox-counter">1 / 16</div>
-    </div>
   </main>
   <Footer />
 </BaseLayout>
@@ -112,11 +63,11 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   }
 
   .about-hero h1 {
-    font-size: clamp(2.5rem, 8vw, 6.5rem);
-    letter-spacing: -0.065em;
-    line-height: 0.98;
+    font-size: clamp(1.85rem, 4.5vw, 3.5rem);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
     margin: 0;
-    max-width: 14ch;
+    max-width: 24ch;
   }
 
   .about-hero__story {
@@ -203,275 +154,4 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
       grid-template-columns: minmax(16rem, 0.7fr) minmax(24rem, 1.3fr);
     }
   }
-
-  /* ==============================
-     GALLERY LOOKBOOK
-  ============================== */
-  .gallery {
-    margin: 0 auto;
-    max-width: var(--layout-max);
-    padding: var(--space-20) var(--layout-edge);
-  }
-
-  .gallery__header {
-    max-width: 36rem;
-    margin-bottom: var(--space-12);
-  }
-
-  .gallery__tag {
-    display: inline-block;
-    color: var(--color-signal);
-    font-size: var(--type-label);
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-3);
-  }
-
-  .gallery__header h2 {
-    font-family: var(--font-display);
-    font-size: var(--type-h2);
-    font-weight: 900;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    margin: 0 0 var(--space-4);
-  }
-
-  .gallery__header p {
-    color: var(--color-text-muted);
-    font-size: var(--type-lead);
-    margin: 0;
-  }
-
-  /* Masonry-style grid */
-  .gallery__grid {
-    columns: 2;
-    column-gap: var(--space-4);
-  }
-
-  @media (min-width: 48rem) {
-    .gallery__grid {
-      columns: 3;
-    }
-  }
-
-  @media (min-width: 72rem) {
-    .gallery__grid {
-      columns: 4;
-    }
-  }
-
-  /* Each gallery item */
-  .gallery__item {
-    break-inside: avoid;
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin: 0 0 var(--space-4);
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .gallery__item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-  }
-
-  .gallery__item:hover img {
-    opacity: 0.82;
-  }
-
-  /* ==============================
-     LIGHTBOX
-  ============================== */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.94);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(6px);
-    animation: lightboxIn 0.25s ease;
-  }
-
-  .lightbox[hidden] {
-    display: none;
-  }
-
-  @keyframes lightboxIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .lightbox__img-wrap {
-    max-width: 90vw;
-    max-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .lightbox__img {
-    max-width: 90vw;
-    max-height: 88vh;
-    object-fit: contain;
-    border-radius: 0.5rem;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-    animation: imgPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  @keyframes imgPop {
-    from { transform: scale(0.92); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-
-  .lightbox__close,
-  .lightbox__prev,
-  .lightbox__next {
-    position: fixed;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
-    color: #fff;
-  }
-
-  .lightbox__close:hover,
-  .lightbox__prev:hover,
-  .lightbox__next:hover {
-    background: rgba(255,255,255,0.2);
-    transform: scale(1.1);
-  }
-
-  .lightbox__close svg,
-  .lightbox__prev svg,
-  .lightbox__next svg {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .lightbox__close {
-    top: var(--space-5);
-    right: var(--space-5);
-  }
-
-  .lightbox__prev {
-    left: var(--space-5);
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .lightbox__prev:hover {
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  .lightbox__next {
-    right: var(--space-5);
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .lightbox__next:hover {
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  .lightbox__counter {
-    position: fixed;
-    bottom: var(--space-5);
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255,255,255,0.6);
-    font-family: var(--font-display);
-    font-size: var(--type-small);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-  }
 </style>
-
-<script is:inline>
-  const galleryItems = Array.from(document.querySelectorAll('.gallery__item'));
-  const photos = galleryItems.map((btn) => ({
-    src: btn.dataset.src || '',
-    title: btn.dataset.title || ''
-  }));
-
-  let currentIndex = 0;
-
-  const lightbox   = document.getElementById('lightbox');
-  const lbImg      = document.getElementById('lightbox-img');
-  const lbCounter  = document.getElementById('lightbox-counter');
-  const lbClose    = document.getElementById('lightbox-close');
-  const lbPrev     = document.getElementById('lightbox-prev');
-  const lbNext     = document.getElementById('lightbox-next');
-
-  function openLightbox(index) {
-    if (photos.length === 0) return;
-    currentIndex = index;
-    updateLightbox();
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-    lbClose.focus();
-  }
-
-  function closeLightbox() {
-    lightbox.hidden = true;
-    document.body.style.overflow = '';
-  }
-
-  function updateLightbox() {
-    if (!photos[currentIndex]) return;
-    lbImg.src = photos[currentIndex].src;
-    lbImg.alt = photos[currentIndex].title || `Foto produk Roller Customize ${currentIndex + 1}`;
-    lbCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
-    // trigger re-animation
-    lbImg.style.animation = 'none';
-    lbImg.offsetHeight;
-    lbImg.style.animation = '';
-  }
-
-  function prevPhoto() {
-    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
-    updateLightbox();
-  }
-
-  function nextPhoto() {
-    currentIndex = (currentIndex + 1) % photos.length;
-    updateLightbox();
-  }
-
-  // Wire up gallery items
-  document.querySelectorAll('.gallery__item').forEach((btn) => {
-    btn.addEventListener('click', () => openLightbox(Number(btn.dataset.index)));
-  });
-
-  lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', prevPhoto);
-  lbNext.addEventListener('click', nextPhoto);
-
-  // Click backdrop to close
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  // Keyboard nav
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.hidden) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prevPhoto();
-    if (e.key === 'ArrowRight') nextPhoto();
-  });
-</script>

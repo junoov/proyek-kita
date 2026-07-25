@@ -45,11 +45,11 @@ import BrandMark from "../ui/BrandMark.astro"
 
   .site-footer__inner {
     display: grid;
-    column-gap: var(--space-5);
+    column-gap: var(--space-6);
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: var(--space-8);
-    padding-bottom: var(--space-10);
-    padding-top: var(--space-12);
+    row-gap: var(--space-6);
+    padding-bottom: var(--space-6);
+    padding-top: var(--space-8);
   }
 
   .site-footer__identity p,
@@ -57,6 +57,7 @@ import BrandMark from "../ui/BrandMark.astro"
   .site-footer__column a {
     color: var(--color-text-inverse);
     font-size: var(--type-small);
+    line-height: 1.5;
     margin: 0;
     opacity: 0.76;
   }
@@ -66,14 +67,24 @@ import BrandMark from "../ui/BrandMark.astro"
   }
 
   .site-footer__identity p {
-    margin-top: var(--space-3);
-    max-width: 34rem;
+    margin-top: var(--space-2);
+    max-width: 26rem;
+    font-size: 0.85rem;
   }
 
   .site-footer__column {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-1.5);
+  }
+
+  .site-footer__column a {
+    font-size: 0.85rem;
+    transition: opacity var(--transition-micro);
+  }
+
+  .site-footer__column p {
+    font-size: 0.85rem;
   }
 
   .site-footer__column a:hover {
@@ -81,24 +92,25 @@ import BrandMark from "../ui/BrandMark.astro"
   }
 
   .site-footer__label {
-    font-size: var(--type-label);
+    font-size: 0.72rem;
     font-weight: 720;
     letter-spacing: 0.1em;
     margin-bottom: var(--space-1);
     text-transform: uppercase;
+    color: var(--color-signal);
   }
 
   .site-footer__bottom {
-    border-top: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 22%, transparent);
+    border-top: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 15%, transparent);
     color: var(--color-text-inverse);
     display: flex;
     flex-direction: row;
-    font-size: var(--type-small);
+    font-size: 0.8rem;
     gap: var(--space-2);
     opacity: 0.7;
     justify-content: space-between;
-    padding-bottom: var(--space-5);
-    padding-top: var(--space-5);
+    padding-bottom: var(--space-4);
+    padding-top: var(--space-4);
   }
 
   .site-footer__bottom span:last-child {
@@ -107,16 +119,20 @@ import BrandMark from "../ui/BrandMark.astro"
 
   @media (min-width: 48rem) {
     .site-footer__inner {
-      column-gap: var(--space-12);
-      grid-template-columns: 2fr repeat(3, 1fr);
-      padding-bottom: var(--space-16);
-      padding-top: var(--space-20);
-      row-gap: var(--space-10);
+      column-gap: var(--space-8);
+      grid-template-columns: 1.8fr repeat(3, 1fr);
+      padding-bottom: var(--space-8);
+      padding-top: var(--space-10);
+      row-gap: var(--space-6);
+    }
+
+    .site-footer__identity {
+      grid-column: auto;
     }
 
     .site-footer__bottom {
-      padding-bottom: var(--space-6);
-      padding-top: var(--space-6);
+      padding-bottom: var(--space-4);
+      padding-top: var(--space-4);
     }
 
     .site-footer__bottom span:last-child {

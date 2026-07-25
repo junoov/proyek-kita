@@ -16,38 +16,23 @@ import Button from "../ui/Button.astro"
       decoding="async"
     />
     <div class="hero__overlay"></div>
-    <figcaption>
-      <span>RC / 01</span>
-      Workshirt hitam, dokumentasi produk 2026
-    </figcaption>
   </figure>
 
   <div class="hero__copy">
-    <p class="hero__index">Garmen kustom · Sleman, Yogyakarta</p>
     <h1 id="hero-title">
-      <span class="hero__title-desktop">Seragam kerja<br />yang siap <em>dipakai.</em></span>
-      <span class="hero__title-mobile">Seragam kerja<br />yang siap <em>dipakai.</em></span>
+      <span class="hero__title-desktop">Mitra Terpercaya untuk<br />Kebutuhan <em>Konveksi Anda</em></span>
+      <span class="hero__title-mobile">Mitra Terpercaya untuk<br />Kebutuhan <em>Konveksi Anda</em></span>
     </h1>
     <p class="hero__lede">
-      <span class="hero__lede-desktop">Kami merancang workshirt untuk kebutuhan tim, lalu menjaganya tetap konsisten dari sampel sampai batch produksi.</span>
-      <span class="hero__lede-mobile">Merancang workshirt kustom konsisten dari sampel hingga batch produksi.</span>
+      <span class="hero__lede-desktop">Roller Customize adalah konveksi yang berfokus pada produksi custom Workshirt, PDL/PDH, Workjacket, Kaos, Celana, dan Totebag dengan pendekatan yang sederhana, rapi, dan presisi.</span>
+      <span class="hero__lede-mobile">Roller Customize adalah konveksi yang berfokus pada produksi custom Workshirt, PDL/PDH, Workjacket, Kaos, Celana, dan Totebag dengan pendekatan yang sederhana, rapi, dan presisi.</span>
     </p>
     <div class="hero__actions">
-      <span class="hero__action-desktop"><Button href="/kontak" label="Bahas kebutuhan tim" variant="signal" /></span>
-      <a class="hero__text-link" href="/layanan">Lihat cara kerja</a>
+      <span class="hero__action-desktop"><Button href="/kontak" label="Konsultasi kebutuhan" variant="signal" /></span>
+      <a class="hero__text-link" href="/layanan">Roadmap produksi</a>
     </div>
-    <dl class="hero__facts">
-      <div>
-        <dt>Fokus</dt>
-        <dd>Workshirt & seragam tim</dd>
-      </div>
-      <div>
-        <dt>Kontrol</dt>
-        <dd>Ukuran, jahitan, warna, identitas</dd>
-      </div>
-    </dl>
   </div>
-  <div class="hero__mobile-action"><Button href="/kontak" label="Diskusikan seragam tim" variant="signal" /></div>
+  <div class="hero__mobile-action"><Button href="/kontak" label="Konsultasi kebutuhan" variant="signal" /></div>
 </section>
 
 <style>
@@ -78,9 +63,9 @@ import Button from "../ui/Button.astro"
     height: 100%;
     object-fit: cover;
     object-position: 15% top;
-    transform: scale(1.08);
+    transform: scale(1.02);
     transform-origin: 15% top;
-    filter: brightness(1.12) contrast(1.03);
+    filter: brightness(0.85) contrast(1.04);
   }
 
   .hero__overlay {
@@ -88,9 +73,9 @@ import Button from "../ui/Button.astro"
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(15, 12, 10, 0.12) 0%,
-      rgba(15, 12, 10, 0.28) 50%,
-      rgba(15, 12, 10, 0.48) 100%
+      rgba(15, 12, 10, 0.45) 0%,
+      rgba(15, 12, 10, 0.55) 50%,
+      rgba(15, 12, 10, 0.75) 100%
     );
     z-index: 2;
   }
@@ -128,36 +113,27 @@ import Button from "../ui/Button.astro"
     padding: var(--space-8) 0;
   }
 
-  .hero__index {
-    color: #f7a361;
-    font-size: var(--type-label);
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    margin: 0 0 var(--space-4);
-    text-transform: uppercase;
-  }
-
-  h1 {
-    font-size: clamp(2.75rem, 8vw, 6.2rem);
-    letter-spacing: -0.05em;
-    line-height: 0.95;
+  h1,
+  h1 span,
+  h1 em,
+  .hero__title-desktop,
+  .hero__title-mobile {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
     margin: 0;
-    color: #ffffff;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
-  }
-
-  h1 em {
-    color: #f7a361;
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: 400;
-    font-style: italic;
+    color: #ffefdf !important;
+    font-style: normal;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
   }
 
   .hero__lede {
     font-size: clamp(1rem, 2vw, 1.2rem);
     line-height: 1.6;
     margin: var(--space-6) auto 0;
-    max-width: 38rem;
+    max-width: 44rem;
     color: rgba(255, 255, 255, 0.9);
   }
 
@@ -187,38 +163,6 @@ import Button from "../ui/Button.astro"
 
   .hero__text-link:hover {
     opacity: 0.8;
-  }
-
-  .hero__facts {
-    border-top: var(--rule-width) solid rgba(255, 255, 255, 0.2);
-    display: grid;
-    gap: var(--space-8);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin: var(--space-10) auto 0;
-    padding-top: var(--space-6);
-    width: 100%;
-    max-width: 32rem;
-    text-align: center;
-  }
-
-  .hero__facts div {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-
-  .hero__facts dt {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: var(--type-label);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .hero__facts dd {
-    color: #ffffff;
-    font-size: var(--type-small);
-    font-weight: 700;
-    margin: 0;
   }
 
   @media (max-width: 48rem) {
@@ -252,7 +196,7 @@ import Button from "../ui/Button.astro"
       object-position: 38% 20%;
       transform: scale(1);
       transform-origin: center top;
-      filter: brightness(1.1) contrast(1.02);
+      filter: brightness(0.85) contrast(1.04);
     }
 
     .hero__overlay {
@@ -260,9 +204,9 @@ import Button from "../ui/Button.astro"
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(15, 12, 10, 0.25) 0%,
-        rgba(15, 12, 10, 0.5) 50%,
-        rgba(15, 12, 10, 0.78) 100%
+        rgba(15, 12, 10, 0.45) 0%,
+        rgba(15, 12, 10, 0.6) 50%,
+        rgba(15, 12, 10, 0.8) 100%
       );
       z-index: 2;
     }

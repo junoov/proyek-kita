@@ -9,7 +9,8 @@ type Props = {
 
 const { heading = "Nama-nama yang pernah bekerja bersama kami.", allClients = false } = Astro.props
 const logos = clientLogos.logos || clientLogos
-const visibleLogos = allClients ? logos : logos.slice(0, 8)
+// Gunakan semua logo yang tersedia agar marquee kaya dan penuh
+const marqueeLogos = logos.length < 10 ? [...logos, ...logos] : logos
 const visibleClients = allClients ? clients : clients.slice(0, 8)
 ---
 
@@ -23,24 +24,24 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
   <div class="clients__marquee" aria-label="Logo mitra Roller Customize">
     <div class="clients__track">
       <div class="clients__logo-set">
-        {visibleLogos.map((logo) => (
+        {marqueeLogos.map((logo) => (
           <div class="clients__logo"><img src={logo.image} alt={logo.title} loading="lazy" /></div>
         ))}
       </div>
       <div class="clients__logo-set" aria-hidden="true">
-        {visibleLogos.map((logo) => (
+        {marqueeLogos.map((logo) => (
           <div class="clients__logo"><img src={logo.image} alt="" loading="lazy" /></div>
         ))}
       </div>
     </div>
     <div class="clients__track clients__track--reverse" aria-hidden="true">
       <div class="clients__logo-set">
-        {[...visibleLogos].reverse().map((logo) => (
+        {[...marqueeLogos].reverse().map((logo) => (
           <div class="clients__logo"><img src={logo.image} alt="" loading="lazy" /></div>
         ))}
       </div>
       <div class="clients__logo-set">
-        {[...visibleLogos].reverse().map((logo) => (
+        {[...marqueeLogos].reverse().map((logo) => (
           <div class="clients__logo"><img src={logo.image} alt="" loading="lazy" /></div>
         ))}
       </div>
@@ -105,19 +106,21 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
     margin-bottom: var(--space-12);
     mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     overflow: hidden;
+    width: 100%;
   }
 
   .clients__track {
     --marquee-gap: var(--space-5);
     --marquee-half-gap: calc(var(--marquee-gap) / 2);
-    animation: clients-marquee 42s linear infinite;
+    animation: clients-marquee-left 50s linear infinite;
     display: flex;
     gap: var(--marquee-gap);
     width: max-content;
+    will-change: transform;
   }
 
   .clients__track.clients__track--reverse {
-    animation: clients-marquee 48s linear infinite reverse;
+    animation: clients-marquee-right 55s linear infinite;
   }
 
   .clients__logo-set {
@@ -135,6 +138,7 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
     padding: var(--space-3);
     width: 6.5rem;
     transition: background-color var(--transition-micro), transform var(--transition-micro);
+    flex-shrink: 0;
   }
 
   .clients__logo:hover {
@@ -260,25 +264,21 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .clients__marquee {
-      mask-image: none;
-      overflow-x: auto;
+  @keyframes clients-marquee-left {
+    0% {
+      transform: translate3d(0, 0, 0);
     }
-
-    .clients__track {
-      animation: none;
-    }
-
-    .clients__track--reverse,
-    .clients__logo-set + .clients__logo-set {
-      display: none;
+    100% {
+      transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
     }
   }
 
-  @keyframes clients-marquee {
-    to {
-      transform: translateX(calc(-50% - var(--marquee-half-gap)));
+  @keyframes clients-marquee-right {
+    0% {
+      transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
     }
   }
 </style>

@@ -1,0 +1,325 @@
+---
+import Footer from "../components/layout/Footer.astro"
+import Header from "../components/layout/Header.astro"
+import Button from "../components/ui/Button.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Size Chart & Panduan Ukuran — Roller Customize"
+  description="Panduan lengkap pola ukuran Reguler Cut dan Boxy Cut untuk Workshirt, Kemeja, Kaos, dan Jaket produksi Roller Customize."
+  path="/size-chart"
+>
+  <Header />
+  <main id="main">
+    <section class="sizechart-hero" aria-labelledby="sizechart-hero-title">
+      <div class="sizechart-hero__inner">
+        <span class="sizechart-hero__tag">Panduan Ukuran</span>
+        <h1 id="sizechart-hero-title">Size Chart & Pola Potongan Seragam</h1>
+        <p class="sizechart-hero__desc">
+          Pilih acuan pola potongan yang paling sesuai dengan kebutuhan tim Anda. Kami menyediakan standar pola <strong>Reguler Cut</strong> (Proporsional) dan <strong>Boxy Cut</strong> (Oversized Streetwear).
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION: SIZE CHART TABS -->
+    <section class="sizechart" id="sizechart" aria-labelledby="sizechart-title">
+      <div class="sizechart__inner">
+        <div class="sizechart__tabs-container">
+          <div class="tab-buttons" role="tablist" aria-label="Pilihan Pola Ukuran">
+            <button class="tab-button active" data-tab="reguler" role="tab" aria-selected="true">Pola Reguler Cut</button>
+            <button class="tab-button" data-tab="boxy" role="tab" aria-selected="false">Pola Boxy Cut</button>
+          </div>
+
+          <div class="tab-panels">
+            <!-- TAB 1: REGULER -->
+            <div class="tab-panel active" id="reguler" role="tabpanel">
+              <div class="table-card">
+                <div class="table-card__header">
+                  <h3>Pola Reguler Cut (Standar Proporsional)</h3>
+                  <p>Pola potong standar konveksi yang memberikan ruang gerak nyaman, rapi, dan formal untuk aktivitas kerja sehari-hari.</p>
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Ukuran</th>
+                        <th>Panjang Badan (cm)</th>
+                        <th>Lebar Dada (cm)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>S</td><td>68</td><td>50</td></tr>
+                      <tr><td>M</td><td>70</td><td>52</td></tr>
+                      <tr><td>L</td><td>72</td><td>54</td></tr>
+                      <tr><td>XL</td><td>74</td><td>56</td></tr>
+                      <tr><td>XXL</td><td>76</td><td>60</td></tr>
+                      <tr class="table-add"><td>Per kenaikan size (+X)</td><td>+2</td><td>+2</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: BOXY -->
+            <div class="tab-panel" id="boxy" role="tabpanel">
+              <div class="table-card">
+                <div class="table-card__header">
+                  <h3>Pola Boxy Cut (Karakter Modern / Relaxed Fit)</h3>
+                  <p>Pola potongan dengan lebar dada lebih luas dan panjang badan lebih pendek, memberikan tampilan kasual modern khas streetwear.</p>
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Ukuran</th>
+                        <th>Panjang Badan (cm)</th>
+                        <th>Lebar Dada (cm)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>S</td><td>64</td><td>52</td></tr>
+                      <tr><td>M</td><td>66</td><td>54</td></tr>
+                      <tr><td>L</td><td>68</td><td>56</td></tr>
+                      <tr><td>XL</td><td>70</td><td>58</td></tr>
+                      <tr><td>XXL</td><td>72</td><td>60</td></tr>
+                      <tr class="table-add"><td>Per kenaikan size (+X)</td><td>+2</td><td>+2</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sizechart__notes">
+            <h4>Catatan Tambahan Mengenai Ukuran:</h4>
+            <ul>
+              <li>Panduan ukuran di atas berlaku standar untuk produk <strong>Workshirt, PDL/PDH, Workjacket, dan Kaos</strong>.</li>
+              <li>Pola ukuran khusus (custom size chart per anggota tim) dapat diajukan saat tahap pengisian formulir pemesanan.</li>
+              <li>Produk <strong>Celana Panjang, Celana Pendek, dan Totebag</strong> menggunakan spesifikasi ukuran custom dari customer.</li>
+              <li>Toleransi perbedaan ukuran saat proses jahitan produksi adalah <strong>± 1–1.5 cm</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="sizechart__cta">
+            <h3>Butuh Bantuan Menentukan Ukuran Tim?</h3>
+            <p>Tim kami siap mendampingi proses fitting dan memberikan sampel fisik sebelum produksi massal dimulai.</p>
+            <Button href="/kontak" label="Konsultasi Kebutuhan Ukuran" variant="signal" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .sizechart-hero {
+    background: var(--color-mist);
+    padding: var(--space-16) var(--layout-edge) var(--space-12);
+  }
+
+  .sizechart-hero__inner {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+  }
+
+  .sizechart-hero__tag {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 720;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .sizechart-hero h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0 0 var(--space-4);
+  }
+
+  .sizechart-hero__desc {
+    color: var(--color-text-muted);
+    font-size: var(--type-lead);
+    line-height: 1.6;
+    max-width: 42rem;
+    margin: 0;
+  }
+
+  .sizechart {
+    padding: var(--space-16) var(--layout-edge) var(--space-24);
+  }
+
+  .sizechart__inner {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: var(--space-3);
+    border-bottom: 2px solid var(--color-rule);
+    margin-bottom: var(--space-8);
+  }
+
+  .tab-button {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: var(--type-body);
+    font-weight: 700;
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: -2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .tab-button:hover {
+    color: var(--color-text);
+  }
+
+  .tab-button.active {
+    border-color: var(--color-signal);
+    color: var(--color-signal);
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .table-card {
+    background: var(--color-canvas);
+    border: var(--rule-width) solid var(--color-rule);
+    border-radius: 12px;
+    padding: var(--space-6);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .table-card__header h3 {
+    font-size: var(--type-h3);
+    margin: 0 0 var(--space-2);
+  }
+
+  .table-card__header p {
+    color: var(--color-text-muted);
+    font-size: var(--type-small);
+    margin: 0 0 var(--space-6);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+  }
+
+  th, td {
+    border-bottom: var(--rule-width) solid var(--color-rule);
+    padding: var(--space-4) var(--space-5);
+    font-size: var(--type-body);
+  }
+
+  th {
+    background: var(--color-mist);
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .table-add {
+    background: color-mix(in oklch, var(--color-signal) 8%, transparent);
+    font-weight: 700;
+  }
+
+  .sizechart__notes {
+    background: var(--color-mist);
+    border-left: 4px solid var(--color-signal);
+    border-radius: 8px;
+    padding: var(--space-6);
+    margin-top: var(--space-12);
+  }
+
+  .sizechart__notes h4 {
+    font-size: var(--type-body);
+    margin: 0 0 var(--space-3);
+  }
+
+  .sizechart__notes ul {
+    margin: 0;
+    padding-left: var(--space-5);
+    color: var(--color-text-muted);
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--type-small);
+  }
+
+  .sizechart__cta {
+    background: var(--color-canvas);
+    border: 2px dashed var(--color-rule);
+    border-radius: 12px;
+    text-align: center;
+    padding: var(--space-10) var(--space-6);
+    margin-top: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .sizechart__cta h3 {
+    margin: 0;
+    font-size: var(--type-h3);
+  }
+
+  .sizechart__cta p {
+    color: var(--color-text-muted);
+    margin: 0;
+    max-width: 32rem;
+    font-size: var(--type-small);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetTab = btn.getAttribute("data-tab");
+
+        tabButtons.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+        });
+
+        tabPanels.forEach((p) => {
+          p.classList.remove("active");
+        });
+
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+
+        const targetPanel = document.getElementById(targetTab);
+        if (targetPanel) {
+          targetPanel.classList.add("active");
+        }
+      });
+    });
+  });
+</script>

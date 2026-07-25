@@ -1,20 +1,18 @@
 ---
-import { company } from "../../data/company"
 ---
 
 <section class="intro" aria-labelledby="intro-title">
   <p class="intro__label">Yang kami kerjakan</p>
   <div class="intro__statement">
-    <h2 id="intro-title">Bukan seragam katalog yang ditempeli logo.</h2>
+    <h2 id="intro-title">Meski mengawali langkah di tahun 2024, kami menerapkan standar manajemen produksi yang terstruktur, tepat waktu, dan bergaransi.</h2>
     <p>
-      {company.name} memulai dari pekerjaan orang yang akan mengenakannya: gerak tubuh, lingkungan kerja,
-      kebutuhan identitas, dan ritme pemakaian sehari-hari.
+      Kami percaya bahwa seragam bukan hanya kebutuhan, tetapi representasi identitas tim dan profesionalitas. Oleh karena itu, setiap produk dikerjakan dengan standar kualitas yang konsisten, mulai dari pemilihan bahan hingga proses finishing.
     </p>
   </div>
   <dl class="intro__checks">
-    <div><dt>01</dt><dd>Fungsi kerja dibahas sebelum visual.</dd></div>
-    <div><dt>02</dt><dd>Sampel diperiksa sebelum masuk batch.</dd></div>
-    <div><dt>03</dt><dd>Ukuran, jahitan, warna, dan identitas dikontrol sebelum kirim.</dd></div>
+    <div><dt>01</dt><dd><strong>Bahan Baku Berkualitas</strong><p>Pemilihan kain berkualitas yang nyaman dan siap untuk aktivitas sesuai kebutuhan.</p></dd></div>
+    <div><dt>02</dt><dd><strong>Detail Bordir</strong><p>Hasil bordir presisi, padat, dan rapi mengikuti standar desain.</p></dd></div>
+    <div><dt>03</dt><dd><strong>Kualitas Jahitan</strong><p>Konstruksi rapi yang melalui kontrol kualitas sebelum dikemas.</p></dd></div>
   </dl>
 </section>
 
@@ -41,11 +39,11 @@ import { company } from "../../data/company"
   }
 
   h2 {
-    font-size: clamp(2.8rem, 7vw, 6.5rem);
-    letter-spacing: -0.07em;
-    line-height: 0.92;
+    font-size: clamp(2rem, 5.5vw, 4.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
     margin: 0;
-    max-width: 13ch;
+    max-width: 22ch;
   }
 
   .intro__statement p {
@@ -73,7 +71,19 @@ import { company } from "../../data/company"
   }
 
   .intro__checks dd {
-    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin: 0;
+  }
+
+  .intro__checks dd strong {
+    font-size: var(--type-body);
+  }
+
+  .intro__checks dd p {
+    font-size: var(--type-small);
+    opacity: 0.9;
     margin: 0;
   }
 

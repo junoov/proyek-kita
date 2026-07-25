@@ -25,82 +25,14 @@ const orderSteps = [
   <main id="main">
     <section class="service-hero" aria-labelledby="service-title">
       <p>Layanan & spesifikasi</p>
-      <h1 id="service-title">Workshirt kustom, dengan rincian yang bisa diperiksa sebelum produksi.</h1>
-      <div>Katalog di bawah memuat bahan, biaya, ukuran, dan urutan kerja yang kami gunakan.</div>
-    </section>
-
-    <!-- SECTION: PRODUCT CATALOG & PRICELIST -->
-    <section class="catalog" aria-labelledby="catalog-title">
-      <div class="catalog__inner">
-        <div class="catalog__intro">
-          <span class="catalog__tag">Katalog utama</span>
-          <h2 id="catalog-title">Custom Workshirt</h2>
-          <p class="catalog__moq"><strong>Pesanan minimum:</strong> 24 pcs <span class="catalog__moq-sub">Pesanan di bawah jumlah minimum dikenakan tambahan Rp15.000–Rp35.000 per pcs.</span></p>
-          
-          <div class="catalog__specs">
-            <h3>Spesifikasi standar</h3>
-            <ul>
-              <li><strong>Model:</strong> Lengan Pendek</li>
-              <li><strong>Desain:</strong> Termasuk 2 titik bordir komputer</li>
-              <li><strong>Potongan:</strong> Reguler Cut</li>
-              <li><strong>Ukuran Standar:</strong> S sampai XL</li>
-            </ul>
-          </div>
-
-          <div class="catalog__notes">
-            <h3>Ketentuan tambahan</h3>
-            <ul>
-              <li>Kenaikan ukuran di atas XL dikenakan tambahan +Rp5.000 per tingkat size (XXL, 3XL, dst).</li>
-              <li>Bordir punggung ukuran besar (di atas 27 x 15 cm) dikenakan biaya sesuai dengan kerumitan desain.</li>
-              <li>Aksen scotlight/reflector, velcro, dan kombinasi kain dihitung berdasarkan kerumitan produksi.</li>
-              <li>Penggunaan resleting tambahan disesuaikan dengan merk yang diminta.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="catalog__pricing-panel">
-          <div class="pricing-card">
-            <h3>Harga bahan utama</h3>
-            <div class="pricing-list">
-              <div class="pricing-item">
-                <span>American Drill</span>
-                <strong>Rp100.000 <small>/ pcs</small></strong>
-              </div>
-              <div class="pricing-item">
-                <span>Nagata Drill</span>
-                <strong>Rp120.000 <small>/ pcs</small></strong>
-              </div>
-              <div class="pricing-item">
-                <span>Tropical</span>
-                <strong>Rp145.000 <small>/ pcs</small></strong>
-              </div>
-              <div class="pricing-item">
-                <span>Ripstop</span>
-                <strong>Rp145.000 <small>/ pcs</small></strong>
-              </div>
-              <div class="pricing-item">
-                <span>Bahan Lain (By Request)</span>
-                <strong>Sesuai Material</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="variations-card">
-            <h3>Variasi dan biaya tambahan</h3>
-            <div class="variations-grid">
-              <div class="var-item"><span>Up Size (&gt; XL)</span><strong>+Rp5.000</strong></div>
-              <div class="var-item"><span>Boxy Cut</span><strong>+Rp7.000</strong></div>
-              <div class="var-item"><span>Lengan Panjang</span><strong>+Rp10.000</strong></div>
-              <div class="var-item"><span>Reflector / Scotlight</span><strong>Rp3.000 - Rp10.000</strong></div>
-              <div class="var-item"><span>Velcro (Perekat)</span><strong>Rp3.000 - Rp10.000</strong></div>
-              <div class="var-item"><span>Resleting Custom</span><strong>Rp7.000 - Rp20.000</strong></div>
-              <div class="var-item"><span>Kombinasi Warna</span><strong>Rp5.000 - Rp20.000</strong></div>
-              <div class="var-item"><span>Bordir Tambahan</span><strong>Rp5.000 - Rp30.000</strong></div>
-            </div>
-          </div>
-        </div>
+      <h1 id="service-title">Jadi partner kami tanpa takut salah spesifikasi.</h1>
+      <div class="service-hero__desc">
+        <p>Lewat sistem formulir order kami, kamu bisa detailkan kebutuhan produksi secara lengkap dan presisi!</p>
+        <p>Kami siap bantu dampingi hingga hasilnya pas dan bebas salah produksi.</p>
       </div>
     </section>
+
+
 
     <!-- SECTION: PROSEDUR KERJA (S-CURVE ROADMAP FLOW) -->
     <section class="flow" aria-labelledby="flow-title">
@@ -293,77 +225,7 @@ const orderSteps = [
       </div>
     </section>
 
-    <!-- SECTION: SIZE CHART TABS -->
-    <section class="sizechart" aria-labelledby="sizechart-title">
-      <div class="sizechart__inner">
-        <div class="sizechart__header">
-          <span class="sizechart__tag">Panduan Ukuran</span>
-          <h2 id="sizechart-title">Panduan ukuran</h2>
-          <p>Dua pola dasar yang dapat dipilih sebelum sampel dibuat.</p>
-        </div>
 
-        <div class="sizechart__tabs-container">
-          <div class="tab-buttons" role="tablist">
-            <button class="tab-button active" data-tab="reguler" role="tab" aria-selected="true">Pola Reguler Cut</button>
-            <button class="tab-button" data-tab="boxy" role="tab" aria-selected="false">Pola Boxy Cut</button>
-          </div>
-
-          <div class="tab-panels">
-            <!-- TAB 1: REGULER -->
-            <div class="tab-panel active" id="reguler" role="tabpanel">
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Ukuran</th>
-                      <th>Panjang Badan (cm)</th>
-                      <th>Lebar Dada (cm)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>S</td><td>68</td><td>50</td></tr>
-                    <tr><td>M</td><td>70</td><td>52</td></tr>
-                    <tr><td>L</td><td>72</td><td>54</td></tr>
-                    <tr><td>XL</td><td>74</td><td>56</td></tr>
-                    <tr><td>XXL</td><td>76</td><td>60</td></tr>
-                    <tr class="table-add"><td>Per kenaikan size (+X)</td><td>+2</td><td>+2</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- TAB 2: BOXY -->
-            <div class="tab-panel" id="boxy" role="tabpanel">
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Ukuran</th>
-                      <th>Panjang Badan (cm)</th>
-                      <th>Lebar Dada (cm)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>S</td><td>64</td><td>52</td></tr>
-                    <tr><td>M</td><td>66</td><td>54</td></tr>
-                    <tr><td>L</td><td>68</td><td>56</td></tr>
-                    <tr><td>XL</td><td>70</td><td>58</td></tr>
-                    <tr><td>XXL</td><td>72</td><td>60</td></tr>
-                    <tr class="table-add"><td>Per kenaikan size (+X)</td><td>+2</td><td>+2</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          
-          <div class="sizechart__footer">
-            <p>* Panduan ukuran di atas berlaku untuk produk <strong>Kemeja & Kaos</strong>.</p>
-            <p>* Celana panjang, celana pendek, dan totebag menggunakan ukuran custom dari klien.</p>
-            <p>* Pola ukuran kustom khusus dikenakan biaya tambahan dan dapat mempengaruhi durasi produksi.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- SECTION: TERMS & CONDITIONS ACCORDION -->
     <section class="terms" aria-labelledby="terms-title">
@@ -505,19 +367,26 @@ const orderSteps = [
   }
 
   .service-hero h1 {
-    font-size: var(--type-h1);
-    letter-spacing: -0.07em;
-    line-height: 0.98;
+    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+    letter-spacing: -0.05em;
+    line-height: 1.05;
     margin: 0;
-    max-width: 17ch;
+    max-width: 22ch;
   }
 
-  .service-hero > div {
+  .service-hero__desc {
     color: var(--color-text-muted);
     font-size: var(--type-lead);
-    line-height: 1.55;
-    margin-top: var(--space-8);
-    max-width: 38rem;
+    line-height: 1.6;
+    margin-top: var(--space-6);
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .service-hero__desc p {
+    margin: 0;
   }
 
   /* Catalog / Specs & Pricelist */
@@ -1121,48 +990,51 @@ const orderSteps = [
     margin: 0;
   }
 
-  /* Assurance Section (Existing style matching) */
+  /* Assurance Section (Quality Control Section) */
   .assurance {
-    background: var(--color-ink);
-    color: var(--color-text-inverse);
+    background: var(--color-canvas);
+    color: var(--color-text);
     display: grid;
     gap: var(--space-12);
+    margin: 0 auto;
+    max-width: var(--layout-max);
     padding: var(--space-20) var(--layout-edge);
   }
 
   .assurance > div,
   .assurance ol {
-    margin: 0 auto;
-    max-width: var(--layout-max);
+    margin: 0;
     width: 100%;
   }
 
   .assurance > div > p {
+    color: var(--color-signal);
     font-size: var(--type-label);
-    font-weight: 720;
+    font-weight: 800;
     letter-spacing: 0.1em;
     margin: 0 0 var(--space-4);
-    opacity: 0.7;
     text-transform: uppercase;
   }
 
   .assurance h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: var(--type-h2);
-    letter-spacing: -0.055em;
-    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
     margin: 0;
-    max-width: 20ch;
+    max-width: 22ch;
   }
 
   .assurance ol {
-    border-top: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 24%, transparent);
+    border-top: 2px solid var(--color-ink);
     list-style: none;
     padding: 0;
   }
 
   .assurance li {
     align-items: start;
-    border-bottom: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 24%, transparent);
+    border-bottom: var(--rule-width) solid var(--color-rule);
     display: grid;
     gap: var(--space-4);
     grid-template-columns: var(--space-10) minmax(0, 1fr);
@@ -1176,26 +1048,16 @@ const orderSteps = [
   }
 
   .assurance li p {
+    color: var(--color-text-muted);
+    font-size: var(--type-body);
+    line-height: 1.55;
     margin: 0;
-    max-width: 28rem;
-    opacity: 0.8;
   }
 
   /* Responsive media queries */
-  @media (min-width: 48rem) {
-    .catalog__inner {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .timeline {
-      margin-left: 0;
-      padding-left: var(--space-12);
-    }
-  }
-
   @media (min-width: 64rem) {
     .assurance {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
     }
 
     .assurance > div,

@@ -1,6 +1,4 @@
 ---
-import { services } from "../../data/company"
-
 type Props = {
   readonly heading?: string
   readonly lede?: string
@@ -8,39 +6,68 @@ type Props = {
 
 const {
   heading = "Dari brief sampai batch.",
-  lede = "Tiga keputusan utama, dengan keluaran yang bisa diperiksa di setiap tahap."
+  lede = "Komitmen kami untuk memberikan pengalaman produksi konveksi yang mudah, tepat, dan terpercaya."
 } = Astro.props
+
+const features = [
+  {
+    title: "MOQ Rendah",
+    description: "Fleksibilitas jumlah pemesanan mulai dari 24 pcs untuk memenuhi kebutuhan tim Anda.",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`
+  },
+  {
+    title: "Form Spesifikasi",
+    description: "Sistem formulir terstruktur untuk mendetailkan bahan, ukuran, warna, dan bordir secara presisi.",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`
+  },
+  {
+    title: "Harga Kompetitif",
+    description: "Penawaran harga rasional dan transparan sesuai rincian bahan serta spesifikasi yang Anda pilih.",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>`
+  },
+  {
+    title: "Bergaransi",
+    description: "Jaminan kualitas produksi dan garansi perbaikan jika terdapat ketidaksesuaian spesifikasi.",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`
+  },
+  {
+    title: "Pengiriman ke Seluruh Indonesia",
+    description: "Jangkauan pengiriman aman dan terpercaya ke seluruh wilayah dan pelosok Indonesia.",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`
+  }
+]
 ---
 
 <section class="services" aria-labelledby="services-title">
   <header class="services__heading">
-    <p>Alur kerja / 01—03</p>
+    <p>Keunggulan & Layanan</p>
     <h2 id="services-title">{heading}</h2>
     <span>{lede}</span>
   </header>
 
-  <ol class="services__list">
-    {services.map((service) => (
-      <li>
-        <span class="service__number">{service.number}</span>
-        <h3>{service.title}</h3>
-        <p>{service.description}</p>
-        <strong>{service.deliverable}</strong>
-      </li>
+  <div class="features-list">
+    {features.map((item) => (
+      <div class="feature-item">
+        <div class="feature-item__icon" set:html={item.icon} />
+        <div class="feature-item__text">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      </div>
     ))}
-  </ol>
+  </div>
 </section>
 
 <style>
   .services {
     margin: 0 auto;
     max-width: var(--layout-max);
-    padding: var(--space-24) var(--layout-edge);
+    padding: var(--space-20) var(--layout-edge);
   }
 
   .services__heading {
     display: grid;
-    gap: var(--space-5);
+    gap: var(--space-4);
     margin-bottom: var(--space-12);
   }
 
@@ -54,51 +81,74 @@ const {
   }
 
   h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: var(--type-h2);
-    letter-spacing: -0.055em;
-    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
     margin: 0;
   }
 
   .services__heading span {
     color: var(--color-text-muted);
-    max-width: 32rem;
+    font-size: var(--type-lead);
+    max-width: 34rem;
   }
 
-  .services__list {
+  /* LIST LAYOUT ACCORDING TO SKETCH */
+  .features-list {
     border-top: 2px solid var(--color-ink);
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
   }
 
-  .services__list li {
-    align-items: baseline;
+  .feature-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-6);
+    padding: var(--space-6) 0;
     border-bottom: var(--rule-width) solid var(--color-rule);
-    display: grid;
-    gap: var(--space-4);
-    padding: var(--space-8) 0;
+    transition: background-color var(--transition-micro);
   }
 
-  .service__number {
+  .feature-item__icon {
+    align-items: center;
+    background: color-mix(in oklch, var(--color-signal) 12%, var(--color-mist));
+    border-radius: 10px;
     color: var(--color-signal);
-    font-size: var(--type-label);
-    font-weight: 800;
+    display: flex;
+    height: 3.25rem;
+    justify-content: center;
+    width: 3.25rem;
+    min-width: 3.25rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
   }
 
-  h3 {
+  .feature-item__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1.5);
+    flex: 1;
+  }
+
+  .feature-item__text h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: var(--type-h3);
-    letter-spacing: -0.035em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     margin: 0;
+    line-height: 1.25;
+    color: var(--color-text);
   }
 
-  .services__list p {
+  .feature-item__text p {
     color: var(--color-text-muted);
+    font-size: var(--type-body);
+    line-height: 1.55;
     margin: 0;
-  }
-
-  .services__list strong {
-    font-size: var(--type-small);
+    max-width: 50rem;
   }
 
   @media (min-width: 48rem) {
@@ -107,9 +157,14 @@ const {
       grid-template-columns: 0.6fr 1fr 1fr;
     }
 
-    .services__list li {
-      grid-template-columns: 0.6fr 1fr 1.4fr 1fr;
+    .feature-item {
+      gap: var(--space-8);
+      padding: var(--space-7) var(--space-4);
     }
 
+    .feature-item:hover {
+      background: color-mix(in oklch, var(--color-mist) 60%, transparent);
+      border-radius: 8px;
+    }
   }
 </style>

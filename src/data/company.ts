@@ -32,6 +32,7 @@ export const navigation = [
   { label: "Beranda", href: "/" },
   { label: "Tentang", href: "/tentang" },
   { label: "Layanan", href: "/layanan" },
+  { label: "Size Chart", href: "/size-chart" },
   { label: "Pelanggan", href: "/pelanggan" },
   { label: "Kontak", href: "/kontak" },
 ] as const
@@ -47,8 +48,8 @@ export const stats = [
 export const clients: readonly Client[] = clientsData.clients
 
 export const contactChannels = [
-  { label: "WhatsApp", value: "+62 896 0580 0090", href: company.whatsapp },
-  { label: "Instagram Konveksi", value: "@rollercustomize", href: company.instagram },
-  { label: "Instagram Brand", value: "@rollercustomize", href: company.instagramBrand },
-  { label: "Shopee", value: "Roller Dealer", href: company.shopee },
+  { label: "WhatsApp", value: "0823-2390-6453", href: company.whatsapp },
+  { label: "Instagram Dealer", value: "@roller.dealer", href: company.instagramDealer },
+  { label: "Instagram Customize", value: "@rollercustomize", href: company.instagram },
+  { label: "Official Shop", value: "Roller Dealer Official Shop", href: company.shopee },
 ] as const satisfies readonly ContactChannel[]

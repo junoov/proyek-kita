@@ -1,0 +1,112 @@
+---
+import PlannerApp from "../components/planner/PlannerApp"
+---
+
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roller Dealer — AI Production Planner</title>
+    <script is:inline src="https://cdn.tailwindcss.com"></script>
+    <script is:inline>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              rc: {
+                canvas: '#f4ebe1',
+                ink: '#23180c',
+                brown: '#675646',
+                warm: '#897868',
+                card: '#e9ded1',
+                border: '#d8caba'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style is:inline>
+      *, ::before, ::after {
+        font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif !important;
+      }
+      body {
+        background-color: #f4ebe1 !important;
+        color: #23180c !important;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      /* Light Roller Customize Theme Overrides */
+      .bg-slate-950 {
+        background-color: #f4ebe1 !important;
+      }
+      .bg-slate-900 {
+        background-color: #ebdcd0 !important;
+      }
+      .bg-slate-800, .bg-slate-800\/60 {
+        background-color: #e2d3c5 !important;
+      }
+      .border-slate-800, .border-slate-700, .border-slate-200 {
+        border-color: #d3c2b2 !important;
+      }
+      .text-slate-100, .text-slate-200, .text-slate-900 {
+        color: #23180c !important;
+      }
+      .text-slate-300, .text-slate-400, .text-slate-500 {
+        color: #675646 !important;
+      }
+      .bg-indigo-600, .bg-indigo-500 {
+        background-color: #342313 !important;
+        color: #f4ebe1 !important;
+      }
+      .bg-indigo-600:hover, .bg-indigo-500:hover {
+        background-color: #23180c !important;
+      }
+      .text-indigo-400, .text-indigo-600, .text-indigo-500 {
+        color: #342313 !important;
+      }
+      .bg-indigo-950\/50, .bg-indigo-950\/30, .bg-indigo-900\/40, .bg-indigo-50 {
+        background-color: #ebdcd0 !important;
+      }
+      .border-indigo-800\/50, .border-indigo-500\/30, .border-indigo-100 {
+        border-color: #d3c2b2 !important;
+      }
+      .bg-white {
+        background-color: #fbf7f2 !important;
+      }
+      button, input, select, textarea {
+        font-weight: 700 !important;
+      }
+      h1, h2, h3, h4, strong {
+        font-weight: 700 !important;
+        color: #23180c !important;
+      }
+
+      /* Print & PDF Export Styles */
+      @media print {
+        header, .print\:hidden, button, input[type="button"], input[type="reset"] {
+          display: none !important;
+        }
+        body {
+          background-color: #ffffff !important;
+          color: #000000 !important;
+          padding: 0 !important;
+        }
+        .bg-gradient-to-br, .bg-slate-950, .bg-slate-900, .bg-slate-800, .bg-white {
+          background: #ffffff !important;
+          color: #1e293b !important;
+          border: 1px solid #cbd5e1 !important;
+          box-shadow: none !important;
+        }
+        h1, h2, h3, h4, span, p, strong {
+          color: #0f172a !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <PlannerApp client:only="react" />
+  </body>
+</html>
