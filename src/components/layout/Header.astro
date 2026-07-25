@@ -2,6 +2,8 @@
 import { navigation } from "../../data/company"
 import BrandMark from "../ui/BrandMark.astro"
 import Button from "../ui/Button.astro"
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 ---
 
 <header class="site-header">
@@ -9,7 +11,19 @@ import Button from "../ui/Button.astro"
   <div class="site-header__inner">
     <a href="/"><BrandMark /></a>
     <nav class="site-header__nav" aria-label="Navigasi utama">
-      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      {navigation.map((item) => {
+        const itemPath = item.href.replace(/\/$/, "") || "/"
+        const isActive = itemPath === "/" ? currentPath === "/" : currentPath.startsWith(itemPath)
+        return (
+          <a
+            href={item.href}
+            class:list={[{ "is-active": isActive }]}
+            aria-current={isActive ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        )
+      })}
     </nav>
     <div class="site-header__actions">
       <Button href="/kontak" label="Mulai Diskusi" />
@@ -17,7 +31,19 @@ import Button from "../ui/Button.astro"
     <details class="mobile-menu">
       <summary>Menu</summary>
       <nav aria-label="Navigasi mobile">
-        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+        {navigation.map((item) => {
+          const itemPath = item.href.replace(/\/$/, "") || "/"
+          const isActive = itemPath === "/" ? currentPath === "/" : currentPath.startsWith(itemPath)
+          return (
+            <a
+              href={item.href}
+              class:list={[{ "is-active": isActive }]}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          )
+        })}
         <a class="mobile-menu__cta" href="/kontak">Mulai Diskusi</a>
       </nav>
     </details>
@@ -118,10 +144,18 @@ import Button from "../ui/Button.astro"
     color: #342313;
     font-weight: 700;
     padding: var(--space-3);
+    border-radius: 6px;
+    transition: background var(--transition-micro), color var(--transition-micro);
   }
 
   .mobile-menu nav a:hover {
     background: var(--color-mist);
+  }
+
+  .mobile-menu nav a.is-active {
+    color: var(--color-signal);
+    background: color-mix(in oklch, var(--color-signal) 12%, transparent);
+    font-weight: 700;
   }
 
   .mobile-menu__cta {
@@ -133,18 +167,49 @@ import Button from "../ui/Button.astro"
   @media (min-width: 64rem) {
     .site-header__nav {
       display: flex;
-      gap: var(--space-5);
+      gap: var(--space-6);
+      align-items: center;
     }
 
     .site-header__nav a {
       color: #342313;
       font-size: var(--type-small);
       font-weight: 700;
+      position: relative;
+      padding-block: var(--space-2);
       transition: color var(--transition-micro);
     }
 
+    .site-header__nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -0.15rem;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--color-signal);
+      border-radius: 2px;
+      opacity: 0;
+      transform: scaleX(0);
+      transition: transform var(--transition-micro), opacity var(--transition-micro);
+    }
+
     .site-header__nav a:hover {
-      color: var(--color-text);
+      color: var(--color-signal);
+    }
+
+    .site-header__nav a:hover::after {
+      opacity: 0.5;
+      transform: scaleX(1);
+    }
+
+    .site-header__nav a.is-active {
+      color: var(--color-signal);
+    }
+
+    .site-header__nav a.is-active::after {
+      opacity: 1;
+      transform: scaleX(1);
     }
 
     .site-header__actions {
