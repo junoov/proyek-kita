@@ -1,289 +1,484 @@
 ---
 import { company } from "../../data/company"
 import Button from "../ui/Button.astro"
+
+const boardImages = [
+  {
+    src: company.studioImage.src,
+    alt: company.studioImage.alt,
+    label: "01 / PRODUK JADI",
+    className: "hero__figure--main",
+    width: 1334,
+    height: 2000,
+    sizes: "(max-width: 767px) 63vw, (max-width: 1023px) 42vw, 32vw"
+  },
+  {
+    src: "/gallery/dsc06446.jpg",
+    alt: "Detail bordir Engineering Club di bagian belakang workshirt",
+    label: "02 / DETAIL BORDIR",
+    className: "hero__figure--detail",
+    width: 1334,
+    height: 2000,
+    sizes: "(max-width: 767px) 34vw, (max-width: 1023px) 25vw, 20vw"
+  },
+  {
+    src: company.heroImage.src,
+    alt: "Katalog bahan dan pilihan warna untuk produksi seragam",
+    label: "03 / MATERIAL",
+    className: "hero__figure--material",
+    width: 1920,
+    height: 1280,
+    sizes: "(max-width: 767px) 34vw, (max-width: 1023px) 25vw, 20vw"
+  }
+] as const
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <figure class="hero__visual">
-    <img
-      src={company.heroImage.src}
-      alt={company.heroImage.alt}
-      width="1920"
-      height="1280"
-      srcset={company.heroImage.srcSet}
-      sizes="100vw"
-      fetchpriority="high"
-      decoding="async"
-    />
-    <div class="hero__overlay"></div>
-  </figure>
-
-  <div class="hero__copy">
-    <h1 id="hero-title">
-      <span class="hero__title-desktop">Mitra Terpercaya untuk<br />Kebutuhan <em>Konveksi Anda</em></span>
-      <span class="hero__title-mobile">Mitra Terpercaya untuk<br />Kebutuhan <em>Konveksi Anda</em></span>
-    </h1>
-    <p class="hero__lede">
-      <span class="hero__lede-desktop">Roller Customize adalah konveksi yang berfokus pada produksi custom Workshirt, PDL/PDH, Workjacket, Kaos, Celana, dan Totebag dengan pendekatan yang sederhana, rapi, dan presisi.</span>
-      <span class="hero__lede-mobile">Roller Customize adalah konveksi yang berfokus pada produksi custom Workshirt, PDL/PDH, Workjacket, Kaos, Celana, dan Totebag dengan pendekatan yang sederhana, rapi, dan presisi.</span>
-    </p>
-    <div class="hero__actions">
-      <span class="hero__action-desktop"><Button href="/kontak" label="Konsultasi kebutuhan" variant="signal" /></span>
-      <a class="hero__text-link" href="/layanan">Roadmap produksi</a>
-    </div>
+  <div class="hero__topline">
+    <span>RC / 2024—NOW</span>
+    <span>WORKWEAR STUDIO / YOGYAKARTA</span>
   </div>
-  <div class="hero__mobile-action"><Button href="/kontak" label="Konsultasi kebutuhan" variant="signal" /></div>
+
+  <div class="hero__content">
+    <div class="hero__statement">
+      <p class="hero__eyebrow">Seragam custom untuk tim yang terus bergerak</p>
+      <h1 id="hero-title">
+        Mitra Terpercaya untuk
+        <span>Kebutuhan Konveksi Anda</span>
+      </h1>
+      <p class="hero__lede">
+        Roller Customize adalah konveksi yang berfokus pada produksi custom Workshirt, PDL/PDH, Workjacket, Kaos, Celana, dan Totebag dengan pendekatan yang sederhana, rapi, dan presisi.
+      </p>
+      <div class="hero__actions">
+        <Button href="/kontak" label="Diskusikan kebutuhan" variant="signal" />
+        <a class="hero__text-link" href="#selected-work">Lihat hasil produksi <span aria-hidden="true">↓</span></a>
+      </div>
+      <dl class="hero__specs" aria-label="Ringkasan layanan">
+        <div>
+          <dt>Mulai dari</dt>
+          <dd>24 pcs</dd>
+        </div>
+        <div>
+          <dt>Metode</dt>
+          <dd>Custom brief</dd>
+        </div>
+        <div>
+          <dt>Jangkauan</dt>
+          <dd>Seluruh Indonesia</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="hero__board" aria-label="Contoh produk dan material Roller Customize">
+      {boardImages.map((image, index) => (
+        <figure class:list={["hero__figure", image.className]}>
+          <img
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            sizes={image.sizes}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : undefined}
+            decoding="async"
+          />
+          <figcaption>{image.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+
+  </div>
+
+  <div class="hero__footline">
+    <span>BRIEF → SAMPLE → PRODUCTION → QC</span>
+    <span>Setiap detail punya tempatnya.</span>
+  </div>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    background: var(--color-canvas);
+    border-bottom: 1px solid var(--color-rule);
+    color: var(--color-text);
+    overflow: clip;
+    padding: var(--space-4) var(--layout-edge) var(--space-8);
+  }
+
+  .hero__topline,
+  .hero__footline {
     align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 4.5rem);
-    padding: var(--space-16) var(--layout-edge) var(--space-12);
-    overflow: hidden;
-    color: #ffffff;
-    background: var(--color-ink);
-  }
-
-  .hero__visual {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    z-index: 1;
-  }
-
-  .hero__visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 15% top;
-    transform: scale(1.02);
-    transform-origin: 15% top;
-    filter: brightness(0.85) contrast(1.04);
-  }
-
-  .hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(15, 12, 10, 0.45) 0%,
-      rgba(15, 12, 10, 0.55) 50%,
-      rgba(15, 12, 10, 0.75) 100%
-    );
-    z-index: 2;
-  }
-
-  .hero__visual figcaption {
-    position: absolute;
-    bottom: var(--space-4);
-    left: var(--layout-edge);
-    z-index: 3;
     display: flex;
-    gap: var(--space-3);
-    font-size: var(--type-small);
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(0, 0, 0, 0.4);
-    padding: var(--space-2) var(--space-3);
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    justify-content: space-between;
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+    text-transform: uppercase;
   }
 
-  .hero__visual figcaption span {
-    color: #f7a361;
-    font-weight: 800;
+  .hero__topline {
+    border-bottom: 1px solid var(--color-rule);
+    min-height: 2rem;
+    padding-bottom: var(--space-3);
   }
 
-  .hero__copy {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 58rem;
-    width: 100%;
-    margin: 0 auto;
-    padding: var(--space-8) 0;
+  .hero__topline span:last-child,
+  .hero__footline span:last-child {
+    color: var(--color-text-muted);
   }
 
-  h1,
-  h1 span,
-  h1 em,
-  .hero__title-desktop,
-  .hero__title-mobile {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: clamp(2.5rem, 7.5vw, 5.5rem);
-    letter-spacing: -0.03em;
-    line-height: 1.02;
+  .hero__content {
+    display: grid;
+    gap: var(--space-8);
+    padding-block: var(--space-8);
+  }
+
+  .hero__statement {
+    display: grid;
+    align-content: start;
+    gap: var(--space-5);
+    min-width: 0;
+  }
+
+  .hero__eyebrow {
+    color: var(--color-signal);
+    font-size: var(--type-label);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.09em;
+    line-height: 1.4;
     margin: 0;
-    color: #ffefdf !important;
-    font-style: normal;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+    max-width: 30ch;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3.15rem, 12vw, 5.3rem);
+    font-weight: var(--font-weight-heavy);
+    letter-spacing: -0.085em;
+    line-height: 0.9;
+    margin: 0;
+    max-width: 8.7ch;
+  }
+
+  .hero h1 span {
+    color: var(--color-signal);
+    display: block;
+    font-weight: var(--font-weight-regular);
   }
 
   .hero__lede {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.6;
-    margin: var(--space-6) auto 0;
-    max-width: 44rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  :global(.hero__title-mobile),
-  :global(.hero__lede-mobile),
-  :global(.hero__mobile-action) {
-    display: none;
+    font-size: var(--type-lead);
+    line-height: 1.55;
+    margin: var(--space-2) 0 0;
+    max-width: 36ch;
   }
 
   .hero__actions {
-    display: flex;
     align-items: center;
-    justify-content: center;
+    display: flex;
     flex-wrap: wrap;
-    gap: var(--space-5);
-    margin-top: var(--space-8);
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  .hero :global(.button--signal) {
+    min-width: 12.5rem;
   }
 
   .hero__text-link {
-    border-bottom: var(--rule-width) solid currentColor;
+    align-items: center;
+    border-bottom: 1px solid currentColor;
+    display: inline-flex;
     font-size: var(--type-small);
-    font-weight: 720;
-    color: #ffffff;
-    padding-block: var(--space-2);
-    transition: opacity var(--transition-micro);
+    font-weight: var(--font-weight-semibold);
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: var(--space-2) 0;
+    transition: color var(--transition-micro), border-color var(--transition-micro);
   }
 
   .hero__text-link:hover {
-    opacity: 0.8;
+    border-color: var(--color-signal);
+    color: var(--color-ink);
   }
 
-  @media (max-width: 48rem) {
+  .hero__specs {
+    border-top: 1px solid var(--color-rule);
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: var(--space-5) 0 0;
+    max-width: 38rem;
+  }
+
+  .hero__specs div {
+    border-right: 1px solid var(--color-rule);
+    display: grid;
+    gap: var(--space-1);
+    min-width: 0;
+    padding: var(--space-3) var(--space-3) 0 0;
+  }
+
+  .hero__specs div + div {
+    padding-left: var(--space-3);
+  }
+
+  .hero__specs div:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .hero__specs dt {
+    color: var(--color-text-muted);
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hero__specs dd {
+    font-size: var(--type-small);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .hero__board {
+    display: grid;
+    gap: var(--space-2);
+    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-rows: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    height: 29rem;
+    min-height: 0;
+  }
+
+  .hero__figure {
+    background: var(--color-mist);
+    margin: 0;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero__figure--main {
+    grid-row: 1 / -1;
+  }
+
+  .hero__figure img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-standard);
+    width: 100%;
+  }
+
+  .hero__figure:hover img {
+    transform: scale(1.02);
+  }
+
+  .hero__figure--main img {
+    object-position: center 34%;
+  }
+
+  .hero__figure--detail img {
+    object-position: center 34%;
+  }
+
+  .hero__figure--material img {
+    object-position: center;
+  }
+
+  .hero__figure figcaption {
+    background: var(--color-ink);
+    bottom: 0;
+    color: var(--color-text-inverse);
+    font-size: 0.62rem;
+    font-weight: var(--font-weight-bold);
+    left: 0;
+    letter-spacing: 0.1em;
+    padding: var(--space-2) var(--space-3);
+    position: absolute;
+  }
+
+  .hero__footline {
+    border-top: 1px solid var(--color-rule);
+    padding-top: var(--space-3);
+  }
+
+  @media (min-width: 48rem) {
     .hero {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: clamp(380px, 110vw, 500px);
-      padding: var(--space-6) var(--layout-edge) var(--space-6);
-      color: #ffffff;
-      background: var(--color-ink);
-      overflow: hidden;
+      padding: var(--space-5) var(--layout-edge) var(--space-6);
     }
 
-    .hero__visual {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      z-index: 1;
-      border-radius: 0;
+    .hero__content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-10);
+      padding-block: var(--space-10);
     }
 
-    .hero__visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 38% 20%;
-      transform: scale(1);
-      transform-origin: center top;
-      filter: brightness(0.85) contrast(1.04);
+    .hero__board {
+      height: min(34rem, 62vw);
+      order: 1;
     }
 
-    .hero__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(15, 12, 10, 0.45) 0%,
-        rgba(15, 12, 10, 0.6) 50%,
-        rgba(15, 12, 10, 0.8) 100%
-      );
-      z-index: 2;
+    .hero__statement {
+      align-items: start;
+      display: grid;
+      column-gap: var(--space-10);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      order: 2;
     }
 
-    .hero__visual figcaption {
-      display: none;
+    .hero__eyebrow,
+    .hero h1 {
+      grid-column: 1;
     }
 
-    .hero__copy {
-      position: relative;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      padding: 0;
-      margin: 0;
+    .hero__eyebrow {
+      grid-row: 1;
     }
 
-    .hero__index {
-      font-size: 0.72rem;
-      margin-bottom: var(--space-1);
+    .hero h1 {
+      grid-row: 2 / span 3;
     }
 
-    h1 {
-      font-size: clamp(1.8rem, 7.5vw, 2.7rem);
-      line-height: 1.05;
+    .hero__lede,
+    .hero__actions,
+    .hero__specs {
+      grid-column: 2;
     }
 
     .hero__lede {
-      font-size: 0.9rem;
-      margin-top: var(--space-2);
-      max-width: 22rem;
-      line-height: 1.45;
+      grid-row: 1 / span 2;
+      margin-top: 0;
     }
 
-    :global(.hero__title-desktop),
-    :global(.hero__lede-desktop),
-    :global(.hero__action-desktop) {
+    .hero__actions {
+      grid-row: 3;
+    }
+
+    .hero__specs {
+      grid-row: 4;
+      margin-top: var(--space-4);
+    }
+
+    .hero h1 {
+      font-size: clamp(4.2rem, 7vw, 6.5rem);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero {
+      padding-inline: max(var(--layout-edge), calc((100vw - var(--layout-max)) / 2));
+    }
+
+    .hero__content {
+      align-items: center;
+      column-gap: var(--space-16);
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    }
+
+    .hero__statement {
+      display: grid;
+      gap: var(--space-5);
+      grid-template-columns: minmax(0, 1fr);
+      order: initial;
+    }
+
+    .hero__statement > * {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .hero__lede {
+      margin-top: var(--space-2);
+    }
+
+    .hero__specs {
+      margin-top: var(--space-5);
+    }
+
+    .hero__board {
+      height: min(40rem, 48vw);
+      order: initial;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 4vw, 4.25rem);
+      letter-spacing: -0.065em;
+      line-height: 0.94;
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .hero {
+      padding-top: var(--space-3);
+    }
+
+    .hero__topline,
+    .hero__footline {
+      font-size: 0.58rem;
+    }
+
+    .hero__topline span:last-child,
+    .hero__footline span:last-child {
       display: none;
     }
 
-    :global(.hero__title-mobile),
-    :global(.hero__lede-mobile) {
-      display: inline;
+    .hero__content {
+      gap: var(--space-8);
+      padding-block: var(--space-8) var(--space-6);
     }
 
-    :global(.hero__mobile-action) {
-      display: block;
-      position: relative;
-      z-index: 3;
+    .hero h1 {
+      font-size: clamp(3.25rem, 14vw, 4.35rem);
+    }
+
+    .hero__lede {
+      font-size: 1rem;
+      max-width: 34ch;
+    }
+
+    .hero__actions {
+      align-items: stretch;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .hero :global(.button--signal) {
       width: 100%;
-      max-width: 100%;
-      margin-top: var(--space-3);
     }
 
-    :global(.hero__mobile-action .button) {
-      width: 100%;
+    .hero__text-link {
+      align-self: flex-start;
     }
 
-    .hero__facts {
-      position: relative;
-      z-index: 3;
-      margin-top: var(--space-3);
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    .hero__specs {
+      margin-top: var(--space-4);
+    }
+
+    .hero__specs div {
       padding-top: var(--space-3);
-      gap: var(--space-4);
     }
 
-    .hero__facts dt {
-      font-size: 0.68rem;
+    .hero__specs dt {
+      font-size: 0.58rem;
     }
 
-    .hero__facts dd {
+    .hero__specs dd {
       font-size: 0.78rem;
+    }
+
+    .hero__board {
+      height: 30rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__figure img {
+      transition: none;
     }
   }
 </style>
-

@@ -144,7 +144,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 font-sans flex flex-col antialiased">
+    <div className="planner-app min-h-screen bg-slate-100 text-slate-900 font-sans flex flex-col antialiased">
       {/* Top Brand Navigation Header */}
       <Header
         onOpenHolidays={() => setIsHolidaysOpen(true)}
@@ -185,7 +185,7 @@ export default function App() {
       </main>
 
       {/* Footer Branding */}
-      <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 py-6 text-xs text-center mt-8">
+      <footer className="planner-footer bg-slate-900 text-slate-400 border-t border-slate-800 py-6 text-xs text-center mt-8">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p>© {new Date().getFullYear()} <strong>Roller Dealer</strong> — AI Production Planner Konveksi Indonesia.</p>
           <p className="text-slate-500">Kapasitas Jahit 80 pcs/hari | Kerja Senin - Sabtu | Dilengkapi AI Gemini</p>

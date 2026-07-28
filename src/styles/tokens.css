@@ -1,19 +1,24 @@
-@import "@fontsource-variable/inter/index.css";
-
 :root {
-  --color-canvas: oklch(95.3% 0.037 35.4);
-  --color-ink: oklch(26.3% 0.053 31.9);
-  --color-mist: oklch(79.7% 0.041 33.9);
-  --color-signal: oklch(45.7% 0.046 33.4);
+  --color-canvas: #a79a8a;
+  --color-ink: #1a1a1a;
+  --color-mist: #d8cfc4;
+  --color-signal: #3d352e;
   --color-signal-strong: var(--color-ink);
   --color-text: var(--color-ink);
-  --color-text-inverse: oklch(95.3% 0.037 35.4);
-  --color-text-muted: oklch(57.6% 0.044 33.6);
-  --color-rule: oklch(79.7% 0.041 33.9);
-  --color-focus: oklch(57.6% 0.044 33.6);
+  --color-text-inverse: #f7f3ee;
+  --color-on-signal: var(--color-text-inverse);
+  --color-text-muted: #3d352e;
+  --color-rule: #6f6257;
+  --color-focus: #3d352e;
 
-  --font-sans: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-  --font-display: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 700;
 
   --type-display: clamp(3rem, 7vw, 7.5rem);
   --type-h1: clamp(2.5rem, 5vw, 5rem);

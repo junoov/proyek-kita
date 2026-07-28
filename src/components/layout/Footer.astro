@@ -31,8 +31,8 @@ import BrandMark from "../ui/BrandMark.astro"
 
 <style>
   .site-footer {
-    background: var(--color-ink);
-    color: var(--color-text-inverse);
+    background: #1a1a1a;
+    color: #f7f3ee;
   }
 
   .site-footer__inner,
@@ -46,7 +46,7 @@ import BrandMark from "../ui/BrandMark.astro"
   .site-footer__inner {
     display: grid;
     column-gap: var(--space-6);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     row-gap: var(--space-6);
     padding-bottom: var(--space-6);
     padding-top: var(--space-8);
@@ -55,7 +55,7 @@ import BrandMark from "../ui/BrandMark.astro"
   .site-footer__identity p,
   .site-footer__column p,
   .site-footer__column a {
-    color: var(--color-text-inverse);
+    color: #f7f3ee;
     font-size: var(--type-small);
     line-height: 1.5;
     margin: 0;
@@ -76,10 +76,12 @@ import BrandMark from "../ui/BrandMark.astro"
     display: flex;
     flex-direction: column;
     gap: var(--space-1.5);
+    min-width: 0;
   }
 
   .site-footer__column a {
     font-size: 0.85rem;
+    overflow-wrap: anywhere;
     transition: opacity var(--transition-micro);
   }
 
@@ -93,11 +95,11 @@ import BrandMark from "../ui/BrandMark.astro"
 
   .site-footer__label {
     font-size: 0.72rem;
-    font-weight: 720;
+    font-weight: var(--font-weight-semibold);
     letter-spacing: 0.1em;
     margin-bottom: var(--space-1);
     text-transform: uppercase;
-    color: var(--color-signal);
+    color: #d8cfc4;
   }
 
   .site-footer__bottom {
@@ -115,6 +117,12 @@ import BrandMark from "../ui/BrandMark.astro"
 
   .site-footer__bottom span:last-child {
     display: none;
+  }
+
+  @media (min-width: 30rem) {
+    .site-footer__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 48rem) {

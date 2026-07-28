@@ -57,6 +57,14 @@ import BaseLayout from "../layouts/BaseLayout.astro"
     padding: var(--space-20) var(--layout-edge);
   }
 
+  .contact-grid__intro,
+  .contact-grid__details {
+    background: #332c27;
+    border: var(--rule-width) solid rgba(247, 243, 238, 0.16);
+    color: #f7f3ee;
+    padding: clamp(1.5rem, 3vw, 2rem);
+  }
+
   .contact-grid__intro h2 {
     font-size: var(--type-h2);
     letter-spacing: -0.055em;
@@ -66,32 +74,33 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   }
 
   .contact-grid__intro p {
-    color: var(--color-text-muted);
+    color: rgba(247, 243, 238, 0.74);
     font-size: var(--type-lead);
     margin: var(--space-5) 0 var(--space-8);
     max-width: 30rem;
   }
 
   .contact-grid__details {
-    border-top: var(--rule-width) solid var(--color-rule);
+    display: grid;
+    gap: 0;
   }
 
   .contact-grid__details a,
   .contact-grid__details > div {
-    border-bottom: var(--rule-width) solid var(--color-rule);
+    border-bottom: 1px solid rgba(247, 243, 238, 0.14);
     display: grid;
     gap: var(--space-2);
     padding: var(--space-5) 0;
   }
 
   .contact-grid__details a:hover strong {
-    color: var(--color-signal);
+    color: #d8cfc4;
   }
 
   .contact-grid__details span {
-    color: var(--color-text-muted);
+    color: rgba(247, 243, 238, 0.64);
     font-size: var(--type-label);
-    font-weight: 720;
+    font-weight: var(--font-weight-semibold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -99,11 +108,12 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   .contact-grid__details strong {
     font-size: var(--type-h3);
     letter-spacing: -0.035em;
+    color: #f7f3ee;
     transition: color var(--transition-micro);
   }
 
   .contact-grid__details p {
-    color: var(--color-text-muted);
+    color: rgba(247, 243, 238, 0.68);
     font-size: var(--type-small);
     margin: 0;
   }
@@ -115,10 +125,10 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   }
 
   .shopee-warning {
-    color: var(--color-signal) !important;
+    color: #d8cfc4 !important;
     font-size: var(--type-small);
     margin: var(--space-1) 0 0 !important;
-    font-weight: 650;
+    font-weight: var(--font-weight-semibold);
     line-height: 1.4;
   }
 </style>

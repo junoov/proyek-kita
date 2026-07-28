@@ -1,19 +1,41 @@
----
----
-
 <section class="intro" aria-labelledby="intro-title">
-  <p class="intro__label">Yang kami kerjakan</p>
-  <div class="intro__statement">
-    <h2 id="intro-title">Meski mengawali langkah di tahun 2024, kami menerapkan standar manajemen produksi yang terstruktur, tepat waktu, dan bergaransi.</h2>
-    <p>
-      Kami percaya bahwa seragam bukan hanya kebutuhan, tetapi representasi identitas tim dan profesionalitas. Oleh karena itu, setiap produk dikerjakan dengan standar kualitas yang konsisten, mulai dari pemilihan bahan hingga proses finishing.
+  <div class="intro__lead">
+    <p class="intro__eyebrow">01 / Cara kami bekerja</p>
+    <h2 id="intro-title">Keputusan penting dibuat sebelum kain dipotong.</h2>
+    <p class="intro__description">
+      Kami menerjemahkan kebutuhan tim menjadi brief yang bisa dikerjakan: fungsi pakaian, pilihan bahan, ukuran, dan detail identitas yang tidak hilang di lantai produksi.
     </p>
   </div>
-  <dl class="intro__checks">
-    <div><dt>01</dt><dd><strong>Bahan Baku Berkualitas</strong><p>Pemilihan kain berkualitas yang nyaman dan siap untuk aktivitas sesuai kebutuhan.</p></dd></div>
-    <div><dt>02</dt><dd><strong>Detail Bordir</strong><p>Hasil bordir presisi, padat, dan rapi mengikuti standar desain.</p></dd></div>
-    <div><dt>03</dt><dd><strong>Kualitas Jahitan</strong><p>Konstruksi rapi yang melalui kontrol kualitas sebelum dikemas.</p></dd></div>
-  </dl>
+
+  <div class="intro__brief">
+    <div class="intro__brief-head">
+      <span>PRODUCTION BRIEF</span>
+      <span>01—03</span>
+    </div>
+    <ol>
+      <li>
+        <span>01</span>
+        <div>
+          <strong>Fungsi lebih dulu</strong>
+          <p>Jenis pekerjaan dan ritme pemakaian menentukan bentuk awal seragam.</p>
+        </div>
+      </li>
+      <li>
+        <span>02</span>
+        <div>
+          <strong>Material yang masuk akal</strong>
+          <p>Kain dan warna dipilih dari kebutuhan nyata, bukan hanya dari layar.</p>
+        </div>
+      </li>
+      <li>
+        <span>03</span>
+        <div>
+          <strong>Sampel sebelum batch</strong>
+          <p>Detail, ukuran, dan penempatan identitas diperiksa sebelum produksi berjalan.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
 </section>
 
 <style>
@@ -21,96 +43,135 @@
     background: var(--color-signal);
     color: var(--color-text-inverse);
     display: grid;
-    gap: var(--space-8);
-    padding: var(--space-20) var(--layout-edge);
+    gap: var(--space-10);
+    padding: clamp(3.5rem, 9vw, 7rem) var(--layout-edge);
   }
 
-  .intro__label {
+  .intro__lead,
+  .intro__brief {
+    margin: 0 auto;
+    max-width: var(--layout-max);
+    width: 100%;
+  }
+
+  .intro__lead {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .intro__eyebrow,
+  .intro__brief-head {
+    color: var(--color-mist);
     font-size: var(--type-label);
-    font-weight: 800;
+    font-weight: var(--font-weight-bold);
     letter-spacing: 0.1em;
     margin: 0;
     text-transform: uppercase;
   }
 
-  .intro__statement {
-    display: grid;
-    gap: var(--space-8);
-  }
-
-  h2 {
-    font-size: clamp(2rem, 5.5vw, 4.5rem);
-    letter-spacing: -0.04em;
-    line-height: 1.05;
+  .intro h2 {
+    color: var(--color-text-inverse);
+    font-family: var(--font-display);
+    font-size: clamp(2.55rem, 7vw, 5.7rem);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.08em;
+    line-height: 0.91;
     margin: 0;
-    max-width: 22ch;
+    max-width: 10ch;
   }
 
-  .intro__statement p {
+  .intro__description {
+    color: color-mix(in oklch, var(--color-text-inverse) 72%, transparent);
     font-size: var(--type-lead);
+    line-height: 1.55;
     margin: 0;
-    max-width: 34rem;
+    max-width: 38rem;
   }
 
-  .intro__checks {
-    border-top: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 38%, transparent);
+  .intro__brief {
+    border-top: 1px solid color-mix(in oklch, var(--color-text-inverse) 35%, transparent);
+  }
+
+  .intro__brief-head {
+    align-items: center;
+    color: var(--color-mist);
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-3) 0;
+  }
+
+  .intro__brief-head span:last-child {
+    color: color-mix(in oklch, var(--color-text-inverse) 55%, transparent);
+  }
+
+  .intro ol {
+    border-top: 1px solid color-mix(in oklch, var(--color-text-inverse) 35%, transparent);
     display: grid;
-    margin: var(--space-6) 0 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .intro__checks div {
-    border-bottom: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 38%, transparent);
+  .intro li {
+    border-bottom: 1px solid color-mix(in oklch, var(--color-text-inverse) 22%, transparent);
     display: grid;
     gap: var(--space-4);
-    grid-template-columns: 2rem 1fr;
-    padding: var(--space-5) 0;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    padding: var(--space-4) 0;
   }
 
-  .intro__checks dt {
-    font-size: var(--type-label);
-  }
-
-  .intro__checks dd {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    margin: 0;
-  }
-
-  .intro__checks dd strong {
-    font-size: var(--type-body);
-  }
-
-  .intro__checks dd p {
+  .intro li > span {
+    color: var(--color-mist);
     font-size: var(--type-small);
-    opacity: 0.9;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .intro li div {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .intro li strong {
+    color: var(--color-text-inverse);
+    font-size: var(--type-body);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .intro li p {
+    color: color-mix(in oklch, var(--color-text-inverse) 66%, transparent);
+    font-size: var(--type-small);
+    line-height: 1.5;
     margin: 0;
+    max-width: 42rem;
+  }
+
+  @media (min-width: 48rem) {
+    .intro {
+      column-gap: var(--space-10);
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      padding-inline: max(var(--layout-edge), calc((100vw - var(--layout-max)) / 2));
+    }
+
+    .intro__lead,
+    .intro__brief {
+      margin: 0;
+    }
+
+    .intro__lead {
+      align-content: start;
+      grid-column: 1;
+    }
+
+    .intro__brief {
+      align-self: end;
+      grid-column: 2;
+    }
   }
 
   @media (min-width: 64rem) {
     .intro {
-      grid-template-columns: 1fr 3fr;
-      padding: var(--space-24) max(var(--layout-edge), calc((100vw - var(--layout-max)) / 2));
+      column-gap: var(--space-16);
+      grid-template-columns: minmax(18rem, 0.8fr) minmax(34rem, 1.2fr);
     }
-
-    .intro__statement {
-      align-items: end;
-      grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.6fr);
-    }
-
-    .intro__checks {
-      grid-column: 2;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .intro__checks div {
-      border-bottom: 0;
-      border-right: var(--rule-width) solid color-mix(in oklch, var(--color-text-inverse) 38%, transparent);
-      grid-template-columns: 1fr;
-      padding: var(--space-5) var(--space-8);
-    }
-
-    .intro__checks div:first-child { padding-left: 0; }
-    .intro__checks div:last-child { border-right: 0; }
   }
 </style>

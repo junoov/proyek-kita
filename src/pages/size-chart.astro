@@ -14,10 +14,14 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   <main id="main">
     <section class="sizechart-hero" aria-labelledby="sizechart-hero-title">
       <div class="sizechart-hero__inner">
-        <span class="sizechart-hero__tag">Panduan Ukuran</span>
-        <h1 id="sizechart-hero-title">Size Chart & Pola Potongan Seragam</h1>
+        <div class="sizechart-hero__meta">
+          <span class="sizechart-hero__tag">Technical Sheet / 01</span>
+          <span>RC—SIZE SYSTEM</span>
+          <span>CM / ± 1–1.5</span>
+        </div>
+        <h1 id="sizechart-hero-title">Ukuran yang<br />tidak menerka.</h1>
         <p class="sizechart-hero__desc">
-          Pilih acuan pola potongan yang paling sesuai dengan kebutuhan tim Anda. Kami menyediakan standar pola <strong>Reguler Cut</strong> (Proporsional) dan <strong>Boxy Cut</strong> (Oversized Streetwear).
+          Dua pola dasar untuk kebutuhan yang berbeda. <strong>Reguler</strong> menjaga proporsi kerja yang rapi; <strong>Boxy</strong> memberi volume yang lebih lepas dan pendek.
         </p>
       </div>
     </section>
@@ -27,8 +31,8 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       <div class="sizechart__inner">
         <div class="sizechart__tabs-container">
           <div class="tab-buttons" role="tablist" aria-label="Pilihan Pola Ukuran">
-            <button class="tab-button active" data-tab="reguler" role="tab" aria-selected="true">Pola Reguler Cut</button>
-            <button class="tab-button" data-tab="boxy" role="tab" aria-selected="false">Pola Boxy Cut</button>
+            <button class="tab-button active" data-tab="reguler" role="tab" aria-selected="true"><span>01</span>Pola Reguler</button>
+            <button class="tab-button" data-tab="boxy" role="tab" aria-selected="false"><span>02</span>Pola Boxy</button>
           </div>
 
           <div class="tab-panels">
@@ -36,7 +40,8 @@ import BaseLayout from "../layouts/BaseLayout.astro"
             <div class="tab-panel active" id="reguler" role="tabpanel">
               <div class="table-card">
                 <div class="table-card__header">
-                  <h3>Pola Reguler Cut (Standar Proporsional)</h3>
+                  <span>RC—REG / BASE 01</span>
+                  <h3>Reguler Cut</h3>
                   <p>Pola potong standar konveksi yang memberikan ruang gerak nyaman, rapi, dan formal untuk aktivitas kerja sehari-hari.</p>
                 </div>
                 <div class="table-wrapper">
@@ -65,7 +70,8 @@ import BaseLayout from "../layouts/BaseLayout.astro"
             <div class="tab-panel" id="boxy" role="tabpanel">
               <div class="table-card">
                 <div class="table-card__header">
-                  <h3>Pola Boxy Cut (Karakter Modern / Relaxed Fit)</h3>
+                  <span>RC—BOXY / BASE 02</span>
+                  <h3>Boxy Cut</h3>
                   <p>Pola potongan dengan lebar dada lebih luas dan panjang badan lebih pendek, memberikan tampilan kasual modern khas streetwear.</p>
                 </div>
                 <div class="table-wrapper">
@@ -92,7 +98,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
           </div>
 
           <div class="sizechart__notes">
-            <h4>Catatan Tambahan Mengenai Ukuran:</h4>
+            <h4>Catatan produksi</h4>
             <ul>
               <li>Panduan ukuran di atas berlaku standar untuk produk <strong>Workshirt, PDL/PDH, Workjacket, dan Kaos</strong>.</li>
               <li>Pola ukuran khusus (custom size chart per anggota tim) dapat diajukan saat tahap pengisian formulir pemesanan.</li>
@@ -102,8 +108,9 @@ import BaseLayout from "../layouts/BaseLayout.astro"
           </div>
 
           <div class="sizechart__cta">
-            <h3>Butuh Bantuan Menentukan Ukuran Tim?</h3>
-            <p>Tim kami siap mendampingi proses fitting dan memberikan sampel fisik sebelum produksi massal dimulai.</p>
+            <span>Fitting support / Yogyakarta</span>
+            <h3>Ukuran tim tidak harus ditebak.</h3>
+            <p>Kami dapat mendampingi fitting dan menyiapkan sampel fisik sebelum produksi massal.</p>
             <Button href="/kontak" label="Konsultasi Kebutuhan Ukuran" variant="signal" />
           </div>
         </div>
@@ -115,44 +122,58 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
 <style>
   .sizechart-hero {
-    background: var(--color-mist);
-    padding: var(--space-16) var(--layout-edge) var(--space-12);
+    background: #a79a8a;
+    color: #1a1a1a;
+    padding: var(--space-8) var(--layout-edge) var(--space-20);
   }
 
   .sizechart-hero__inner {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1.8fr) minmax(18rem, 0.6fr);
     margin: 0 auto;
     max-width: var(--layout-max);
   }
 
-  .sizechart-hero__tag {
-    color: var(--color-signal);
-    font-size: var(--type-label);
-    font-weight: 720;
+  .sizechart-hero__meta {
+    border-bottom: 1px solid #6f6257;
+    display: flex;
+    font-size: 0.66rem;
+    font-weight: var(--font-weight-bold);
+    grid-column: 1 / -1;
+    justify-content: space-between;
     letter-spacing: 0.1em;
+    padding-bottom: var(--space-3);
     text-transform: uppercase;
-    display: block;
-    margin-bottom: var(--space-2);
+  }
+
+  .sizechart-hero__tag {
+    color: #1a1a1a;
   }
 
   .sizechart-hero h1 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    margin: 0 0 var(--space-4);
-  }
-
-  .sizechart-hero__desc {
-    color: var(--color-text-muted);
-    font-size: var(--type-lead);
-    line-height: 1.6;
-    max-width: 42rem;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8.5vw, 8rem);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.08em;
+    line-height: 0.84;
     margin: 0;
   }
 
+  .sizechart-hero__desc {
+    align-self: end;
+    border-top: 1px solid #6f6257;
+    color: #3d352e;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0;
+    padding-top: var(--space-4);
+  }
+
   .sizechart {
-    padding: var(--space-16) var(--layout-edge) var(--space-24);
+    background: #3d352e !important;
+    color: #f7f3ee !important;
+    padding: var(--space-10) var(--layout-edge) var(--space-24);
   }
 
   .sizechart__inner {
@@ -162,31 +183,45 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
   .tab-buttons {
     display: flex;
-    gap: var(--space-3);
-    border-bottom: 2px solid var(--color-rule);
-    margin-bottom: var(--space-8);
+    gap: 0;
+    border-bottom: 1px solid rgba(216, 207, 196, 0.42);
+    margin-bottom: var(--space-12);
   }
 
   .tab-button {
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    color: var(--color-text-muted);
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-right: 1px solid rgba(216, 207, 196, 0.42);
+    color: #a79a8a;
     cursor: pointer;
-    font-size: var(--type-body);
-    font-weight: 700;
-    padding: var(--space-3) var(--space-4);
-    margin-bottom: -2px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex: 1;
+    font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+    font-weight: var(--font-weight-bold);
+    gap: var(--space-4);
+    justify-content: flex-start;
+    padding: var(--space-5) var(--space-6);
+    text-align: left;
+    transition: background-color var(--transition-micro), color var(--transition-micro);
+  }
+
+  .tab-button:first-child {
+    border-left: 1px solid rgba(216, 207, 196, 0.42);
+  }
+
+  .tab-button span {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
   }
 
   .tab-button:hover {
-    color: var(--color-text);
+    color: #f7f3ee;
   }
 
   .tab-button.active {
-    border-color: var(--color-signal);
-    color: var(--color-signal);
+    background: #d8cfc4;
+    color: #1a1a1a;
   }
 
   .tab-panel {
@@ -198,22 +233,41 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   }
 
   .table-card {
-    background: var(--color-canvas);
-    border: var(--rule-width) solid var(--color-rule);
-    border-radius: 12px;
-    padding: var(--space-6);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .table-card__header {
+    align-items: end;
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 0.45fr 1fr 0.85fr;
+    margin-bottom: var(--space-10);
+  }
+
+  .table-card__header > span {
+    align-self: start;
+    color: #a79a8a;
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.1em;
   }
 
   .table-card__header h3 {
-    font-size: var(--type-h3);
-    margin: 0 0 var(--space-2);
+    color: #f7f3ee;
+    font-size: clamp(3.2rem, 7vw, 6.6rem);
+    letter-spacing: -0.075em;
+    line-height: 0.86;
+    margin: 0;
   }
 
   .table-card__header p {
-    color: var(--color-text-muted);
+    border-top: 1px solid rgba(216, 207, 196, 0.42);
+    color: #d8cfc4;
     font-size: var(--type-small);
-    margin: 0 0 var(--space-6);
+    margin: 0;
+    padding-top: var(--space-3);
   }
 
   .table-wrapper {
@@ -222,75 +276,177 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
   table {
     border-collapse: collapse;
+    border-top: 2px solid #f7f3ee;
     width: 100%;
     text-align: left;
   }
 
   th, td {
-    border-bottom: var(--rule-width) solid var(--color-rule);
-    padding: var(--space-4) var(--space-5);
-    font-size: var(--type-body);
+    border-bottom: 1px solid rgba(216, 207, 196, 0.42);
+    padding: var(--space-5) var(--space-2);
   }
 
   th {
-    background: var(--color-mist);
-    color: var(--color-signal);
-    font-size: var(--type-label);
-    font-weight: 800;
+    background: transparent;
+    color: #a79a8a;
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
+  td {
+    color: #f7f3ee;
+    font-size: clamp(1.15rem, 2vw, 1.8rem);
+    font-variant-numeric: tabular-nums;
+  }
+
+  td:first-child {
+    font-size: clamp(1.7rem, 3vw, 2.8rem);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.04em;
+  }
+
   .table-add {
-    background: color-mix(in oklch, var(--color-signal) 8%, transparent);
-    font-weight: 700;
+    background: color-mix(in srgb, #d8cfc4 12%, #3d352e);
+    font-weight: var(--font-weight-bold);
   }
 
   .sizechart__notes {
-    background: var(--color-mist);
-    border-left: 4px solid var(--color-signal);
-    border-radius: 8px;
-    padding: var(--space-6);
-    margin-top: var(--space-12);
+    border-bottom: 1px solid rgba(216, 207, 196, 0.42);
+    border-top: 1px solid rgba(216, 207, 196, 0.42);
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: 0.45fr 1.85fr;
+    margin-top: var(--space-16);
+    padding: var(--space-6) 0;
   }
 
   .sizechart__notes h4 {
+    color: #f7f3ee;
     font-size: var(--type-body);
-    margin: 0 0 var(--space-3);
+    margin: 0;
   }
 
   .sizechart__notes ul {
     margin: 0;
-    padding-left: var(--space-5);
-    color: var(--color-text-muted);
+    padding: 0;
+    color: #d8cfc4;
     display: grid;
-    gap: var(--space-2);
+    gap: 0;
     font-size: var(--type-small);
+    list-style: none;
+  }
+
+  .sizechart__notes li {
+    border-top: 1px solid rgba(216, 207, 196, 0.22);
+    padding: var(--space-3) 0;
+  }
+
+  .sizechart__notes li:first-child {
+    border-top: 0;
+    padding-top: 0;
   }
 
   .sizechart__cta {
-    background: var(--color-canvas);
-    border: 2px dashed var(--color-rule);
-    border-radius: 12px;
-    text-align: center;
-    padding: var(--space-10) var(--space-6);
-    margin-top: var(--space-12);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-4);
+    align-items: end;
+    background: #d8cfc4;
+    color: #1a1a1a;
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 0.45fr 1fr 0.85fr auto;
+    margin-top: var(--space-16);
+    padding: var(--space-8);
+    text-align: left;
+  }
+
+  .sizechart__cta > span {
+    align-self: start;
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   .sizechart__cta h3 {
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    letter-spacing: -0.06em;
+    line-height: 0.95;
     margin: 0;
-    font-size: var(--type-h3);
   }
 
   .sizechart__cta p {
-    color: var(--color-text-muted);
+    color: #3d352e;
     margin: 0;
-    max-width: 32rem;
+    max-width: 24rem;
     font-size: var(--type-small);
+  }
+
+  .sizechart__cta :global(.button) {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #f7f3ee;
+  }
+
+  @media (max-width: 48rem) {
+    .sizechart-hero {
+      padding: var(--space-6) var(--layout-edge) var(--space-12);
+    }
+
+    .sizechart-hero__inner,
+    .table-card__header,
+    .sizechart__notes,
+    .sizechart__cta {
+      grid-template-columns: 1fr;
+    }
+
+    .sizechart-hero__meta span:nth-child(2) {
+      display: none;
+    }
+
+    .sizechart-hero h1 {
+      font-size: clamp(3.8rem, 17vw, 5.2rem);
+    }
+
+    .sizechart {
+      padding: var(--space-8) var(--layout-edge) var(--space-16);
+    }
+
+    .tab-button {
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: 1.05rem;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+
+    .table-card__header {
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    th, td {
+      padding: var(--space-4) var(--space-2);
+    }
+
+    th {
+      font-size: 0.58rem;
+      line-height: 1.35;
+    }
+
+    .sizechart__notes,
+    .sizechart__cta {
+      gap: var(--space-5);
+      margin-top: var(--space-12);
+    }
+
+    .sizechart__cta {
+      padding: var(--space-6);
+    }
+
+    .sizechart__cta :global(.button) {
+      width: 100%;
+    }
   }
 </style>
 

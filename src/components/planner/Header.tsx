@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({
   savedCount
 }) => {
   return (
-    <header className="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-30 shadow-md print:hidden">
+    <header className="planner-header bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-30 shadow-md print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
         {/* Brand identity */}
         <div className="flex items-center gap-3">

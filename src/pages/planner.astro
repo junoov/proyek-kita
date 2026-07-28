@@ -15,12 +15,12 @@ import PlannerApp from "../components/planner/PlannerApp"
           extend: {
             colors: {
               rc: {
-                canvas: '#f4ebe1',
-                ink: '#23180c',
-                brown: '#675646',
-                warm: '#897868',
-                card: '#e9ded1',
-                border: '#d8caba'
+                canvas: '#A79A8A',
+                ink: '#1A1A1A',
+                brown: '#3D352E',
+                warm: '#D8CFC4',
+                card: '#D8CFC4',
+                border: '#6F6257'
               }
             }
           }
@@ -28,60 +28,110 @@ import PlannerApp from "../components/planner/PlannerApp"
       }
     </script>
     <style is:inline>
+      :root {
+        --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-weight-bold: 700;
+      }
       *, ::before, ::after {
-        font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif !important;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
       }
       body {
-        background-color: #f4ebe1 !important;
-        color: #23180c !important;
+        background-color: #A79A8A !important;
+        color: #1A1A1A !important;
         margin: 0;
         padding: 0;
         min-height: 100vh;
       }
+      .planner-app.min-h-screen {
+        background-color: #A79A8A !important;
+        color: #1A1A1A !important;
+      }
+      .planner-header {
+        background-color: #D8CFC4 !important;
+        border-color: #A79A8A !important;
+        color: #1A1A1A !important;
+      }
+      .planner-header .text-white,
+      .planner-header .text-slate-200,
+      .planner-header .text-slate-300,
+      .planner-header .text-slate-400 {
+        color: #1A1A1A !important;
+      }
+      .planner-header .text-amber-300,
+      .planner-header .text-amber-400,
+      .planner-header .text-emerald-400 {
+        color: #3D352E !important;
+      }
+      .planner-header .bg-amber-500 {
+        background-color: #3D352E !important;
+        border-color: #3D352E !important;
+        color: #F7F3EE !important;
+      }
+      .planner-header .bg-amber-500\/20 {
+        background-color: rgba(61, 53, 46, 0.12) !important;
+        border-color: rgba(61, 53, 46, 0.35) !important;
+      }
+      .planner-header .bg-emerald-500 {
+        background-color: #3D352E !important;
+        color: #F7F3EE !important;
+      }
+      .planner-header .bg-slate-800 {
+        background-color: #A79A8A !important;
+        border-color: #6F6257 !important;
+      }
+      .planner-footer.bg-slate-900 {
+        background-color: #1A1A1A !important;
+        border-color: #3D352E !important;
+        color: #D8CFC4 !important;
+      }
+      .planner-footer .text-slate-400,
+      .planner-footer .text-slate-500 {
+        color: #D8CFC4 !important;
+      }
       /* Light Roller Customize Theme Overrides */
       .bg-slate-950 {
-        background-color: #f4ebe1 !important;
+        background-color: #A79A8A !important;
       }
       .bg-slate-900 {
-        background-color: #ebdcd0 !important;
+        background-color: #D8CFC4 !important;
       }
       .bg-slate-800, .bg-slate-800\/60 {
-        background-color: #e2d3c5 !important;
+        background-color: #D8CFC4 !important;
       }
       .border-slate-800, .border-slate-700, .border-slate-200 {
-        border-color: #d3c2b2 !important;
+        border-color: #6F6257 !important;
       }
       .text-slate-100, .text-slate-200, .text-slate-900 {
-        color: #23180c !important;
+        color: #1A1A1A !important;
       }
       .text-slate-300, .text-slate-400, .text-slate-500 {
-        color: #675646 !important;
+        color: #3D352E !important;
       }
       .bg-indigo-600, .bg-indigo-500 {
-        background-color: #342313 !important;
-        color: #f4ebe1 !important;
+        background-color: #3D352E !important;
+        color: #F7F3EE !important;
       }
       .bg-indigo-600:hover, .bg-indigo-500:hover {
-        background-color: #23180c !important;
+        background-color: #1A1A1A !important;
       }
       .text-indigo-400, .text-indigo-600, .text-indigo-500 {
-        color: #342313 !important;
+        color: #3D352E !important;
       }
       .bg-indigo-950\/50, .bg-indigo-950\/30, .bg-indigo-900\/40, .bg-indigo-50 {
-        background-color: #ebdcd0 !important;
+        background-color: #D8CFC4 !important;
       }
       .border-indigo-800\/50, .border-indigo-500\/30, .border-indigo-100 {
-        border-color: #d3c2b2 !important;
+        border-color: #6F6257 !important;
       }
       .bg-white {
-        background-color: #fbf7f2 !important;
+        background-color: #F7F3EE !important;
       }
       button, input, select, textarea {
-        font-weight: 700 !important;
+        font-weight: var(--font-weight-bold) !important;
       }
       h1, h2, h3, h4, strong {
-        font-weight: 700 !important;
-        color: #23180c !important;
+        font-weight: var(--font-weight-bold) !important;
+        color: #1A1A1A !important;
       }
 
       /* Print & PDF Export Styles */

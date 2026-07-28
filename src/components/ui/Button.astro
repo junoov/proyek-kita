@@ -20,7 +20,7 @@ const { href, label, variant = "signal" } = Astro.props
     border: var(--rule-width) solid currentColor;
     display: inline-flex;
     font-size: var(--type-small);
-    font-weight: 720;
+    font-weight: var(--font-weight-semibold);
     justify-content: center;
     min-height: var(--space-12);
     padding: var(--space-3) var(--space-4);
@@ -39,7 +39,7 @@ const { href, label, variant = "signal" } = Astro.props
   .button--signal {
     background: var(--color-signal);
     border-color: var(--color-signal);
-    color: var(--color-text-inverse);
+    color: var(--color-on-signal, var(--color-text-inverse));
   }
 
   .button--signal:hover {

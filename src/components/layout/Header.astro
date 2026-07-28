@@ -6,7 +6,7 @@ import Button from "../ui/Button.astro"
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 ---
 
-<header class="site-header">
+<header class:list={["site-header", { "site-header--home": currentPath === "/" }]}>
   <a class="skip-link" href="#main">Lewati navigasi</a>
   <div class="site-header__inner">
     <a href="/"><BrandMark /></a>
@@ -52,11 +52,19 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 
 <style>
   .site-header {
-    background: color-mix(in oklch, var(--color-canvas) 84%, var(--color-mist));
-    border-bottom: var(--rule-width) solid var(--color-rule);
+    background: var(--header-surface, #d8cfc4);
+    border-bottom: var(--rule-width) solid var(--header-rule, #a79a8a);
+    color: var(--header-text, #1a1a1a);
     position: sticky;
     top: 0;
     z-index: 10;
+  }
+
+  .site-header--home {
+    --header-surface: #d8cfc4;
+    --header-rule: #a79a8a;
+    --header-text: #1a1a1a;
+    --header-signal: #3d352e;
   }
 
   .site-header__inner {
@@ -105,7 +113,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
     cursor: pointer;
     display: flex;
     font-size: var(--type-small);
-    font-weight: 720;
+    font-weight: var(--font-weight-semibold);
     gap: var(--space-2);
     list-style: none;
     min-height: calc(var(--space-10) + var(--space-1));
@@ -116,10 +124,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .mobile-menu summary::after {
-    color: var(--color-signal);
+    color: var(--header-signal, var(--color-signal));
     content: "+";
     font-size: var(--type-h3);
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
   }
 
   .mobile-menu[open] summary::after {
@@ -127,8 +135,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .mobile-menu nav {
-    background: var(--color-canvas);
-    border: var(--rule-width) solid var(--color-rule);
+    background: #d8cfc4;
+    border: var(--rule-width) solid #a79a8a;
     border-radius: 12px;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
     display: grid;
@@ -141,11 +149,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .mobile-menu nav a {
-    color: #342313;
-    font-weight: 700;
+    border-left: 3px solid transparent;
+    color: #3d352e;
+    font-weight: var(--font-weight-medium);
     padding: var(--space-3);
-    border-radius: 6px;
-    transition: background var(--transition-micro), color var(--transition-micro);
+    transition: border-color var(--transition-micro), color var(--transition-micro);
   }
 
   .mobile-menu nav a:hover {
@@ -153,9 +161,9 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .mobile-menu nav a.is-active {
-    color: var(--color-signal);
-    background: color-mix(in oklch, var(--color-signal) 12%, transparent);
-    font-weight: 700;
+    border-left-color: var(--header-signal, #3d352e);
+    color: #1a1a1a;
+    font-weight: var(--font-weight-semibold);
   }
 
   .mobile-menu__cta {
@@ -172,44 +180,27 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
     }
 
     .site-header__nav a {
-      color: #342313;
+      border-bottom: 2px solid transparent;
+      color: #3d352e;
       font-size: var(--type-small);
-      font-weight: 700;
+      font-weight: var(--font-weight-medium);
+      padding: var(--space-2) 0 calc(var(--space-2) - 1px);
       position: relative;
-      padding-block: var(--space-2);
-      transition: color var(--transition-micro);
+      transition: border-color var(--transition-micro), color var(--transition-micro);
     }
 
     .site-header__nav a::after {
-      content: "";
-      position: absolute;
-      bottom: -0.15rem;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background-color: var(--color-signal);
-      border-radius: 2px;
-      opacity: 0;
-      transform: scaleX(0);
-      transition: transform var(--transition-micro), opacity var(--transition-micro);
+      content: none;
     }
 
     .site-header__nav a:hover {
-      color: var(--color-signal);
-    }
-
-    .site-header__nav a:hover::after {
-      opacity: 0.5;
-      transform: scaleX(1);
+      border-bottom-color: var(--header-signal, #3d352e);
+      color: #1a1a1a;
     }
 
     .site-header__nav a.is-active {
-      color: var(--color-signal);
-    }
-
-    .site-header__nav a.is-active::after {
-      opacity: 1;
-      transform: scaleX(1);
+      border-bottom-color: var(--header-signal, #3d352e);
+      color: #1a1a1a;
     }
 
     .site-header__actions {
@@ -219,5 +210,25 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
     .mobile-menu {
       display: none;
     }
+  }
+
+  .site-header--home :global(.button--signal) {
+    background: #3d352e;
+    border-color: #3d352e;
+    color: #f7f3ee;
+  }
+
+  .site-header--home :global(.button--signal:hover) {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #f7f3ee;
+  }
+
+  .site-header--home .mobile-menu nav {
+    background: #d8cfc4;
+    border-color: #1a1a1a;
+    border-radius: 0;
+    border-top: 3px solid #3d352e;
+    box-shadow: 0 12px 24px rgba(26, 26, 26, 0.12);
   }
 </style>
