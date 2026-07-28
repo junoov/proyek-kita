@@ -1,0 +1,99 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/gallery"
+public_folder: "/gallery"
+
+collections:
+  - name: "data"
+    label: "Pengaturan Website"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "lookbook"
+        label: "Lookbook Gallery (Foto Portofolio)"
+        file: "src/data/gallery.json"
+        description: "Kelola foto-foto portofolio yang tampil di halaman Lookbook / Tentang."
+        fields:
+          - label: "Foto Portofolio"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.image}} - {{fields.title}}"
+            fields:
+              - { label: "File Foto", name: "image", widget: "image" }
+              - { label: "Judul / Keterangan", name: "title", widget: "string", required: false }
+
+      - name: "client_logos"
+        label: "Logo Klien & Mitra"
+        file: "src/data/client_logos.json"
+        description: "Kelola gambar logo-logo instansi/perusahaan mitra yang tampil di Grid Klien."
+        fields:
+          - label: "Daftar Logo Klien"
+            name: "logos"
+            widget: "list"
+            summary: "{{fields.title}} - {{fields.image}}"
+            fields:
+              - { label: "File Gambar Logo", name: "image", widget: "image" }
+              - { label: "Nama / Keterangan Logo", name: "title", widget: "string", required: false }
+
+      - name: "company"
+        label: "Informasi Perusahaan & Foto Utama"
+        file: "src/data/company.json"
+        description: "Kelola nama perusahaan, deskripsi, alamat, kontak, dan foto hero/studio."
+        fields:
+          - { label: "Nama Brand", name: "name", widget: "string" }
+          - { label: "Nama PT/Legal", name: "legalName", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Deskripsi Singkat", name: "description", widget: "text" }
+          - { label: "Alamat Lengkap", name: "address", widget: "text" }
+          - { label: "Jam Operasional", name: "hours", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "No. Telepon", name: "phone", widget: "string" }
+          - { label: "Link WhatsApp", name: "whatsapp", widget: "string" }
+          - { label: "Link Instagram Konveksi", name: "instagram", widget: "string" }
+          - { label: "Link Instagram Brand", name: "instagramBrand", widget: "string" }
+          - { label: "Link Shopee", name: "shopee", widget: "string" }
+          - label: "Foto Utama (Hero)"
+            name: "heroImage"
+            widget: "object"
+            fields:
+              - { label: "File Foto Hero", name: "src", widget: "image" }
+              - { label: "Foto Hero Resolution Set (srcSet)", name: "srcSet", widget: "string", required: false }
+              - { label: "Teks Alt Foto Hero", name: "alt", widget: "string" }
+          - label: "Foto Studio / Model (Tentang)"
+            name: "studioImage"
+            widget: "object"
+            fields:
+              - { label: "File Foto Studio", name: "src", widget: "image" }
+              - { label: "Teks Alt Foto Studio", name: "alt", widget: "string" }
+
+      - name: "services"
+        label: "Daftar Layanan"
+        file: "src/data/services.json"
+        fields:
+          - label: "Layanan"
+            name: "services"
+            widget: "list"
+            summary: "{{fields.number}} - {{fields.title}}"
+            fields:
+              - { label: "Nomor Urut", name: "number", widget: "string" }
+              - { label: "Judul Layanan", name: "title", widget: "string" }
+              - { label: "Deskripsi Layanan", name: "description", widget: "text" }
+              - { label: "Hasil / Deliverable", name: "deliverable", widget: "string" }
+
+      - name: "clients"
+        label: "Daftar Klien / Pelanggan"
+        file: "src/data/clients.json"
+        fields:
+          - label: "Klien"
+            name: "clients"
+            widget: "list"
+            summary: "{{fields.initials}} - {{fields.name}} ({{fields.sector}})"
+            fields:
+              - { label: "Inisial / Kode", name: "initials", widget: "string" }
+              - { label: "Nama Klien / Perusahaan", name: "name", widget: "string" }
+              - { label: "Kategori Sektor", name: "sector", widget: "string" }

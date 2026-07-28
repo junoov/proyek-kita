@@ -1,37 +1,37 @@
 <section class="intro" aria-labelledby="intro-title">
   <div class="intro__lead">
-    <p class="intro__eyebrow">01 / Cara kami bekerja</p>
-    <h2 id="intro-title">Keputusan penting dibuat sebelum kain dipotong.</h2>
+    <p class="intro__eyebrow">Yang kami kerjakan</p>
+    <h2 id="intro-title">Meski mengawali langkah di tahun 2024, kami menerapkan standar manajemen produksi yang terstruktur, tepat waktu, dan bergaransi.</h2>
     <p class="intro__description">
-      Kami menerjemahkan kebutuhan tim menjadi brief yang bisa dikerjakan: fungsi pakaian, pilihan bahan, ukuran, dan detail identitas yang tidak hilang di lantai produksi.
+      Kami percaya bahwa seragam bukan hanya kebutuhan, tetapi representasi identitas tim dan profesionalitas. Oleh karena itu, setiap produk dikerjakan dengan standar kualitas yang konsisten, mulai dari pemilihan bahan hingga proses finishing.
     </p>
   </div>
 
   <div class="intro__brief">
     <div class="intro__brief-head">
-      <span>PRODUCTION BRIEF</span>
-      <span>01—03</span>
+      <span>01 / Tiga standar utama kualitas produk kami</span>
+      <span></span>
     </div>
     <ol>
       <li>
         <span>01</span>
         <div>
-          <strong>Fungsi lebih dulu</strong>
-          <p>Jenis pekerjaan dan ritme pemakaian menentukan bentuk awal seragam.</p>
+          <strong>Bahan Baku Berkualitas</strong>
+          <p>Pemilihan kain berkualitas yang nyaman dan siap untuk aktivitas sesuai kebutuhan.</p>
         </div>
       </li>
       <li>
         <span>02</span>
         <div>
-          <strong>Material yang masuk akal</strong>
-          <p>Kain dan warna dipilih dari kebutuhan nyata, bukan hanya dari layar.</p>
+          <strong>Detail Bordir</strong>
+          <p>Hasil bordir presisi, padat, dan rapi mengikuti standar desain.</p>
         </div>
       </li>
       <li>
         <span>03</span>
         <div>
-          <strong>Sampel sebelum batch</strong>
-          <p>Detail, ukuran, dan penempatan identitas diperiksa sebelum produksi berjalan.</p>
+          <strong>Kualitas Jahitan</strong>
+          <p>Konstruksi rapi yang melalui kontrol kualitas sebelum dikemas.</p>
         </div>
       </li>
     </ol>
@@ -72,12 +72,12 @@
   .intro h2 {
     color: var(--color-text-inverse);
     font-family: var(--font-display);
-    font-size: clamp(2.55rem, 7vw, 5.7rem);
+    font-size: clamp(2rem, 8vw, 3.4rem);
     font-weight: var(--font-weight-bold);
-    letter-spacing: -0.08em;
-    line-height: 0.91;
+    letter-spacing: -0.055em;
+    line-height: 1;
     margin: 0;
-    max-width: 10ch;
+    max-width: 13ch;
   }
 
   .intro__description {
@@ -165,6 +165,41 @@
     .intro__brief {
       align-self: end;
       grid-column: 2;
+    }
+
+    .intro h2 {
+      font-size: clamp(2.55rem, 7vw, 5.7rem);
+      letter-spacing: -0.08em;
+      line-height: 0.91;
+      max-width: 10ch;
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .intro {
+      gap: var(--space-8);
+      padding-block: var(--space-16);
+    }
+
+    .intro__lead {
+      gap: var(--space-4);
+    }
+
+    .intro__description {
+      font-size: 1rem;
+      line-height: 1.55;
+      max-width: 34rem;
+    }
+
+    .intro__brief-head {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .intro li {
+      gap: var(--space-3);
+      padding: var(--space-4) 0;
     }
   }
 

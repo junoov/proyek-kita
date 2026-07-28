@@ -23,17 +23,18 @@ body {
 }
 
 main:not(.home) > section:not(.hero):nth-of-type(odd) {
-  background-color: #a79a8a;
+  background-color: #d8cfc4;
 }
 
 main:not(.home) > section:not(.hero):nth-of-type(even) {
-  --color-canvas: #a79a8a;
+  --color-canvas: #d8cfc4;
   --color-ink: #f7f3ee;
   --color-mist: #4b433c;
   --color-signal: #d8cfc4;
   --color-signal-strong: #f7f3ee;
   --color-text: #f7f3ee;
   --color-text-inverse: #1a1a1a;
+  --color-on-signal: #1a1a1a;
   --color-text-muted: #d8cfc4;
   --color-rule: rgba(216, 207, 196, 0.38);
   --color-focus: #d8cfc4;
@@ -42,7 +43,7 @@ main:not(.home) > section:not(.hero):nth-of-type(even) {
 }
 
 main.home {
-  --color-canvas: #a79a8a;
+  --color-canvas: #d8cfc4;
   --color-ink: #1a1a1a;
   --color-mist: #d8cfc4;
   --color-signal: #3d352e;

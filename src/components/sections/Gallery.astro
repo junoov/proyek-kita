@@ -1,94 +1,52 @@
 ---
 import galleryData from "../../data/gallery.json"
 
-const editorialTitles: Record<string, string> = {
-  "/gallery/dsc06413.jpg": "Workshirt hitam dengan bordir dada",
-  "/gallery/dsc06446.jpg": "Detail bordir belakang Engineering Club",
-  "/gallery/dsc06558.jpg": "Kemeja PDL navy dengan panel krem"
-}
-
-const allGalleryItems = (galleryData.items || galleryData)
-  .filter((item) => item.image !== "/hero/hero.jpg")
-  .map((item, index) => ({
-    ...item,
-    index,
-    title: editorialTitles[item.image] || item.title || `Foto produksi ${index + 1}`
-  }))
-
-const featuredIndexes = [0, 13, 10]
-const featuredItems = featuredIndexes.flatMap((index) => {
-  const item = allGalleryItems[index]
-  return item ? [item] : []
-})
+const galleryItems = (galleryData.items || galleryData).filter((item) => item.image !== "/hero/hero.jpg")
 ---
 
-<section class="gallery" id="selected-work" aria-labelledby="gallery-title">
-  <header class="gallery__header">
-    <div>
-      <p class="gallery__eyebrow">02 / Selected work</p>
-      <h2 id="gallery-title">Detail yang terlihat sebelum logo dibaca.</h2>
-    </div>
-    <div class="gallery__intro">
-      <p>Potongan, bordir, material, dan cara pakaian jatuh di badan. Pilihan kecil dari pekerjaan yang kami kerjakan.</p>
-      <button class="gallery__open-all" type="button" data-open-index="0">
-        Lihat {allGalleryItems.length} foto produksi <span aria-hidden="true">↗</span>
-      </button>
-    </div>
-  </header>
+<section class="gallery" aria-labelledby="gallery-title">
+  <div class="gallery__header">
+    <span class="gallery__tag">Lookbook</span>
+    <h2 id="gallery-title">Hasil yang bicara sendiri.</h2>
+    <p>Setiap foto adalah bukti standar produksi yang kami jaga, dari potongan, bordir, hingga finishing akhir.</p>
+  </div>
 
-  <div class="gallery__grid">
-    {featuredItems.map((item, index) => (
+  <div class="gallery__grid" id="gallery-grid">
+    {galleryItems.map((item, i) => (
       <button
-        class:list={["gallery__item", { "gallery__item--feature": index === 0 }]}
-        type="button"
-        data-index={item.index}
-        aria-label={`Buka foto: ${item.title}`}
+        class="gallery__item"
+        data-index={i}
+        data-src={item.image}
+        data-title={item.title || `Foto produk ${i + 1}`}
+        aria-label={`Buka foto produk ${i + 1}`}
       >
         <img
           src={item.image}
-          alt={item.title}
-          loading={index === 0 ? "eager" : "lazy"}
+          alt={item.title || `Foto produk Roller Customize ${i + 1}`}
+          loading="lazy"
           decoding="async"
-          width="1334"
-          height="2000"
+          width="600"
+          height="800"
         />
-        <span class="gallery__caption">
-          <span>{String(index + 1).padStart(2, "0")}</span>
-          <span>{item.title}</span>
-        </span>
       </button>
     ))}
   </div>
 
-  <dialog
-    class="lightbox"
-    id="lightbox"
-    aria-labelledby="lightbox-title"
-    data-photos={JSON.stringify(allGalleryItems)}
-  >
-    <div class="lightbox__bar">
-      <p id="lightbox-title">Roller Customize / Production archive</p>
-      <button class="lightbox__close" type="button" id="lightbox-close">Tutup</button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox foto" hidden>
+    <button class="lightbox__close" id="lightbox-close" aria-label="Tutup lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <button class="lightbox__prev" id="lightbox-prev" aria-label="Foto sebelumnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="lightbox__next" id="lightbox-next" aria-label="Foto berikutnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox__img-wrap">
+      <img class="lightbox__img" id="lightbox-img" src="" alt="" />
     </div>
-    <div class="lightbox__stage">
-      <button class="lightbox__prev" type="button" id="lightbox-prev" aria-label="Foto sebelumnya">
-        <span aria-hidden="true">←</span>
-      </button>
-      <figure>
-        <div class="lightbox__img-wrap">
-          <img class="lightbox__img" id="lightbox-img" src="" alt="" />
-        </div>
-        <figcaption id="lightbox-caption"></figcaption>
-      </figure>
-      <button class="lightbox__next" type="button" id="lightbox-next" aria-label="Foto berikutnya">
-        <span aria-hidden="true">→</span>
-      </button>
-    </div>
-    <div class="lightbox__footer">
-      <span id="lightbox-counter">01 / 15</span>
-      <span>Gunakan tombol panah untuk melihat foto berikutnya.</span>
-    </div>
-  </dialog>
+    <div class="lightbox__counter" id="lightbox-counter">1 / 15</div>
+  </div>
 </section>
 
 <style>
@@ -96,415 +54,261 @@ const featuredItems = featuredIndexes.flatMap((index) => {
     background: var(--color-canvas);
     margin: 0 auto;
     max-width: var(--layout-max);
-    padding: clamp(4rem, 9vw, 7rem) var(--layout-edge);
+    padding: var(--space-20) var(--layout-edge);
   }
 
   .gallery__header {
-    border-top: 2px solid var(--color-ink);
-    display: grid;
-    gap: var(--space-8);
-    padding-top: var(--space-5);
+    max-width: 36rem;
+    margin-bottom: var(--space-12);
   }
 
-  .gallery__eyebrow {
+  .gallery__tag {
+    display: inline-block;
     color: var(--color-signal);
     font-size: var(--type-label);
+    font-family: var(--font-display);
     font-weight: var(--font-weight-bold);
     letter-spacing: 0.1em;
-    margin: 0 0 var(--space-4);
     text-transform: uppercase;
+    margin-bottom: var(--space-3);
   }
 
-  .gallery h2 {
+  .gallery__header h2 {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 6vw, 5.25rem);
+    font-size: var(--type-h2);
     font-weight: var(--font-weight-bold);
-    letter-spacing: -0.08em;
-    line-height: 0.92;
-    margin: 0;
-    max-width: 11ch;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0 0 var(--space-4);
   }
 
-  .gallery__intro {
-    display: grid;
-    align-content: end;
-    gap: var(--space-5);
-  }
-
-  .gallery__intro p {
+  .gallery__header p {
     color: var(--color-text-muted);
     font-size: var(--type-lead);
-    line-height: 1.55;
     margin: 0;
-    max-width: 31rem;
-  }
-
-  .gallery__open-all {
-    align-items: center;
-    background: none;
-    border: 0;
-    border-bottom: 1px solid var(--color-ink);
-    color: var(--color-ink);
-    cursor: pointer;
-    display: inline-flex;
-    font-size: var(--type-small);
-    font-weight: var(--font-weight-semibold);
-    gap: var(--space-2);
-    justify-self: start;
-    min-height: 2.75rem;
-    padding: var(--space-2) 0;
-    transition: color var(--transition-micro), border-color var(--transition-micro);
-  }
-
-  .gallery__open-all:hover {
-    border-color: var(--color-signal);
-    color: var(--color-ink);
   }
 
   .gallery__grid {
-    display: grid;
-    gap: var(--space-2);
-    grid-template-columns: 1.12fr 0.88fr;
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-    height: clamp(32rem, 51vw, 44rem);
-    margin-top: var(--space-10);
+    columns: 2;
+    column-gap: var(--space-4);
+  }
+
+  @media (min-width: 48rem) {
+    .gallery__grid {
+      columns: 3;
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .gallery__grid {
+      columns: 4;
+    }
   }
 
   .gallery__item {
-    background: var(--color-mist);
-    border: 0;
-    cursor: pointer;
+    break-inside: avoid;
     display: block;
-    min-height: 0;
-    min-width: 0;
-    overflow: hidden;
+    width: 100%;
     padding: 0;
+    margin: 0 0 var(--space-4);
+    background: none;
+    border: none;
+    cursor: pointer;
     position: relative;
-    text-align: left;
-  }
-
-  .gallery__item--feature {
-    grid-row: 1 / -1;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .gallery__item img {
-    display: block;
-    height: 100%;
-    min-height: 0;
-    min-width: 0;
-    object-fit: cover;
-    transition: transform var(--transition-standard), opacity var(--transition-standard);
     width: 100%;
-  }
-
-  .gallery__item:first-child img {
-    object-position: center 28%;
-  }
-
-  .gallery__item:nth-child(2) img {
-    object-position: center 27%;
-  }
-
-  .gallery__item:nth-child(3) img {
-    object-position: center 32%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
   .gallery__item:hover img {
     opacity: 0.88;
-    transform: scale(1.025);
-  }
-
-  .gallery__caption {
-    align-items: center;
-    background: color-mix(in oklch, var(--color-ink) 94%, transparent);
-    bottom: 0;
-    color: var(--color-text-inverse);
-    display: flex;
-    font-size: 0.62rem;
-    font-weight: var(--font-weight-bold);
-    gap: var(--space-3);
-    justify-content: space-between;
-    left: 0;
-    letter-spacing: 0.08em;
-    padding: var(--space-3) var(--space-4);
-    position: absolute;
-    right: 0;
-    text-transform: uppercase;
-  }
-
-  .gallery__caption span:last-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    transform: scale(1.02);
   }
 
   .lightbox {
-    background: var(--color-ink);
-    border: 0;
-    color: var(--color-text-inverse);
-    height: min(100vh, 100dvh);
-    margin: 0;
-    max-height: none;
-    max-width: none;
-    padding: var(--space-5) max(var(--layout-edge), 3vw) var(--space-4);
-    width: 100vw;
-  }
-
-  .lightbox::backdrop {
-    background: var(--color-ink);
-  }
-
-  .lightbox__bar,
-  .lightbox__footer {
-    align-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.94);
     display: flex;
-    font-size: var(--type-small);
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    animation: lightboxIn 0.25s ease;
   }
 
-  .lightbox__bar {
-    border-bottom: 1px solid color-mix(in oklch, var(--color-text-inverse) 32%, transparent);
-    padding-bottom: var(--space-4);
+  .lightbox[hidden] {
+    display: none;
   }
 
-  .lightbox__bar p,
-  .lightbox__footer span {
-    margin: 0;
+  @keyframes lightboxIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
-  .lightbox__bar p {
-    color: color-mix(in oklch, var(--color-text-inverse) 72%, transparent);
-    font-size: var(--type-label);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .lightbox__img-wrap {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox__img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
   }
 
   .lightbox__close,
   .lightbox__prev,
   .lightbox__next {
-    background: none;
-    border: 1px solid color-mix(in oklch, var(--color-text-inverse) 50%, transparent);
-    color: var(--color-text-inverse);
+    position: fixed;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: var(--type-small);
-    font-weight: var(--font-weight-bold);
-    min-height: 2.75rem;
-    min-width: 2.75rem;
-    padding: var(--space-2) var(--space-3);
-    transition: background-color var(--transition-micro), color var(--transition-micro);
+    transition: background 0.2s ease, transform 0.2s ease;
+    color: #fff;
   }
 
   .lightbox__close:hover,
   .lightbox__prev:hover,
   .lightbox__next:hover {
-    background: var(--color-text-inverse);
-    color: var(--color-ink);
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1);
   }
 
-  .lightbox__stage {
-    align-items: center;
-    display: grid;
-    gap: var(--space-5);
-    grid-template-columns: 3rem minmax(0, 1fr) 3rem;
-    height: calc(100% - 7rem);
-    justify-items: center;
-    padding-block: var(--space-5);
+  .lightbox__close svg,
+  .lightbox__prev svg,
+  .lightbox__next svg {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
-  .lightbox__stage figure {
-    display: grid;
-    gap: var(--space-3);
-    height: 100%;
-    margin: 0;
-    min-height: 0;
-    width: 100%;
+  .lightbox__close {
+    top: var(--space-5);
+    right: var(--space-5);
   }
 
-  .lightbox__img-wrap {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    min-height: 0;
+  .lightbox__prev {
+    left: var(--space-5);
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  .lightbox__img {
-    display: block;
-    height: 100%;
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-    width: auto;
+  .lightbox__prev:hover {
+    transform: translateY(-50%) scale(1.1);
   }
 
-  .lightbox__stage figcaption {
-    color: color-mix(in oklch, var(--color-text-inverse) 72%, transparent);
-    font-size: var(--type-small);
-    text-align: center;
-  }
-
-  .lightbox__prev,
   .lightbox__next {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
+    right: var(--space-5);
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  .lightbox__footer {
-    border-top: 1px solid color-mix(in oklch, var(--color-text-inverse) 32%, transparent);
-    color: color-mix(in oklch, var(--color-text-inverse) 58%, transparent);
-    padding-top: var(--space-3);
+  .lightbox__next:hover {
+    transform: translateY(-50%) scale(1.1);
   }
 
-  .lightbox__footer span:first-child {
-    color: var(--color-mist);
-    font-weight: var(--font-weight-bold);
-  }
-
-  @media (min-width: 48rem) {
-    .gallery__header {
-      align-items: end;
-      column-gap: var(--space-10);
-      grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
-    }
-  }
-
-  @media (max-width: 47.99rem) {
-    .gallery__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: auto auto;
-      height: auto;
-    }
-
-    .gallery__item--feature {
-      aspect-ratio: 4 / 5;
-      grid-column: 1 / -1;
-      grid-row: auto;
-    }
-
-    .gallery__item:not(.gallery__item--feature) {
-      aspect-ratio: 4 / 5;
-    }
-
-    .gallery__caption {
-      align-items: start;
-      flex-direction: column;
-      gap: 0.1rem;
-      padding: var(--space-2) var(--space-3);
-    }
-
-    .gallery__caption span:last-child {
-      max-width: 100%;
-    }
-
-    .lightbox {
-      padding-inline: var(--space-3);
-    }
-
-    .lightbox__bar p {
-      max-width: 16rem;
-    }
-
-    .lightbox__stage {
-      gap: var(--space-2);
-      grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
-    }
-
-    .lightbox__footer span:last-child {
-      display: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .gallery__item img {
-      transition: none;
-    }
+  .lightbox__counter {
+    position: fixed;
+    bottom: var(--space-5);
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-display);
+    font-size: var(--type-small);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
   }
 </style>
 
 <script is:inline>
-  const initGallery = () => {
-    const galleryItems = Array.from(document.querySelectorAll(".gallery__item"))
-    const openAll = document.querySelector(".gallery__open-all")
-    const lightbox = document.getElementById("lightbox")
-    const lightboxImage = document.getElementById("lightbox-img")
-    const lightboxCaption = document.getElementById("lightbox-caption")
-    const lightboxCounter = document.getElementById("lightbox-counter")
-    const closeButton = document.getElementById("lightbox-close")
-    const previousButton = document.getElementById("lightbox-prev")
-    const nextButton = document.getElementById("lightbox-next")
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryItems = Array.from(document.querySelectorAll('.gallery__item'));
+    if (galleryItems.length === 0) return;
 
-    if (!lightbox || !lightboxImage || !lightboxCaption || !lightboxCounter) return
+    const photos = galleryItems.map((btn) => ({
+      src: btn.dataset.src || '',
+      title: btn.dataset.title || ''
+    }));
 
-    const photos = JSON.parse(lightbox.dataset.photos || "[]")
-    let currentIndex = 0
-    let opener = null
+    let currentIndex = 0;
 
-    const updateLightbox = () => {
-      const photo = photos[currentIndex]
-      if (!photo) return
-      lightboxImage.src = photo.image
-      lightboxImage.alt = photo.title
-      lightboxCaption.textContent = photo.title
-      lightboxCounter.textContent = `${String(currentIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`
+    const lightbox   = document.getElementById('lightbox');
+    const lbImg      = document.getElementById('lightbox-img');
+    const lbCounter  = document.getElementById('lightbox-counter');
+    const lbClose    = document.getElementById('lightbox-close');
+    const lbPrev     = document.getElementById('lightbox-prev');
+    const lbNext     = document.getElementById('lightbox-next');
+
+    if (!lightbox) return;
+
+    function openLightbox(index) {
+      if (photos.length === 0) return;
+      currentIndex = index;
+      updateLightbox();
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+      if (lbClose) lbClose.focus();
     }
 
-    const openLightbox = (index, trigger) => {
-      currentIndex = (index + photos.length) % photos.length
-      opener = trigger || null
-      updateLightbox()
-      if (typeof lightbox.showModal === "function") {
-        lightbox.showModal()
-      } else {
-        lightbox.setAttribute("open", "")
-      }
-      closeButton?.focus()
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.style.overflow = '';
     }
 
-    const closeLightbox = () => {
-      if (typeof lightbox.close === "function" && lightbox.open) {
-        lightbox.close()
-      } else {
-        lightbox.removeAttribute("open")
-        opener?.focus()
-      }
+    function updateLightbox() {
+      if (!photos[currentIndex] || !lbImg) return;
+      lbImg.src = photos[currentIndex].src;
+      lbImg.alt = photos[currentIndex].title || `Foto produk Roller Customize ${currentIndex + 1}`;
+      if (lbCounter) lbCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
     }
 
-    galleryItems.forEach((item) => {
-      item.addEventListener("click", () => openLightbox(Number(item.dataset.index), item))
-    })
+    function prevPhoto() {
+      currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+      updateLightbox();
+    }
 
-    openAll?.addEventListener("click", () => openLightbox(Number(openAll.dataset.openIndex || 0), openAll))
-    closeButton?.addEventListener("click", closeLightbox)
-    previousButton?.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + photos.length) % photos.length
-      updateLightbox()
-    })
-    nextButton?.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % photos.length
-      updateLightbox()
-    })
+    function nextPhoto() {
+      currentIndex = (currentIndex + 1) % photos.length;
+      updateLightbox();
+    }
 
-    lightbox.addEventListener("close", () => {
-      opener?.focus()
-      opener = null
-    })
+    galleryItems.forEach((btn) => {
+      btn.addEventListener('click', () => openLightbox(Number(btn.dataset.index)));
+    });
 
-    lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) closeLightbox()
-    })
+    if (lbClose) lbClose.addEventListener('click', closeLightbox);
+    if (lbPrev) lbPrev.addEventListener('click', prevPhoto);
+    if (lbNext) lbNext.addEventListener('click', nextPhoto);
 
-    document.addEventListener("keydown", (event) => {
-      if (!lightbox.open) return
-      if (event.key === "ArrowLeft") previousButton?.click()
-      if (event.key === "ArrowRight") nextButton?.click()
-    })
-  }
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initGallery)
-  } else {
-    initGallery()
-  }
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevPhoto();
+      if (e.key === 'ArrowRight') nextPhoto();
+    });
+  });
 </script>

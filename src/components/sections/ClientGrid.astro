@@ -7,58 +7,67 @@ type Props = {
   readonly allClients?: boolean
 }
 
-const { heading = "Dipakai oleh tim dengan standar kerja yang berbeda.", allClients = false } = Astro.props
+const { heading = "Nama-nama yang pernah bekerja bersama kami.", allClients = false } = Astro.props
 const logos = clientLogos.logos || clientLogos
-const homeLogos = logos.slice(0, 10)
+// Gunakan semua logo yang tersedia agar marquee kaya dan penuh
+const marqueeLogos = logos.length < 10 ? [...logos, ...logos] : logos
 const visibleClients = allClients ? clients : clients.slice(0, 8)
 ---
 
 <section class:list={["clients", { "clients--all": allClients }]} aria-labelledby="clients-title">
   <header class="clients__heading">
-    <p class="clients__eyebrow">04 / Rekam kerja</p>
+    <p>Rekam kerja</p>
     <h2 id="clients-title">{heading}</h2>
     <span>Universitas, instansi, organisasi, dan perusahaan.</span>
   </header>
 
-  {!allClients && (
-    <>
-      <ul class="clients__logo-grid" aria-label="Logo mitra Roller Customize">
-        {homeLogos.map((logo) => (
-          <li>
-            <img src={logo.image} alt={logo.title} loading="lazy" />
-          </li>
+  <div class="clients__marquee" aria-label="Logo mitra Roller Customize">
+    <div class="clients__track">
+      <div class="clients__logo-set">
+        {marqueeLogos.map((logo) => (
+          <div class="clients__logo"><img src={logo.image} alt={logo.title} loading="lazy" /></div>
         ))}
-      </ul>
-      <div class="clients__note">
-        <p>Kepercayaan dibangun dari detail yang konsisten, batch demi batch.</p>
-        <a href="/pelanggan">Lihat seluruh daftar pelanggan <span aria-hidden="true">↗</span></a>
       </div>
-    </>
-  )}
-
-  {allClients && (
-    <div class="clients__directory">
-      {visibleClients.map((client, index) => (
-        <article class="client">
-          <span class="client__index">{String(index + 1).padStart(2, "0")}</span>
-          {logos[index] && <img src={logos[index].image} alt="" loading="lazy" />}
-          <h3>{client.name}</h3>
-          <p>{client.sector}</p>
-        </article>
-      ))}
+      <div class="clients__logo-set" aria-hidden="true">
+        {marqueeLogos.map((logo) => (
+          <div class="clients__logo"><img src={logo.image} alt="" loading="lazy" /></div>
+        ))}
+      </div>
     </div>
-  )}
+    <div class="clients__track clients__track--reverse" aria-hidden="true">
+      <div class="clients__logo-set">
+        {[...marqueeLogos].reverse().map((logo) => (
+          <div class="clients__logo"><img src={logo.image} alt="" loading="lazy" /></div>
+        ))}
+      </div>
+      <div class="clients__logo-set">
+        {[...marqueeLogos].reverse().map((logo) => (
+          <div class="clients__logo"><img src={logo.image} alt="" loading="lazy" /></div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="clients__directory">
+    {visibleClients.map((client, index) => (
+      <article class="client">
+        <span class="client__index">{String(index + 1).padStart(2, "0")}</span>
+        {logos[index] && <img src={logos[index].image} alt="" loading="lazy" />}
+        <h3>{client.name}</h3>
+        <p>{client.sector}</p>
+      </article>
+    ))}
+  </div>
 </section>
 
 <style>
   .clients {
     background: var(--color-mist);
-    padding: clamp(4rem, 9vw, 7rem) var(--layout-edge);
+    padding: var(--space-24) var(--layout-edge);
   }
 
   .clients__heading,
-  .clients__logo-grid,
-  .clients__note,
+  .clients__marquee,
   .clients__directory {
     margin: 0 auto;
     max-width: var(--layout-max);
@@ -66,11 +75,11 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
 
   .clients__heading {
     display: grid;
-    gap: var(--space-4);
-    margin-bottom: var(--space-10);
+    gap: var(--space-5);
+    margin-bottom: var(--space-12);
   }
 
-  .clients__eyebrow {
+  .clients__heading p {
     color: var(--color-signal);
     font-size: var(--type-label);
     font-weight: var(--font-weight-bold);
@@ -79,84 +88,80 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
     text-transform: uppercase;
   }
 
-  .clients h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5vw, 4.8rem);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: -0.075em;
-    line-height: 0.94;
+  h2 {
+    font-size: var(--type-h2);
+    letter-spacing: -0.055em;
+    line-height: 1;
     margin: 0;
-    max-width: 13ch;
+    max-width: 18ch;
   }
 
-  .clients__heading > span {
+  .clients__heading span {
     color: var(--color-text-muted);
-    font-size: var(--type-lead);
   }
 
-  .clients__logo-grid {
-    border-left: 1px solid color-mix(in oklch, var(--color-ink) 20%, transparent);
-    border-top: 1px solid color-mix(in oklch, var(--color-ink) 20%, transparent);
+  .clients__marquee {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    list-style: none;
-    padding: 0;
+    gap: var(--space-5);
+    margin-bottom: var(--space-12);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    overflow: hidden;
+    width: 100%;
   }
 
-  .clients__logo-grid li {
-    align-items: center;
-    border-bottom: 1px solid color-mix(in oklch, var(--color-ink) 20%, transparent);
-    border-right: 1px solid color-mix(in oklch, var(--color-ink) 20%, transparent);
+  .clients__track {
+    --marquee-gap: var(--space-5);
+    --marquee-half-gap: calc(var(--marquee-gap) / 2);
+    animation: clients-marquee-left 50s linear infinite;
     display: flex;
-    height: 6.25rem;
+    gap: var(--marquee-gap);
+    width: max-content;
+    will-change: transform;
+  }
+
+  .clients__track.clients__track--reverse {
+    animation: clients-marquee-right 55s linear infinite;
+  }
+
+  .clients__logo-set {
+    display: flex;
+    gap: var(--marquee-gap);
+  }
+
+  .clients__logo {
+    align-items: center;
+    background: color-mix(in oklch, var(--color-canvas) 72%, transparent);
+    border: var(--rule-width) solid color-mix(in oklch, var(--color-ink) 16%, transparent);
+    display: flex;
+    height: 5rem;
     justify-content: center;
-    padding: var(--space-4);
+    padding: var(--space-3);
+    width: 6.5rem;
+    transition: background-color var(--transition-micro), transform var(--transition-micro);
+    flex-shrink: 0;
   }
 
-  .clients__logo-grid img {
+  .clients__logo:hover {
+    background: var(--color-canvas);
+    transform: translateY(-3px);
+  }
+
+  .clients__logo img {
     filter: grayscale(1);
-    max-height: 4.25rem;
-    max-width: 8rem;
-    opacity: 0.66;
+    max-height: 100%;
+    max-width: 100%;
     object-fit: contain;
-    transition: filter var(--transition-micro), opacity var(--transition-micro), transform var(--transition-micro);
+    opacity: 0.68;
+    transition: filter var(--transition-micro), opacity var(--transition-micro);
   }
 
-  .clients__logo-grid li:hover img {
+  .clients__logo:hover img {
     filter: grayscale(0);
     opacity: 1;
-    transform: scale(1.04);
   }
 
-  .clients__note {
-    align-items: center;
-    border-bottom: 1px solid color-mix(in oklch, var(--color-ink) 24%, transparent);
-    display: flex;
-    gap: var(--space-6);
-    justify-content: space-between;
-    padding: var(--space-5) 0;
-  }
-
-  .clients__note p,
-  .clients__note a {
-    font-size: var(--type-small);
-    margin: 0;
-  }
-
-  .clients__note p {
-    color: var(--color-text-muted);
-  }
-
-  .clients__note a {
-    border-bottom: 1px solid currentColor;
-    font-weight: var(--font-weight-semibold);
-    min-height: 2.75rem;
-    padding-block: var(--space-2);
-    white-space: nowrap;
-  }
-
-  .clients__note a:hover {
-    color: var(--color-ink);
+  .clients__marquee:hover .clients__track {
+    animation-play-state: paused;
   }
 
   .clients__directory {
@@ -165,7 +170,7 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
 
   .client {
     align-items: center;
-    border-bottom: 1px solid color-mix(in oklch, var(--color-ink) 22%, transparent);
+    border-bottom: var(--rule-width) solid color-mix(in oklch, var(--color-ink) 22%, transparent);
     display: grid;
     gap: var(--space-4);
     grid-template-columns: 1.5rem 3rem 1fr;
@@ -184,7 +189,7 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
     width: 2.75rem;
   }
 
-  .client h3 {
+  h3 {
     font-size: var(--type-body);
     letter-spacing: -0.025em;
     margin: 0;
@@ -195,19 +200,53 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
     margin: calc(var(--space-3) * -1) 0 0;
   }
 
+  .clients--all .clients__marquee {
+    display: none;
+  }
+
+  .clients--all .clients__directory {
+    --color-ink: #1a1a1a;
+    --color-text-muted: #3d352e;
+    border-top: 2px solid var(--color-ink);
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .clients--all .client {
+    align-content: start;
+    background: var(--color-canvas);
+    border: var(--rule-width) solid color-mix(in oklch, var(--color-ink) 18%, transparent);
+    color: var(--color-ink);
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1.5rem 1fr;
+    min-height: 12rem;
+    padding: var(--space-5);
+  }
+
+  .clients--all .client img {
+    grid-column: 2;
+    height: 5rem;
+    justify-self: start;
+    width: 5rem;
+  }
+
+  .clients--all .client h3 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .clients--all .client p {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin: 0;
+  }
+
   @media (min-width: 48rem) {
     .clients__heading {
       align-items: end;
-      column-gap: var(--space-8);
       grid-template-columns: 0.5fr 1.5fr 1fr;
-    }
-
-    .clients__logo-grid {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-
-    .clients__note {
-      gap: var(--space-8);
     }
 
     .client {
@@ -220,44 +259,29 @@ const visibleClients = allClients ? clients : clients.slice(0, 8)
     }
 
     .clients--all .clients__directory {
-      display: grid;
-      gap: var(--space-3);
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .clients--all .client {
-      align-content: start;
-      background: var(--color-canvas);
-      border: 1px solid color-mix(in oklch, var(--color-ink) 18%, transparent);
-      display: grid;
-      gap: var(--space-3);
-      grid-template-columns: 1.5rem 1fr;
-      min-height: 14rem;
-      padding: var(--space-5);
-    }
-
-    .clients--all .client img {
-      grid-column: 2;
-      height: 5rem;
-      width: 5rem;
-    }
-
-    .clients--all .client h3,
-    .clients--all .client p {
-      grid-column: 1 / -1;
-      margin: 0;
+      min-height: 15rem;
     }
   }
 
-  @media (max-width: 30rem) {
-    .clients__note {
-      align-items: start;
-      flex-direction: column;
-      gap: var(--space-3);
+  @keyframes clients-marquee-left {
+    0% {
+      transform: translate3d(0, 0, 0);
     }
+    100% {
+      transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
+    }
+  }
 
-    .clients__note a {
-      white-space: normal;
+  @keyframes clients-marquee-right {
+    0% {
+      transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
     }
   }
 </style>

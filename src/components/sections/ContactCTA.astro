@@ -1,18 +1,15 @@
 ---
 import { company } from "../../data/company"
 import Button from "../ui/Button.astro"
-
-const isHome = Astro.url.pathname === "/"
 ---
 
-<section class:list={["contact-cta", { "contact-cta--home": isHome }]} aria-labelledby="contact-cta-title">
-  <p class="contact-cta__label">05 / Mulai percakapan</p>
+<section class="contact-cta" aria-labelledby="contact-cta-title">
+  <p class="contact-cta__label">Mulai dari informasi yang ada</p>
   <div class="contact-cta__body">
-    <h2 id="contact-cta-title">Punya jumlah, jenis, dan deadline?</h2>
-    <div class="contact-cta__action">
-      <p>Itu sudah cukup untuk memulai. Kami bantu merapikannya menjadi brief yang bisa diproduksi.</p>
-      <Button href={company.whatsapp} label="Kirim brief di WhatsApp" variant="ink" />
-      <span>Respons langsung dari tim Roller Customize.</span>
+    <h2 id="contact-cta-title">Kirim jumlah, jenis seragam, dan target waktu.</h2>
+    <div>
+      <p>Kami bantu merapikan kebutuhan Anda menjadi brief yang bisa diproduksi.</p>
+      <Button href={company.whatsapp} label="Buka WhatsApp" variant="ink" />
     </div>
   </div>
 </section>
@@ -20,18 +17,13 @@ const isHome = Astro.url.pathname === "/"
 <style>
   .contact-cta {
     background: var(--color-canvas);
-    color: var(--color-text);
     display: grid;
     gap: var(--space-8);
-    padding: clamp(4rem, 10vw, 8rem) max(var(--layout-edge), calc((100vw - var(--layout-max)) / 2));
-  }
-
-  .contact-cta--home {
-    background: var(--color-signal);
-    color: var(--color-text-inverse);
+    padding: var(--space-24) max(var(--layout-edge), calc((100vw - var(--layout-max)) / 2));
   }
 
   .contact-cta__label {
+    color: var(--color-signal);
     font-size: var(--type-label);
     font-weight: var(--font-weight-bold);
     letter-spacing: 0.1em;
@@ -40,63 +32,34 @@ const isHome = Astro.url.pathname === "/"
   }
 
   .contact-cta__body {
-    border-top: 2px solid currentColor;
+    border-top: 2px solid var(--color-ink);
     display: grid;
-    gap: var(--space-8);
-    padding-top: var(--space-6);
+    gap: var(--space-10);
+    padding-top: var(--space-8);
   }
 
-  .contact-cta h2 {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 7rem);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: -0.09em;
-    line-height: 0.88;
+  h2 {
+    font-size: clamp(3rem, 7vw, 6.8rem);
+    letter-spacing: -0.07em;
+    line-height: 0.9;
     margin: 0;
-    max-width: 10ch;
+    max-width: 13ch;
   }
 
-  .contact-cta__action {
-    display: grid;
-    gap: var(--space-4);
-    max-width: 28rem;
-  }
-
-  .contact-cta__action p {
+  .contact-cta__body p {
     font-size: var(--type-lead);
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  .contact-cta__action :global(.button--ink) {
-    justify-self: start;
-  }
-
-  .contact-cta--home :global(.button--ink) {
-    background: var(--color-mist);
-    border-color: var(--color-mist);
-    color: var(--color-ink);
-  }
-
-  .contact-cta__action > span {
-    font-size: var(--type-small);
-    font-weight: var(--font-weight-semibold);
+    margin: 0 0 var(--space-8);
+    max-width: 28rem;
   }
 
   @media (min-width: 64rem) {
     .contact-cta {
-      column-gap: var(--space-10);
-      grid-template-columns: minmax(10rem, 0.55fr) minmax(0, 2.45fr);
+      grid-template-columns: 1fr 3fr;
     }
 
     .contact-cta__body {
       align-items: end;
-      column-gap: var(--space-10);
-      grid-template-columns: minmax(0, 1.3fr) minmax(15rem, 0.7fr);
-    }
-
-    .contact-cta__action {
-      padding-bottom: var(--space-2);
+      grid-template-columns: 1.7fr 0.8fr;
     }
   }
 </style>

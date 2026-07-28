@@ -52,8 +52,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 
 <style>
   .site-header {
-    background: var(--header-surface, #d8cfc4);
-    border-bottom: var(--rule-width) solid var(--header-rule, #a79a8a);
+    background: var(--header-surface, #a79a8a);
+    border-bottom: var(--rule-width) solid var(--header-rule, #6f6257);
     color: var(--header-text, #1a1a1a);
     position: sticky;
     top: 0;
@@ -61,8 +61,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .site-header--home {
-    --header-surface: #d8cfc4;
-    --header-rule: #a79a8a;
+    --header-surface: #a79a8a;
+    --header-rule: #6f6257;
     --header-text: #1a1a1a;
     --header-signal: #3d352e;
   }
@@ -135,8 +135,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .mobile-menu nav {
-    background: #d8cfc4;
-    border: var(--rule-width) solid #a79a8a;
+    background: #a79a8a;
+    border: var(--rule-width) solid #6f6257;
     border-radius: 12px;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
     display: grid;
@@ -225,7 +225,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .site-header--home .mobile-menu nav {
-    background: #d8cfc4;
+    background: #a79a8a;
     border-color: #1a1a1a;
     border-radius: 0;
     border-top: 3px solid #3d352e;
