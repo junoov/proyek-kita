@@ -76,7 +76,7 @@ export default function CustomAdminDashboard() {
       setIsAuthenticated(true);
       setLoginError('');
     } else {
-      setLoginError('Username atau Password salah! Gunakan username: admin & password: admin123');
+      setLoginError('Username atau Password salah!');
     }
   };
 
@@ -182,7 +182,7 @@ export default function CustomAdminDashboard() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Masukkan username (admin)"
+                placeholder="Masukkan username"
                 className="w-full px-4 py-3 rounded-lg border border-[#D8CFC4] bg-white text-[#1A1A1A] text-sm focus:outline-none focus:ring-2 focus:ring-[#1A1A1A]"
                 required
               />
@@ -193,7 +193,7 @@ export default function CustomAdminDashboard() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Masukkan password (admin123)"
+                placeholder="Masukkan password"
                 className="w-full px-4 py-3 rounded-lg border border-[#D8CFC4] bg-white text-[#1A1A1A] text-sm focus:outline-none focus:ring-2 focus:ring-[#1A1A1A]"
                 required
               />
@@ -205,10 +205,6 @@ export default function CustomAdminDashboard() {
               Masuk Dashboard
             </button>
           </form>
-
-          <p className="text-center text-xs text-[#6F6257] mt-6">
-            Default: Username <code className="bg-stone-200 px-1 rounded">admin</code> / Password <code className="bg-stone-200 px-1 rounded">admin123</code>
-          </p>
         </div>
       </div>
     );
