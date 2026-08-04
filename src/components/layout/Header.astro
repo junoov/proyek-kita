@@ -241,20 +241,22 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
     let animation: Animation | undefined
     menu.dataset.expanded = String(expanded)
 
-    summary.addEventListener("click", (event) => {
-      event.preventDefault()
-      expanded = !expanded
+    const setExpanded = (nextExpanded: boolean) => {
+      if (nextExpanded === expanded) return
+
+      expanded = nextExpanded
       menu.dataset.expanded = String(expanded)
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         animation?.cancel()
+        animation = undefined
         menu.open = expanded
         return
       }
 
       let from = expanded
-        ? { opacity: 0, transform: "translateY(-12px) scale(0.98)" }
-        : { opacity: 1, transform: "translateY(0) scale(1)" }
+        ? { opacity: 0, transform: "translateY(-18px)" }
+        : { opacity: 1, transform: "translateY(0)" }
 
       if (animation) {
         const current = getComputedStyle(nav)
@@ -268,12 +270,12 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
         [
           from,
           expanded
-            ? { opacity: 1, transform: "translateY(0) scale(1)" }
-            : { opacity: 0, transform: "translateY(-8px) scale(0.99)" },
+            ? { opacity: 1, transform: "translateY(0)" }
+            : { opacity: 0, transform: "translateY(-12px)" },
         ],
         {
-          duration: expanded ? 240 : 180,
-          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          duration: expanded ? 280 : 200,
+          easing: expanded ? "cubic-bezier(0.16, 1, 0.3, 1)" : "cubic-bezier(0.65, 0, 0.35, 1)",
         },
       )
       animation = nextAnimation
@@ -284,6 +286,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
         animation = undefined
         nextAnimation.cancel()
       }, { once: true })
+    }
+
+    summary.addEventListener("click", (event) => {
+      event.preventDefault()
+      setExpanded(!expanded)
     })
+
+    window.addEventListener("scroll", () => setExpanded(false), { passive: true })
   })
 </script>
