@@ -11,7 +11,7 @@ const { heading = "Nama-nama yang pernah bekerja bersama kami.", allClients = fa
 const logos = clientLogos.logos || clientLogos
 // Gunakan semua logo yang tersedia agar marquee kaya dan penuh
 const marqueeLogos = logos.length < 10 ? [...logos, ...logos] : logos
-const visibleClients = allClients ? clients : clients.slice(0, 8)
+const visibleClients = clients
 ---
 
 <section class:list={["clients", { "clients--all": allClients }]} aria-labelledby="clients-title">
