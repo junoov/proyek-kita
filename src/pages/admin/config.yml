@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: junoov/proyek-kita
   branch: main
+  base_url: https://api.decapcms.org
+
 
 
 media_folder: "public/gallery"
