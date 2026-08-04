@@ -64,13 +64,34 @@ export default function CustomAdminDashboard() {
     setTimeout(() => setNotification(''), 3000);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (username === 'admin' && password === 'admin123') {
+    const cleanUser = username.trim();
+    const cleanPass = password.trim();
+
+    if (cleanUser === 'admin' && cleanPass === 'admin123') {
       setIsAuthenticated(true);
       localStorage.setItem('rc_admin_auth', 'true');
       setLoginError('');
-    } else {
+      return;
+    }
+
+    // Fallback hit API jika local verification gagal
+    try {
+      const res = await fetch('/api/admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'login', username: cleanUser, password: cleanPass })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setIsAuthenticated(true);
+        localStorage.setItem('rc_admin_auth', 'true');
+        setLoginError('');
+      } else {
+        setLoginError(data.message || 'Username atau Password salah!');
+      }
+    } catch (err) {
       setLoginError('Username atau Password salah!');
     }
   };
