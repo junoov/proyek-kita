@@ -131,28 +131,29 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   }
 
   .gallery__grid {
-    columns: 2;
-    column-gap: var(--space-4);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
   }
 
   @media (min-width: 48rem) {
     .gallery__grid {
-      columns: 3;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 72rem) {
     .gallery__grid {
-      columns: 4;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
   .gallery__item {
-    break-inside: avoid;
     display: block;
     width: 100%;
+    aspect-ratio: 3 / 4;
     padding: 0;
-    margin: 0 0 var(--space-4);
+    margin: 0;
     background: none;
     border: none;
     cursor: pointer;
@@ -164,7 +165,7 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
 
   .gallery__item img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     object-fit: cover;
     border-radius: 8px;
