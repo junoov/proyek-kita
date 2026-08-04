@@ -33,43 +33,48 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   </div>
 
   <script is:inline>
-    // Sync dynamic photos from LocalStorage / Admin Dashboard
-    (function renderCustomGallery() {
-      function sync() {
+    // Append dynamic photos from Admin Dashboard (localStorage)
+    (function() {
+      function appendNewPhotos() {
         try {
-          const storedItems = localStorage.getItem("rc_custom_gallery");
-          if (storedItems) {
-            const parsed = JSON.parse(storedItems);
-            const grid = document.getElementById("gallery-grid");
-            if (grid && Array.isArray(parsed) && parsed.length > 0) {
-              grid.innerHTML = parsed.map((item, i) => `
-                <button
-                  class="gallery__item"
-                  data-index="${i}"
-                  data-src="${item.image}"
-                  data-title="${item.title || 'Foto Produk'}"
-                  aria-label="Buka foto produk ${i + 1}"
-                >
-                  <img
-                    src="${item.image}"
-                    alt="${item.title || 'Foto Produk Roller Customize'}"
-                    loading="lazy"
-                    decoding="async"
-                    width="600"
-                    height="800"
-                  />
-                </button>
-              `).join("");
-            }
-          }
+          var stored = localStorage.getItem('rc_custom_gallery');
+          if (!stored) return;
+          var parsed = JSON.parse(stored);
+          if (!Array.isArray(parsed) || parsed.length === 0) return;
+          var grid = document.getElementById('gallery-grid');
+          if (!grid) return;
+          // Get existing image sources to avoid duplicates
+          var existing = [];
+          grid.querySelectorAll('img').forEach(function(img) {
+            existing.push(img.getAttribute('src'));
+          });
+          var baseIndex = grid.querySelectorAll('.gallery__item').length;
+          parsed.forEach(function(item, i) {
+            if (existing.indexOf(item.image) !== -1) return; // skip duplicate
+            var btn = document.createElement('button');
+            btn.className = 'gallery__item gallery__item--dynamic';
+            btn.setAttribute('data-index', baseIndex + i);
+            btn.setAttribute('data-src', item.image);
+            btn.setAttribute('data-title', item.title || 'Foto Produk');
+            btn.setAttribute('aria-label', 'Buka foto produk ' + (baseIndex + i + 1));
+            var img = document.createElement('img');
+            img.src = item.image;
+            img.alt = item.title || 'Foto Produk Roller Customize';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.width = 600;
+            img.height = 800;
+            btn.appendChild(img);
+            grid.appendChild(btn);
+          });
         } catch (e) {
           console.error(e);
         }
       }
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", sync);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', appendNewPhotos);
       } else {
-        sync();
+        appendNewPhotos();
       }
     })();
   </script>
@@ -91,7 +96,7 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   </div>
 </section>
 
-<style>
+<style is:global>
   .gallery {
     background: var(--color-canvas);
     margin: 0 auto;
