@@ -133,15 +133,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
     height: var(--space-3);
   }
 
-  .mobile-menu[open] summary::after {
+  .mobile-menu[data-expanded="true"] summary::after,
+  .mobile-menu[open]:not([data-expanded]) summary::after {
     background: linear-gradient(currentColor 0 0) center / 100% 2px no-repeat;
   }
 
   .mobile-menu nav {
     background: #a79a8a;
-    border: var(--rule-width) solid #6f6257;
-    border-radius: 12px;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
     display: grid;
     gap: var(--space-1);
     min-width: min(18rem, calc(100vw - var(--space-8)));
@@ -152,11 +150,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .mobile-menu nav a {
-    border-left: 3px solid transparent;
     color: #3d352e;
     font-weight: var(--font-weight-medium);
     padding: var(--space-3);
-    transition: border-color var(--transition-micro), color var(--transition-micro);
+    transition: background-color var(--transition-micro), color var(--transition-micro);
   }
 
   .mobile-menu nav a:hover {
@@ -164,7 +161,6 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
   }
 
   .mobile-menu nav a.is-active {
-    border-left-color: var(--header-signal, #3d352e);
     color: #1a1a1a;
     font-weight: var(--font-weight-semibold);
   }
@@ -229,9 +225,65 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 
   .site-header--home .mobile-menu nav {
     background: #a79a8a;
-    border-color: #1a1a1a;
-    border-radius: 0;
-    border-top: 3px solid #3d352e;
-    box-shadow: 0 12px 24px rgba(26, 26, 26, 0.12);
   }
+
 </style>
+
+<script>
+  document.querySelectorAll(".mobile-menu").forEach((menu) => {
+    if (!(menu instanceof HTMLDetailsElement)) return
+
+    const summary = menu.querySelector("summary")
+    const nav = menu.querySelector("nav")
+    if (!summary || !nav) return
+
+    let expanded = menu.open
+    let animation: Animation | undefined
+    menu.dataset.expanded = String(expanded)
+
+    summary.addEventListener("click", (event) => {
+      event.preventDefault()
+      expanded = !expanded
+      menu.dataset.expanded = String(expanded)
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        animation?.cancel()
+        menu.open = expanded
+        return
+      }
+
+      let from = expanded
+        ? { opacity: 0, transform: "translateY(-12px) scale(0.98)" }
+        : { opacity: 1, transform: "translateY(0) scale(1)" }
+
+      if (animation) {
+        const current = getComputedStyle(nav)
+        from = { opacity: Number(current.opacity), transform: current.transform }
+        animation.cancel()
+      }
+
+      if (expanded) menu.open = true
+
+      const nextAnimation = nav.animate(
+        [
+          from,
+          expanded
+            ? { opacity: 1, transform: "translateY(0) scale(1)" }
+            : { opacity: 0, transform: "translateY(-8px) scale(0.99)" },
+        ],
+        {
+          duration: expanded ? 240 : 180,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        },
+      )
+      animation = nextAnimation
+
+      nextAnimation.addEventListener("finish", () => {
+        if (animation !== nextAnimation) return
+        if (!expanded) menu.open = false
+        animation = undefined
+        nextAnimation.cancel()
+      }, { once: true })
+    })
+  })
+</script>
