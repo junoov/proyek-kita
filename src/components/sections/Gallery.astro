@@ -32,52 +32,6 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
     ))}
   </div>
 
-  <script is:inline>
-    // Append dynamic photos from Admin Dashboard (localStorage)
-    (function() {
-      function appendNewPhotos() {
-        try {
-          var stored = localStorage.getItem('rc_custom_gallery');
-          if (!stored) return;
-          var parsed = JSON.parse(stored);
-          if (!Array.isArray(parsed) || parsed.length === 0) return;
-          var grid = document.getElementById('gallery-grid');
-          if (!grid) return;
-          // Get existing image sources to avoid duplicates
-          var existing = [];
-          grid.querySelectorAll('img').forEach(function(img) {
-            existing.push(img.getAttribute('src'));
-          });
-          var baseIndex = grid.querySelectorAll('.gallery__item').length;
-          parsed.forEach(function(item, i) {
-            if (existing.indexOf(item.image) !== -1) return; // skip duplicate
-            var btn = document.createElement('button');
-            btn.className = 'gallery__item gallery__item--dynamic';
-            btn.setAttribute('data-index', baseIndex + i);
-            btn.setAttribute('data-src', item.image);
-            btn.setAttribute('data-title', item.title || 'Foto Produk');
-            btn.setAttribute('aria-label', 'Buka foto produk ' + (baseIndex + i + 1));
-            var img = document.createElement('img');
-            img.src = item.image;
-            img.alt = item.title || 'Foto Produk Roller Customize';
-            img.loading = 'lazy';
-            img.decoding = 'async';
-            img.width = 600;
-            img.height = 800;
-            btn.appendChild(img);
-            grid.appendChild(btn);
-          });
-        } catch (e) {
-          console.error(e);
-        }
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', appendNewPhotos);
-      } else {
-        appendNewPhotos();
-      }
-    })();
-  </script>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox foto" hidden>
     <button class="lightbox__close" id="lightbox-close" aria-label="Tutup lightbox">
@@ -96,7 +50,7 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   </div>
 </section>
 
-<style is:global>
+<style>
   .gallery {
     background: var(--color-canvas);
     margin: 0 auto;
