@@ -9,8 +9,9 @@ import CustomAdminDashboard from "../../components/admin/CustomAdminDashboard"
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard — Roller Customize</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <script is:inline src="https://cdn.tailwindcss.com"></script>
 </head>
-<body style="margin: 0; padding: 0;">
-  <CustomAdminDashboard client:only="react" />
+<body style="margin: 0; padding: 0; background-color: #3D352E;">
+  <CustomAdminDashboard client:load />
 </body>
 </html>
