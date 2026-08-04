@@ -244,146 +244,88 @@ export default function CustomAdminDashboard() {
 
       {/* Main Container */}
       <div className="max-w-6xl mx-auto p-6">
-        {/* Navigation Tabs */}
-        <div className="flex gap-2 border-b border-[#6F6257] pb-3 mb-6">
-          <button
-            onClick={() => setActiveTab('gallery')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all ${
-              activeTab === 'gallery' ? 'bg-[#1A1A1A] text-[#F7F3EE]' : 'bg-[#D8CFC4] text-[#3D352E] hover:bg-[#F7F3EE]'
-            }`}
-          >
-            <Image className="w-4 h-4" />
-            Kelola Foto Lookbook ({galleryItems.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('company')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all ${
-              activeTab === 'company' ? 'bg-[#1A1A1A] text-[#F7F3EE]' : 'bg-[#D8CFC4] text-[#3D352E] hover:bg-[#F7F3EE]'
-            }`}
-          >
-            <Building className="w-4 h-4" />
-            Informasi Kontak & Brand
-          </button>
+        {/* Header Title */}
+        <div className="flex items-center justify-between border-b border-[#6F6257] pb-3 mb-6">
+          <div className="flex items-center gap-2 font-bold text-sm text-[#1A1A1A]">
+            <Image className="w-5 h-5 text-[#3D352E]" />
+            <span>Kelola Foto Lookbook ({galleryItems.length} Foto)</span>
+          </div>
         </div>
 
-        {/* Tab 1: GALLERY LOOKBOOK */}
-        {activeTab === 'gallery' && (
-          <div className="space-y-6">
-            {/* Form Tambah Foto */}
-            <div className="bg-[#D8CFC4] p-6 rounded-2xl border border-[#6F6257] shadow-sm">
-              <h2 className="text-base font-bold text-[#1A1A1A] mb-4 flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#3D352E]" />
-                Tambah Foto Portofolio Baru
-              </h2>
-              <form onSubmit={handleAddPhoto} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                <div>
-                  <label className="block text-xs font-bold text-[#3D352E] uppercase mb-1">Judul / Keterangan Foto</label>
-                  <input
-                    type="text"
-                    value={newPhotoTitle}
-                    onChange={(e) => setNewPhotoTitle(e.target.value)}
-                    placeholder="misal: Seragam Workshirt Karsa"
-                    className="w-full px-3 py-2.5 rounded-lg bg-[#F7F3EE] border border-[#6F6257] text-sm text-[#1A1A1A] focus:outline-none"
-                  />
+        {/* GALLERY LOOKBOOK */}
+        <div className="space-y-6">
+          {/* Form Tambah Foto */}
+          <div className="bg-[#D8CFC4] p-6 rounded-2xl border border-[#6F6257] shadow-sm">
+            <h2 className="text-base font-bold text-[#1A1A1A] mb-4 flex items-center gap-2">
+              <Plus className="w-5 h-5 text-[#3D352E]" />
+              Tambah Foto Portofolio Baru
+            </h2>
+            <form onSubmit={handleAddPhoto} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+              <div>
+                <label className="block text-xs font-bold text-[#3D352E] uppercase mb-1">Judul / Keterangan Foto</label>
+                <input
+                  type="text"
+                  value={newPhotoTitle}
+                  onChange={(e) => setNewPhotoTitle(e.target.value)}
+                  placeholder="misal: Seragam Workshirt Karsa"
+                  className="w-full px-3 py-2.5 rounded-lg bg-[#F7F3EE] border border-[#6F6257] text-sm text-[#1A1A1A] focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-[#3D352E] uppercase mb-1">Pilih Foto (Upload)</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  className="w-full px-2 py-1.5 rounded-lg bg-[#F7F3EE] border border-[#6F6257] text-xs text-[#1A1A1A] file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-[#1A1A1A] file:text-[#F7F3EE]"
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="w-full py-2.5 bg-[#1A1A1A] hover:bg-[#3D352E] text-[#F7F3EE] font-bold text-sm rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  {saving ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Menyimpan...</>
+                  ) : (
+                    <><Save className="w-4 h-4" /> Simpan Foto</>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Loading State */}
+          {loading && (
+            <div className="text-center py-8">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#3D352E]" />
+              <p className="text-sm text-[#3D352E] mt-2">Mengambil foto dari database...</p>
+            </div>
+          )}
+
+          {/* Grid Preview Foto */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {galleryItems.map((item, idx) => (
+              <div key={item.id || idx} className="bg-[#F7F3EE] rounded-xl overflow-hidden border border-[#6F6257] group relative shadow-sm">
+                <div className="aspect-square bg-stone-300 relative overflow-hidden">
+                  <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-[#3D352E] uppercase mb-1">Pilih Foto (Upload)</label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="w-full px-2 py-1.5 rounded-lg bg-[#F7F3EE] border border-[#6F6257] text-xs text-[#1A1A1A] file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-[#1A1A1A] file:text-[#F7F3EE]"
-                  />
-                </div>
-                <div>
+                <div className="p-3 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#1A1A1A] truncate pr-2">{item.title}</span>
                   <button
-                    type="submit"
-                    disabled={saving}
-                    className="w-full py-2.5 bg-[#1A1A1A] hover:bg-[#3D352E] text-[#F7F3EE] font-bold text-sm rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                    onClick={() => handleDeletePhoto(item)}
+                    title="Hapus foto"
+                    className="p-1.5 rounded-lg transition-colors bg-red-100 hover:bg-red-200 text-red-600"
                   >
-                    {saving ? (
-                      <><Loader2 className="w-4 h-4 animate-spin" /> Menyimpan...</>
-                    ) : (
-                      <><Save className="w-4 h-4" /> Simpan Foto</>
-                    )}
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
-              </form>
-            </div>
-
-            {/* Loading State */}
-            {loading && (
-              <div className="text-center py-8">
-                <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#3D352E]" />
-                <p className="text-sm text-[#3D352E] mt-2">Mengambil foto dari database...</p>
               </div>
-            )}
-
-            {/* Grid Preview Foto */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {galleryItems.map((item, idx) => (
-                <div key={item.id || idx} className="bg-[#F7F3EE] rounded-xl overflow-hidden border border-[#6F6257] group relative shadow-sm">
-                  <div className="aspect-square bg-stone-300 relative overflow-hidden">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="p-3 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#1A1A1A] truncate pr-2">{item.title}</span>
-                    <button
-                      onClick={() => handleDeletePhoto(item)}
-                      title="Hapus foto"
-                      className="p-1.5 rounded-lg transition-colors bg-red-100 hover:bg-red-200 text-red-600"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
-        )}
-
-        {/* Tab 2: COMPANY INFO */}
-        {activeTab === 'company' && (
-          <div className="bg-[#D8CFC4] p-6 rounded-2xl border border-[#6F6257] shadow-sm max-w-2xl">
-            <h2 className="text-base font-bold text-[#1A1A1A] mb-4">Ubah Data Perusahaan & Kontak</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-[#3D352E] uppercase mb-1">Nama Brand</label>
-                <input
-                  type="text"
-                  value={companyInfo.name}
-                  onChange={(e) => setCompanyInfo({ ...companyInfo, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg bg-[#F7F3EE] border border-[#6F6257] text-sm text-[#1A1A1A]"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-[#3D352E] uppercase mb-1">No. WhatsApp</label>
-                <input
-                  type="text"
-                  value={companyInfo.phone}
-                  onChange={(e) => setCompanyInfo({ ...companyInfo, phone: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg bg-[#F7F3EE] border border-[#6F6257] text-sm text-[#1A1A1A]"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-[#3D352E] uppercase mb-1">Email Official</label>
-                <input
-                  type="email"
-                  value={companyInfo.email}
-                  onChange={(e) => setCompanyInfo({ ...companyInfo, email: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg bg-[#F7F3EE] border border-[#6F6257] text-sm text-[#1A1A1A]"
-                />
-              </div>
-              <button
-                onClick={() => showNotify('Informasi kontak berhasil disimpan!')}
-                className="py-2.5 px-6 bg-[#1A1A1A] hover:bg-[#3D352E] text-[#F7F3EE] font-bold text-sm rounded-lg transition-colors flex items-center gap-2 mt-4"
-              >
-                <Save className="w-4 h-4" />
-                Simpan Perubahan
-              </button>
-            </div>
-          </div>
-        )}
+        </div>
+      </div>
       </div>
     </div>
   );
