@@ -68,7 +68,9 @@ export default function CustomAdminDashboard() {
   const handleAddPhoto = (e) => {
     e.preventDefault();
     if (!newPhotoUrl) return;
-    setGalleryItems([...galleryItems, { image: newPhotoUrl, title: newPhotoTitle || 'Foto Baru' }]);
+    const updated = [...galleryItems, { image: newPhotoUrl, title: newPhotoTitle || 'Foto Baru' }];
+    setGalleryItems(updated);
+    localStorage.setItem('rc_custom_gallery', JSON.stringify(updated));
     setNewPhotoUrl('');
     setNewPhotoTitle('');
     showNotify('Foto berhasil ditambahkan!');
@@ -78,6 +80,7 @@ export default function CustomAdminDashboard() {
     if (confirm('Yakin ingin menghapus foto ini?')) {
       const updated = galleryItems.filter((_, i) => i !== index);
       setGalleryItems(updated);
+      localStorage.setItem('rc_custom_gallery', JSON.stringify(updated));
       showNotify('Foto berhasil dihapus.');
     }
   };
