@@ -243,24 +243,31 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
 
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
-    const galleryItems = Array.from(document.querySelectorAll('.gallery__item'));
-    if (galleryItems.length === 0) return;
+    const grid = document.getElementById('gallery-grid');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCounter = document.getElementById('lightbox-counter');
+    const lbClose = document.getElementById('lightbox-close');
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
 
-    const photos = galleryItems.map((btn) => ({
-      src: btn.dataset.src || '',
-      title: btn.dataset.title || ''
-    }));
+    if (!lightbox || !grid) return;
 
+    let photos = [];
     let currentIndex = 0;
 
-    const lightbox   = document.getElementById('lightbox');
-    const lbImg      = document.getElementById('lightbox-img');
-    const lbCounter  = document.getElementById('lightbox-counter');
-    const lbClose    = document.getElementById('lightbox-close');
-    const lbPrev     = document.getElementById('lightbox-prev');
-    const lbNext     = document.getElementById('lightbox-next');
+    function initLightbox() {
+      const items = Array.from(grid.querySelectorAll('.gallery__item'));
+      photos = items.map((btn) => ({
+        src: btn.dataset.src || '',
+        title: btn.dataset.title || ''
+      }));
 
-    if (!lightbox) return;
+      items.forEach((btn, i) => {
+        btn.setAttribute('data-index', i);
+        btn.onclick = () => openLightbox(i);
+      });
+    }
 
     function openLightbox(index) {
       if (photos.length === 0) return;
@@ -279,8 +286,8 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
     function updateLightbox() {
       if (!photos[currentIndex] || !lbImg) return;
       lbImg.src = photos[currentIndex].src;
-      lbImg.alt = photos[currentIndex].title || `Foto produk Roller Customize ${currentIndex + 1}`;
-      if (lbCounter) lbCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
+      lbImg.alt = photos[currentIndex].title || 'Foto produk Roller Customize ' + (currentIndex + 1);
+      if (lbCounter) lbCounter.textContent = (currentIndex + 1) + ' / ' + photos.length;
     }
 
     function prevPhoto() {
@@ -292,10 +299,6 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
       currentIndex = (currentIndex + 1) % photos.length;
       updateLightbox();
     }
-
-    galleryItems.forEach((btn) => {
-      btn.addEventListener('click', () => openLightbox(Number(btn.dataset.index)));
-    });
 
     if (lbClose) lbClose.addEventListener('click', closeLightbox);
     if (lbPrev) lbPrev.addEventListener('click', prevPhoto);
@@ -311,5 +314,48 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
       if (e.key === 'ArrowLeft') prevPhoto();
       if (e.key === 'ArrowRight') nextPhoto();
     });
+
+    // Initialize with static photos first
+    initLightbox();
+
+    // Fetch dynamic photos from D1 database and append
+    fetch('/api/admin')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success && Array.isArray(data.photos) && data.photos.length > 0) {
+          var existing = [];
+          grid.querySelectorAll('img').forEach(function(img) {
+            existing.push(img.getAttribute('src'));
+          });
+
+          data.photos.forEach(function(photo) {
+            if (existing.indexOf(photo.image) !== -1) return;
+            var btn = document.createElement('button');
+            btn.className = 'gallery__item';
+            btn.setAttribute('data-src', photo.image);
+            btn.setAttribute('data-title', photo.title || 'Foto Produk');
+            btn.setAttribute('aria-label', 'Buka foto produk');
+            btn.style.cssText = 'break-inside:avoid;display:block;width:100%;padding:0;margin:0 0 1rem;background:none;border:none;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;';
+
+            var img = document.createElement('img');
+            img.src = photo.image;
+            img.alt = photo.title || 'Foto Produk';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.width = 600;
+            img.height = 800;
+            img.style.cssText = 'width:100%;height:auto;display:block;object-fit:cover;border-radius:8px;';
+
+            btn.appendChild(img);
+            grid.appendChild(btn);
+          });
+
+          // Re-initialize lightbox with all photos
+          initLightbox();
+        }
+      })
+      .catch(function(err) {
+        console.log('Gallery: no dynamic photos loaded', err);
+      });
   });
 </script>

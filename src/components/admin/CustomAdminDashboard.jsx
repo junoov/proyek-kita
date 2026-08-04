@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, LogOut, Image, Plus, Trash2, Save, Upload, CheckCircle, AlertCircle, Building, Phone, Mail, ShoppingBag } from 'lucide-react';
+import { Lock, LogOut, Image, Plus, Trash2, Save, Upload, CheckCircle, AlertCircle, Building, Phone, Mail, ShoppingBag, Loader2 } from 'lucide-react';
 
 
 export default function CustomAdminDashboard() {
@@ -8,19 +8,23 @@ export default function CustomAdminDashboard() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
-  const [activeTab, setActiveTab] = useState('gallery'); // 'gallery' | 'logos' | 'company'
+  const [activeTab, setActiveTab] = useState('gallery'); // 'gallery' | 'company'
   const [notification, setNotification] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // Data State
-  const [galleryItems, setGalleryItems] = useState([
-    { image: '/gallery/gallery-1.jpeg', title: 'Foto Produk Workshirt 1' },
-    { image: '/gallery/gallery-2.jpeg', title: 'Foto Produk Workshirt 2' },
-    { image: '/gallery/gallery-3.jpeg', title: 'Foto Produk Workshirt 3' },
-    { image: '/gallery/gallery-4.jpeg', title: 'Foto Produk Workshirt 4' },
-    { image: '/gallery/gallery-5.jpeg', title: 'Foto Produk Workshirt 5' },
-    { image: '/gallery/gallery-6.jpeg', title: 'Foto Produk Workshirt 6' },
-    { image: '/gallery/gallery-7.jpeg', title: 'Foto Produk Workshirt 7' },
-  ]);
+  // Gallery: foto default (dari file) + foto dari database
+  const defaultPhotos = [
+    { id: 'default-1', image: '/gallery/gallery-1.jpeg', title: 'Foto Produk Workshirt 1', isDefault: true },
+    { id: 'default-2', image: '/gallery/gallery-2.jpeg', title: 'Foto Produk Workshirt 2', isDefault: true },
+    { id: 'default-3', image: '/gallery/gallery-3.jpeg', title: 'Foto Produk Workshirt 3', isDefault: true },
+    { id: 'default-4', image: '/gallery/gallery-4.jpeg', title: 'Foto Produk Workshirt 4', isDefault: true },
+    { id: 'default-5', image: '/gallery/gallery-5.jpeg', title: 'Foto Produk Workshirt 5', isDefault: true },
+    { id: 'default-6', image: '/gallery/gallery-6.jpeg', title: 'Foto Produk Workshirt 6', isDefault: true },
+    { id: 'default-7', image: '/gallery/gallery-7.jpeg', title: 'Foto Produk Workshirt 7', isDefault: true },
+  ];
+
+  const [galleryItems, setGalleryItems] = useState(defaultPhotos);
+  const [dbPhotos, setDbPhotos] = useState([]);
 
   const [companyInfo, setCompanyInfo] = useState({
     name: 'Roller Customize',
@@ -35,6 +39,7 @@ export default function CustomAdminDashboard() {
 
   const [newPhotoTitle, setNewPhotoTitle] = useState('');
   const [newPhotoUrl, setNewPhotoUrl] = useState('');
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const authSession = localStorage.getItem('rc_admin_auth');
@@ -43,6 +48,35 @@ export default function CustomAdminDashboard() {
     }
   }, []);
 
+  // Fetch foto dari database saat login berhasil
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchPhotosFromDB();
+    }
+  }, [isAuthenticated]);
+
+  const fetchPhotosFromDB = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/admin');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.photos)) {
+        setDbPhotos(data.photos);
+        // Gabungkan default + DB photos
+        setGalleryItems([...defaultPhotos, ...data.photos.map(p => ({
+          id: p.id,
+          image: p.image,
+          title: p.title,
+          isDefault: false,
+        }))]);
+      }
+    } catch (err) {
+      console.error('Gagal mengambil foto dari database:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const showNotify = (msg) => {
     setNotification(msg);
     setTimeout(() => setNotification(''), 3000);
@@ -50,7 +84,6 @@ export default function CustomAdminDashboard() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Default credential sederhana: admin / admin123
     if (username === 'admin' && password === 'admin123') {
       setIsAuthenticated(true);
       localStorage.setItem('rc_admin_auth', 'true');
@@ -65,23 +98,67 @@ export default function CustomAdminDashboard() {
     localStorage.removeItem('rc_admin_auth');
   };
 
-  const handleAddPhoto = (e) => {
+  const handleAddPhoto = async (e) => {
     e.preventDefault();
     if (!newPhotoUrl) return;
-    const updated = [...galleryItems, { image: newPhotoUrl, title: newPhotoTitle || 'Foto Baru' }];
-    setGalleryItems(updated);
-    localStorage.setItem('rc_custom_gallery', JSON.stringify(updated));
-    setNewPhotoUrl('');
-    setNewPhotoTitle('');
-    showNotify('Foto berhasil ditambahkan!');
+
+    setSaving(true);
+    try {
+      const res = await fetch('/api/admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'save_photo',
+          photoData: {
+            title: newPhotoTitle || 'Foto Baru',
+            image: newPhotoUrl,
+          }
+        })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        showNotify('Foto berhasil disimpan ke database!');
+        setNewPhotoUrl('');
+        setNewPhotoTitle('');
+        // Refresh daftar foto dari database
+        await fetchPhotosFromDB();
+      } else {
+        showNotify('Gagal menyimpan: ' + (data.message || 'Error'));
+      }
+    } catch (err) {
+      showNotify('Gagal menyimpan foto. Pastikan sudah di-deploy ke Cloudflare.');
+      console.error(err);
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const handleDeletePhoto = (index) => {
-    if (confirm('Yakin ingin menghapus foto ini?')) {
-      const updated = galleryItems.filter((_, i) => i !== index);
-      setGalleryItems(updated);
-      localStorage.setItem('rc_custom_gallery', JSON.stringify(updated));
-      showNotify('Foto berhasil dihapus.');
+  const handleDeletePhoto = async (item) => {
+    if (item.isDefault) {
+      alert('Foto bawaan tidak bisa dihapus dari admin. Edit file gallery.json untuk menghapus foto bawaan.');
+      return;
+    }
+
+    if (!confirm('Yakin ingin menghapus foto ini?')) return;
+
+    try {
+      const res = await fetch('/api/admin', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ photoId: item.id })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        showNotify('Foto berhasil dihapus dari database!');
+        await fetchPhotosFromDB();
+      } else {
+        showNotify('Gagal menghapus: ' + (data.message || 'Error'));
+      }
+    } catch (err) {
+      showNotify('Gagal menghapus foto.');
+      console.error(err);
     }
   };
 
@@ -237,28 +314,50 @@ export default function CustomAdminDashboard() {
                 <div>
                   <button
                     type="submit"
-                    className="w-full py-2.5 bg-[#1A1A1A] hover:bg-[#3D352E] text-[#F7F3EE] font-bold text-sm rounded-lg transition-colors flex items-center justify-center gap-2"
+                    disabled={saving}
+                    className="w-full py-2.5 bg-[#1A1A1A] hover:bg-[#3D352E] text-[#F7F3EE] font-bold text-sm rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                   >
-                    <Save className="w-4 h-4" />
-                    Simpan Foto
+                    {saving ? (
+                      <><Loader2 className="w-4 h-4 animate-spin" /> Menyimpan...</>
+                    ) : (
+                      <><Save className="w-4 h-4" /> Simpan Foto</>
+                    )}
                   </button>
                 </div>
               </form>
             </div>
 
+            {/* Loading State */}
+            {loading && (
+              <div className="text-center py-8">
+                <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#3D352E]" />
+                <p className="text-sm text-[#3D352E] mt-2">Mengambil foto dari database...</p>
+              </div>
+            )}
+
             {/* Grid Preview Foto */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {galleryItems.map((item, idx) => (
-                <div key={idx} className="bg-[#F7F3EE] rounded-xl overflow-hidden border border-[#6F6257] group relative shadow-sm">
+                <div key={item.id || idx} className="bg-[#F7F3EE] rounded-xl overflow-hidden border border-[#6F6257] group relative shadow-sm">
                   <div className="aspect-square bg-stone-300 relative overflow-hidden">
                     <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    {item.isDefault && (
+                      <span className="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">bawaan</span>
+                    )}
+                    {!item.isDefault && (
+                      <span className="absolute top-2 left-2 bg-emerald-600/80 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">database</span>
+                    )}
                   </div>
                   <div className="p-3 flex items-center justify-between">
                     <span className="text-xs font-semibold text-[#1A1A1A] truncate pr-2">{item.title}</span>
                     <button
-                      onClick={() => handleDeletePhoto(idx)}
-                      title="Hapus foto"
-                      className="p-1.5 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg transition-colors"
+                      onClick={() => handleDeletePhoto(item)}
+                      title={item.isDefault ? "Foto bawaan tidak bisa dihapus" : "Hapus foto"}
+                      className={`p-1.5 rounded-lg transition-colors ${
+                        item.isDefault
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-100 hover:bg-red-200 text-red-600'
+                      }`}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
