@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, LogOut, Image, Plus, Trash2, Save, Upload, CheckCircle, AlertCircle, Building, Phone, Mail, Instagram, ShoppingBag } from 'lucide-react';
+import { Lock, LogOut, Image, Plus, Trash2, Save, Upload, CheckCircle, AlertCircle, Building, Phone, Mail, ShoppingBag } from 'lucide-react';
+
 
 export default function CustomAdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
