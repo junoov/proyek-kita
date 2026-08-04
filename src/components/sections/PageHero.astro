@@ -2,7 +2,7 @@
 type Props = {
   readonly label: string
   readonly title: string
-  readonly lede: string
+  readonly lede?: string
 }
 
 const { label, title, lede } = Astro.props
@@ -13,7 +13,7 @@ const { label, title, lede } = Astro.props
     <p>{label}</p>
     <h1 id="page-title">{title}</h1>
     <span aria-hidden="true" class="page-hero__rule"></span>
-    <div>{lede}</div>
+    {lede && <div>{lede}</div>}
   </div>
 </section>
 

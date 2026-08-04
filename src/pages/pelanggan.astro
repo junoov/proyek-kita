@@ -16,8 +16,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   <main id="main">
     <PageHero
       label="Pelanggan"
-      title="Standar yang sama, konteks kerja yang berbeda."
-      lede="Kami mengubah kebutuhan khas setiap industri menjadi sistem seragam yang dapat diterapkan secara konsisten."
+      title="Dari seragam korporat hingga seragam komunitas, kami menyesuaikan setiap spesifikasi produksi dengan kebutuhan Anda."
     />
     <Gallery />
     <section class="sectors" aria-labelledby="sectors-title">
@@ -34,6 +33,10 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 </BaseLayout>
 
 <style>
+  main :global(.page-hero h1) {
+    max-width: 27ch;
+  }
+
   .sectors {
     margin: 0 auto;
     max-width: var(--layout-max);

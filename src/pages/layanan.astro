@@ -303,17 +303,9 @@ const orderSteps = [
       </div>
     </section>
 
-    <!-- SECTION: ASSURANCE (Existing Quality Control Section) -->
     <section class="assurance" aria-labelledby="assurance-title">
-      <div>
-        <p>Kontrol mutu</p>
-        <h2 id="assurance-title">Pemeriksaan yang mengikuti ritme produksi, bukan menunggu di ujung.</h2>
-      </div>
-      <ol>
-        <li><span>01</span><p>Material dan warna diverifikasi sebelum pemotongan berjalan.</p></li>
-        <li><span>02</span><p>Ukuran dan pola diperiksa terhadap sampel yang telah disetujui.</p></li>
-        <li><span>03</span><p>Batch akhir diperiksa kembali sebelum dipacking dan dikirim.</p></li>
-      </ol>
+      <h2 id="assurance-title">Komitmen garansi, di setiap produksi.</h2>
+      <p class="assurance__statement">Kami berkomitmen untuk memberikan garansi perbaikan di setiap pesanan yang sesuai dengan Syarat &amp; Ketentuan</p>
     </section>
   </main>
   <Footer />
@@ -1021,7 +1013,6 @@ const orderSteps = [
     margin: 0;
   }
 
-  /* Assurance Section (Quality Control Section) */
   .assurance {
     background: var(--color-canvas);
     color: var(--color-text);
@@ -1030,21 +1021,6 @@ const orderSteps = [
     margin: 0 auto;
     max-width: var(--layout-max);
     padding: var(--space-20) var(--layout-edge);
-  }
-
-  .assurance > div,
-  .assurance ol {
-    margin: 0;
-    width: 100%;
-  }
-
-  .assurance > div > p {
-    color: var(--color-signal);
-    font-size: var(--type-label);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.1em;
-    margin: 0 0 var(--space-4);
-    text-transform: uppercase;
   }
 
   .assurance h2 {
@@ -1057,32 +1033,14 @@ const orderSteps = [
     max-width: 22ch;
   }
 
-  .assurance ol {
+  .assurance__statement {
     border-top: 2px solid var(--color-ink);
-    list-style: none;
-    padding: 0;
-  }
-
-  .assurance li {
-    align-items: start;
-    border-bottom: var(--rule-width) solid var(--color-rule);
-    display: grid;
-    gap: var(--space-4);
-    grid-template-columns: var(--space-10) minmax(0, 1fr);
-    padding: var(--space-5) 0;
-  }
-
-  .assurance li span {
-    color: var(--color-signal);
-    font-size: var(--type-small);
-    font-weight: var(--font-weight-bold);
-  }
-
-  .assurance li p {
     color: var(--color-text-muted);
-    font-size: var(--type-body);
-    line-height: 1.55;
+    font-size: var(--type-lead);
+    line-height: 1.5;
     margin: 0;
+    max-width: 34rem;
+    padding-top: var(--space-6);
   }
 
   /* Responsive media queries */
@@ -1091,9 +1049,8 @@ const orderSteps = [
       grid-template-columns: 1fr 1fr;
     }
 
-    .assurance > div,
-    .assurance ol {
-      max-width: none;
+    .assurance__statement {
+      justify-self: end;
     }
   }
 </style>
