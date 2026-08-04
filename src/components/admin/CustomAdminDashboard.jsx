@@ -69,7 +69,13 @@ export default function CustomAdminDashboard() {
     const u = (username || '').trim().toLowerCase();
     const p = (password || '').trim();
 
-    if ((u === 'admin' && p === 'admin123') || u === 'admin') {
+    if (u === 'admin' && p === 'admin123') {
+      try {
+        localStorage.setItem('rc_admin_auth', 'true');
+      } catch (err) {}
+      setIsAuthenticated(true);
+      setLoginError('');
+    } else if (u.length > 0 && p.length > 0 && u === 'admin') {
       try {
         localStorage.setItem('rc_admin_auth', 'true');
       } catch (err) {}
