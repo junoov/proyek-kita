@@ -1,11 +1,9 @@
 import { defineConfig } from "astro/config"
 import react from "@astrojs/react"
-import cloudflare from "@astrojs/cloudflare"
 
 export default defineConfig({
   integrations: [react()],
-  adapter: cloudflare(),
-  site: "https://karsa-uniform.vercel.app",
+  site: "https://rollercustomize.com",
   server: {
     host: true,
   },
