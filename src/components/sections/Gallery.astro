@@ -34,37 +34,44 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
 
   <script is:inline>
     // Sync dynamic photos from LocalStorage / Admin Dashboard
-    document.addEventListener("DOMContentLoaded", () => {
-      try {
-        const storedItems = localStorage.getItem("rc_custom_gallery");
-        if (storedItems) {
-          const parsed = JSON.parse(storedItems);
-          const grid = document.getElementById("gallery-grid");
-          if (grid && Array.isArray(parsed) && parsed.length > 0) {
-            grid.innerHTML = parsed.map((item, i) => `
-              <button
-                class="gallery__item"
-                data-index="${i}"
-                data-src="${item.image}"
-                data-title="${item.title || 'Foto Produk'}"
-                aria-label="Buka foto produk ${i + 1}"
-              >
-                <img
-                  src="${item.image}"
-                  alt="${item.title || 'Foto Produk Roller Customize'}"
-                  loading="lazy"
-                  decoding="async"
-                  width="600"
-                  height="800"
-                />
-              </button>
-            `).join("");
+    (function renderCustomGallery() {
+      function sync() {
+        try {
+          const storedItems = localStorage.getItem("rc_custom_gallery");
+          if (storedItems) {
+            const parsed = JSON.parse(storedItems);
+            const grid = document.getElementById("gallery-grid");
+            if (grid && Array.isArray(parsed) && parsed.length > 0) {
+              grid.innerHTML = parsed.map((item, i) => `
+                <button
+                  class="gallery__item"
+                  data-index="${i}"
+                  data-src="${item.image}"
+                  data-title="${item.title || 'Foto Produk'}"
+                  aria-label="Buka foto produk ${i + 1}"
+                >
+                  <img
+                    src="${item.image}"
+                    alt="${item.title || 'Foto Produk Roller Customize'}"
+                    loading="lazy"
+                    decoding="async"
+                    width="600"
+                    height="800"
+                  />
+                </button>
+              `).join("");
+            }
           }
+        } catch (e) {
+          console.error(e);
         }
-      } catch (e) {
-        console.error(e);
       }
-    });
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", sync);
+      } else {
+        sync();
+      }
+    })();
   </script>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox foto" hidden>
