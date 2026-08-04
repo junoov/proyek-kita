@@ -100,7 +100,7 @@ import Button from "../ui/Button.astro"
   }
 
   .hero__image--primary {
-    animation: hero-slide-left 8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    animation: hero-slide-left 20s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   }
 
   .hero__visual .hero__image--secondary,
@@ -110,21 +110,21 @@ import Button from "../ui/Button.astro"
   }
 
   .hero__image--secondary {
-    animation: hero-slide-left 8s -6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    animation: hero-slide-left 20s -15s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   }
 
   .hero__image--tertiary {
-    animation: hero-slide-left 8s -4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    animation: hero-slide-left 20s -10s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   }
 
   .hero__image--quaternary {
-    animation: hero-slide-left 8s -2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    animation: hero-slide-left 20s -5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   }
 
   @keyframes hero-slide-left {
-    0%, 20% { transform: translate3d(0, 0, 0); }
+    0%, 21% { transform: translate3d(0, 0, 0); }
     25% { transform: translate3d(-100%, 0, 0); }
-    25.01%, 95% { transform: translate3d(100%, 0, 0); }
+    25.01%, 96% { transform: translate3d(100%, 0, 0); }
     100% { transform: translate3d(0, 0, 0); }
   }
 
