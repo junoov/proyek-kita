@@ -2,15 +2,25 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 
+// Default photos to seed into DB on first run
+const DEFAULT_PHOTOS = [
+  { title: 'Foto Produk Workshirt 1', image: '/gallery/gallery-1.jpeg' },
+  { title: 'Foto Produk Workshirt 2', image: '/gallery/gallery-2.jpeg' },
+  { title: 'Foto Produk Workshirt 3', image: '/gallery/gallery-3.jpeg' },
+  { title: 'Foto Produk Workshirt 4', image: '/gallery/gallery-4.jpeg' },
+  { title: 'Foto Produk Workshirt 5', image: '/gallery/gallery-5.jpeg' },
+  { title: 'Foto Produk Workshirt 6', image: '/gallery/gallery-6.jpeg' },
+  { title: 'Foto Produk Workshirt 7', image: '/gallery/gallery-7.jpeg' },
+];
+
 // GET: Ambil semua foto dari D1 database
 export const GET: APIRoute = async ({ locals }) => {
   try {
     const env = (locals as any).runtime?.env;
     if (!env?.DB) {
-      // Fallback: kembalikan data default dari gallery.json
       return new Response(JSON.stringify({ 
         success: true, 
-        photos: [] 
+        photos: DEFAULT_PHOTOS.map((p, i) => ({ id: i + 1, ...p }))
       }), {
         status: 200,
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
@@ -27,7 +37,17 @@ export const GET: APIRoute = async ({ locals }) => {
       )
     `).run();
 
-    const { results } = await env.DB.prepare('SELECT * FROM gallery ORDER BY id DESC').all();
+    // Cek apakah tabel kosong → seed default photos
+    const countResult = await env.DB.prepare('SELECT COUNT(*) as total FROM gallery').first();
+    if (countResult && countResult.total === 0) {
+      for (const photo of DEFAULT_PHOTOS) {
+        await env.DB.prepare('INSERT INTO gallery (title, image) VALUES (?, ?)')
+          .bind(photo.title, photo.image)
+          .run();
+      }
+    }
+
+    const { results } = await env.DB.prepare('SELECT * FROM gallery ORDER BY id ASC').all();
 
     return new Response(JSON.stringify({ 
       success: true, 

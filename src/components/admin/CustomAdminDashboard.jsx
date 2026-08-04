@@ -12,19 +12,8 @@ export default function CustomAdminDashboard() {
   const [notification, setNotification] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Gallery: foto default (dari file) + foto dari database
-  const defaultPhotos = [
-    { id: 'default-1', image: '/gallery/gallery-1.jpeg', title: 'Foto Produk Workshirt 1', isDefault: true },
-    { id: 'default-2', image: '/gallery/gallery-2.jpeg', title: 'Foto Produk Workshirt 2', isDefault: true },
-    { id: 'default-3', image: '/gallery/gallery-3.jpeg', title: 'Foto Produk Workshirt 3', isDefault: true },
-    { id: 'default-4', image: '/gallery/gallery-4.jpeg', title: 'Foto Produk Workshirt 4', isDefault: true },
-    { id: 'default-5', image: '/gallery/gallery-5.jpeg', title: 'Foto Produk Workshirt 5', isDefault: true },
-    { id: 'default-6', image: '/gallery/gallery-6.jpeg', title: 'Foto Produk Workshirt 6', isDefault: true },
-    { id: 'default-7', image: '/gallery/gallery-7.jpeg', title: 'Foto Produk Workshirt 7', isDefault: true },
-  ];
-
-  const [galleryItems, setGalleryItems] = useState(defaultPhotos);
-  const [dbPhotos, setDbPhotos] = useState([]);
+  // Semua foto dikelola dari database
+  const [galleryItems, setGalleryItems] = useState([]);
 
   const [companyInfo, setCompanyInfo] = useState({
     name: 'Roller Customize',
@@ -61,14 +50,7 @@ export default function CustomAdminDashboard() {
       const res = await fetch('/api/admin');
       const data = await res.json();
       if (data.success && Array.isArray(data.photos)) {
-        setDbPhotos(data.photos);
-        // Gabungkan default + DB photos
-        setGalleryItems([...defaultPhotos, ...data.photos.map(p => ({
-          id: p.id,
-          image: p.image,
-          title: p.title,
-          isDefault: false,
-        }))]);
+        setGalleryItems(data.photos);
       }
     } catch (err) {
       console.error('Gagal mengambil foto dari database:', err);
@@ -135,11 +117,6 @@ export default function CustomAdminDashboard() {
   };
 
   const handleDeletePhoto = async (item) => {
-    if (item.isDefault) {
-      alert('Foto bawaan tidak bisa dihapus dari admin. Edit file gallery.json untuk menghapus foto bawaan.');
-      return;
-    }
-
     if (!confirm('Yakin ingin menghapus foto ini?')) return;
 
     try {
@@ -151,7 +128,7 @@ export default function CustomAdminDashboard() {
 
       const data = await res.json();
       if (data.success) {
-        showNotify('Foto berhasil dihapus dari database!');
+        showNotify('Foto berhasil dihapus!');
         await fetchPhotosFromDB();
       } else {
         showNotify('Gagal menghapus: ' + (data.message || 'Error'));
@@ -341,23 +318,13 @@ export default function CustomAdminDashboard() {
                 <div key={item.id || idx} className="bg-[#F7F3EE] rounded-xl overflow-hidden border border-[#6F6257] group relative shadow-sm">
                   <div className="aspect-square bg-stone-300 relative overflow-hidden">
                     <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                    {item.isDefault && (
-                      <span className="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">bawaan</span>
-                    )}
-                    {!item.isDefault && (
-                      <span className="absolute top-2 left-2 bg-emerald-600/80 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">database</span>
-                    )}
                   </div>
                   <div className="p-3 flex items-center justify-between">
                     <span className="text-xs font-semibold text-[#1A1A1A] truncate pr-2">{item.title}</span>
                     <button
                       onClick={() => handleDeletePhoto(item)}
-                      title={item.isDefault ? "Foto bawaan tidak bisa dihapus" : "Hapus foto"}
-                      className={`p-1.5 rounded-lg transition-colors ${
-                        item.isDefault
-                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                          : 'bg-red-100 hover:bg-red-200 text-red-600'
-                      }`}
+                      title="Hapus foto"
+                      className="p-1.5 rounded-lg transition-colors bg-red-100 hover:bg-red-200 text-red-600"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
