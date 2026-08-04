@@ -1,15 +1,16 @@
 ---
+import CustomAdminDashboard from "../../components/admin/CustomAdminDashboard"
 ---
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard — Roller Customize</title>
-  <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 </head>
-<body>
-  <!-- Decap CMS Dashboard Script -->
-  <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<body style="margin: 0; padding: 0;">
+  <CustomAdminDashboard client:only="react" />
 </body>
 </html>

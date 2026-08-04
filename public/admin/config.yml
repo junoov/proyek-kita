@@ -2,7 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-# Aktifkan local backend untuk membaca/menulis file fisik di laptop via decap-server
 local_backend: true
 
 media_folder: "public/gallery"
