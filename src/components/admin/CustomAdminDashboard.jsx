@@ -326,7 +326,6 @@ export default function CustomAdminDashboard() {
           </div>
         </div>
       </div>
-      </div>
     </div>
   );
 }
