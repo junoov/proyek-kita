@@ -1,20 +1,16 @@
 ---
-import { clients } from "../../data/company"
 import clientLogos from "../../data/client_logos.json"
 
 type Props = {
   readonly heading?: string
-  readonly allClients?: boolean
 }
 
-const { heading = "Nama-nama yang pernah bekerja bersama kami.", allClients = false } = Astro.props
+const { heading = "Nama-nama yang pernah bekerja bersama kami." } = Astro.props
 const logos = clientLogos.logos || clientLogos
-// Gunakan semua logo yang tersedia agar marquee kaya dan penuh
 const marqueeLogos = logos.length < 10 ? [...logos, ...logos] : logos
-const visibleClients = clients
 ---
 
-<section class:list={["clients", { "clients--all": allClients }]} aria-labelledby="clients-title">
+<section class="clients" aria-labelledby="clients-title">
   <header class="clients__heading">
     <p>Rekam kerja</p>
     <h2 id="clients-title">{heading}</h2>
@@ -47,17 +43,6 @@ const visibleClients = clients
       </div>
     </div>
   </div>
-
-  <div class="clients__directory">
-    {visibleClients.map((client, index) => (
-      <article class="client">
-        <span class="client__index">{String(index + 1).padStart(2, "0")}</span>
-        {logos[index] && <img src={logos[index].image} alt="" loading="lazy" />}
-        <h3>{client.name}</h3>
-        <p>{client.sector}</p>
-      </article>
-    ))}
-  </div>
 </section>
 
 <style>
@@ -67,8 +52,7 @@ const visibleClients = clients
   }
 
   .clients__heading,
-  .clients__marquee,
-  .clients__directory {
+  .clients__marquee {
     margin: 0 auto;
     max-width: var(--layout-max);
   }
@@ -164,106 +148,10 @@ const visibleClients = clients
     animation-play-state: paused;
   }
 
-  .clients__directory {
-    border-top: 2px solid var(--color-ink);
-  }
-
-  .client {
-    align-items: center;
-    border-bottom: var(--rule-width) solid color-mix(in oklch, var(--color-ink) 22%, transparent);
-    display: grid;
-    gap: var(--space-4);
-    grid-template-columns: 1.5rem 3rem 1fr;
-    padding: var(--space-4) 0;
-  }
-
-  .client__index,
-  .client p {
-    color: var(--color-text-muted);
-    font-size: var(--type-small);
-  }
-
-  .client img {
-    height: 2.75rem;
-    object-fit: contain;
-    width: 2.75rem;
-  }
-
-  h3 {
-    font-size: var(--type-body);
-    letter-spacing: -0.025em;
-    margin: 0;
-  }
-
-  .client p {
-    grid-column: 3;
-    margin: calc(var(--space-3) * -1) 0 0;
-  }
-
-  .clients--all .clients__marquee {
-    display: none;
-  }
-
-  .clients--all .clients__directory {
-    --color-ink: #1a1a1a;
-    --color-text-muted: #3d352e;
-    border-top: 2px solid var(--color-ink);
-    display: grid;
-    gap: var(--space-3);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .clients--all .client {
-    align-content: start;
-    background: var(--color-canvas);
-    border: var(--rule-width) solid color-mix(in oklch, var(--color-ink) 18%, transparent);
-    color: var(--color-ink);
-    display: grid;
-    gap: var(--space-3);
-    grid-template-columns: 1.5rem 1fr;
-    min-height: 12rem;
-    padding: var(--space-5);
-  }
-
-  .clients--all .client img {
-    grid-column: 2;
-    height: 5rem;
-    justify-self: start;
-    width: 5rem;
-  }
-
-  .clients--all .client h3 {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-
-  .clients--all .client p {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    margin: 0;
-  }
-
   @media (min-width: 48rem) {
     .clients__heading {
       align-items: end;
       grid-template-columns: 0.5fr 1.5fr 1fr;
-    }
-
-    .client {
-      grid-template-columns: 3rem 4rem 1fr 0.5fr;
-    }
-
-    .client p {
-      grid-column: auto;
-      margin: 0;
-    }
-
-    .clients--all .clients__directory {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .clients--all .client {
-      min-height: 15rem;
     }
   }
 

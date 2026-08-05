@@ -48,8 +48,8 @@ export const stats = [
 export const clients: readonly Client[] = clientsData.clients
 
 export const contactChannels = [
-  { label: "WhatsApp", value: "0823-2390-6453", href: company.whatsapp },
+  { label: "WhatsApp", value: "0823-2390-6453 / 0896-0580-0090", href: company.whatsapp },
   { label: "Instagram Dealer", value: "@roller.dealer", href: company.instagramDealer },
   { label: "Instagram Customize", value: "@rollercustomize", href: company.instagram },
-  { label: "Official Shop", value: "Roller Dealer Official Shop", href: company.shopee },
+  { label: "Shopee", value: "Roller Dealer", href: company.shopee },
 ] as const satisfies readonly ContactChannel[]

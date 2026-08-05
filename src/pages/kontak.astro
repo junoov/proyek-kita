@@ -16,7 +16,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   <main id="main">
     <PageHero
       label="Kontak"
-      title="Ceritakan apa yang perlu tim Anda pakai setiap hari."
+      title="Dari tim kecil sampai korporat, mulai dari percakapan ini."
       lede="Kami akan membantu menyusun langkah pertama, dari jumlah kebutuhan hingga pendekatan material yang sesuai."
     />
     <section class="contact-grid" aria-labelledby="contact-title">
@@ -30,7 +30,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
           <a href={channel.href}>
             <span>{channel.label}</span>
             <strong>{channel.value}</strong>
-            {channel.label === "Official Shop" && (
+            {channel.label === "Shopee" && (
               <p class="shopee-warning">
                 * Order via Shopee dikenakan biaya administrasi 20% (lebih disarankan untuk upgrade bahan langsung via WA)
               </p>
