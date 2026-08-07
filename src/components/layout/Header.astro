@@ -73,8 +73,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
     justify-content: space-between;
     margin: 0 auto;
     max-width: var(--layout-max);
-    min-height: calc(var(--space-12) + var(--space-6));
-    padding: var(--space-3) var(--layout-edge);
+    min-height: 3.25rem;
+    padding: 0.5rem var(--layout-edge);
   }
 
   .site-header__brand {
@@ -85,8 +85,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 
   @media (max-width: 30rem) {
     .site-header__inner {
-      min-height: 4rem;
-      padding-block: var(--space-2);
+      min-height: 3rem;
+      padding-block: 0.35rem;
     }
   }
 
