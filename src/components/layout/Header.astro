@@ -9,7 +9,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 <header class:list={["site-header", { "site-header--home": currentPath === "/" }]}>
   <a class="skip-link" href="#main">Lewati navigasi</a>
   <div class="site-header__inner">
-    <a href="/"><BrandMark /></a>
+    <a href="/" class="site-header__brand"><BrandMark /></a>
     <nav class="site-header__nav" aria-label="Navigasi utama">
       {navigation.map((item) => {
         const itemPath = item.href.replace(/\/$/, "") || "/"
@@ -75,6 +75,12 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
     max-width: var(--layout-max);
     min-height: calc(var(--space-12) + var(--space-6));
     padding: var(--space-3) var(--layout-edge);
+  }
+
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
   }
 
   @media (max-width: 30rem) {
