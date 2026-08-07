@@ -251,7 +251,12 @@ const orderSteps = [
           <details class="accordion__item">
             <summary>3. Akurasi Warna (Color Accuracy)</summary>
             <div class="accordion__content">
-              <p>Akurasi warna produk akhir berkisar 90% dari referensi digital yang diberikan. Deviasi minor disebabkan oleh perbedaan lot celupan kain dari supplier, rendering tampilan layar gadget (RGB vs CMYK), serta faktor pencahayaan saat foto produksi.</p>
+              <p>Warna produk akhir memiliki tingkat kesesuaian sekitar 90% dengan referensi yang diberikan. Perbedaan dapat terjadi karena:</p>
+              <ul>
+                <li>Ketersediaan warna bahan dari supplier</li>
+                <li>Perbedaan tampilan layar (gadget)</li>
+                <li>Pencahayaan saat proses produksi</li>
+              </ul>
             </div>
           </details>
 
@@ -995,6 +1000,17 @@ const orderSteps = [
     color: var(--color-text-muted);
     line-height: 1.6;
     margin: 0;
+  }
+
+  .accordion__content ul {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: var(--space-3) 0 0;
+    padding-left: var(--space-5);
+  }
+
+  .accordion__content li {
+    margin-bottom: var(--space-1);
   }
 
   .assurance {
