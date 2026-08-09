@@ -9,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 
 <BaseLayout
   title="Pelanggan Roller Customize"
-  description="Roller Customize mendukung kebutuhan seragam kerja untuk tim hospitality, logistik, healthcare, retail, dan layanan."
+  description="Roller Customize mendukung kebutuhan seragam kerja untuk korporat, komunitas, instansi, dan organisasi."
   path="/pelanggan"
 >
   <Header />
@@ -19,13 +19,6 @@ import BaseLayout from "../layouts/BaseLayout.astro"
       title="Dari seragam korporat hingga seragam komunitas, kami menyesuaikan setiap spesifikasi produksi dengan kebutuhan Anda."
     />
     <Gallery />
-    <section class="sectors" aria-labelledby="sectors-title">
-      <div>
-        <article><strong>Hospitality</strong><p>Seragam yang memberi kesan pertama tanpa menghambat gerak.</p></article>
-        <article><strong>Logistics</strong><p>Material dan detail yang tetap jelas di lingkungan kerja yang cepat.</p></article>
-        <article><strong>Healthcare</strong><p>Komposisi yang rapi, mudah dirawat, dan nyaman untuk shift panjang.</p></article>
-      </div>
-    </section>
     <ContactCTA />
   </main>
   <Footer />
@@ -34,61 +27,5 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 <style>
   main :global(.page-hero h1) {
     max-width: 27ch;
-  }
-
-  .sectors {
-    margin: 0 auto;
-    max-width: var(--layout-max);
-    padding: var(--space-20) var(--layout-edge);
-  }
-
-  h2 {
-    font-size: var(--type-h2);
-    letter-spacing: -0.055em;
-    line-height: 1.04;
-    margin: 0;
-    max-width: 18ch;
-  }
-
-  .sectors > div {
-    display: grid;
-    margin-top: var(--space-12);
-  }
-
-  article {
-    border-bottom: var(--rule-width) solid var(--color-rule);
-    padding: var(--space-6) 0;
-  }
-
-  article strong {
-    font-size: var(--type-h3);
-    letter-spacing: -0.035em;
-  }
-
-  article p {
-    color: var(--color-text-muted);
-    margin-bottom: 0;
-    max-width: 22rem;
-  }
-
-  @media (min-width: 48rem) {
-    .sectors > div {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    article {
-      border-bottom: 0;
-      border-right: var(--rule-width) solid var(--color-rule);
-      padding: 0 var(--space-6);
-    }
-
-    article:first-child {
-      padding-left: 0;
-    }
-
-    article:last-child {
-      border-right: 0;
-      padding-right: 0;
-    }
   }
 </style>
