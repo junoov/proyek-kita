@@ -692,7 +692,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 </style>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     // Sub-tabs switching per card (Regular vs Boxy / Panjang vs Pendek)
     const fitTabContainers = document.querySelectorAll(".fit-tabs[data-card]");
 
@@ -726,5 +726,32 @@ import BaseLayout from "../layouts/BaseLayout.astro"
         });
       });
     });
+
+    // Fetch dynamic size chart data from DB if available
+    try {
+      const res = await fetch('/api/admin?action=get_size_chart');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.sizeChart)) {
+        data.sizeChart.forEach((item) => {
+          const card = document.getElementById(item.category_key);
+          if (!card) return;
+
+          const fitBlock = card.querySelector(`.fit-content[data-fit-content="${item.fit_key}"]`);
+          if (!fitBlock) return;
+
+          const rows = fitBlock.querySelectorAll('tbody tr');
+          rows.forEach((row) => {
+            const firstCell = row.children[0];
+            if (firstCell && firstCell.textContent.trim().startsWith(item.size_label)) {
+              if (row.children[1]) row.children[1].textContent = item.panjang;
+              if (row.children[2]) row.children[2].textContent = item.lebar;
+              if (row.children[3]) row.children[3].textContent = item.lengan_bahu;
+            }
+          });
+        });
+      }
+    } catch (err) {
+      console.log("Menggunakan ukuran default statis.");
+    }
   });
 </script>
