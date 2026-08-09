@@ -28,7 +28,7 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
         <img
           src={item.image}
           alt={item.title || `Foto produk Roller Customize ${i + 1}`}
-          loading="lazy"
+          loading={i < 4 ? "eager" : "lazy"}
           decoding="async"
           width="600"
           height="800"
@@ -414,6 +414,15 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
       .then(function(res) { return res.json(); })
       .then(function(data) {
         if (data.success && Array.isArray(data.photos) && data.photos.length > 0) {
+          var currentItems = Array.from(grid.querySelectorAll('.gallery__item'));
+          var currentSrcs = currentItems.map(function(item) { return item.getAttribute('data-src'); });
+          var newSrcs = data.photos.map(function(photo) { return photo.image; });
+
+          // Skip DOM replacement if images match currently displayed list
+          if (currentSrcs.length === newSrcs.length && currentSrcs.every(function(src, idx) { return src === newSrcs[idx]; })) {
+            return;
+          }
+
           grid.innerHTML = '';
 
           data.photos.forEach(function(photo, i) {
@@ -427,7 +436,7 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
             var img = document.createElement('img');
             img.src = photo.image;
             img.alt = photo.title || ('Foto produk Roller Customize ' + (i + 1));
-            img.loading = 'lazy';
+            // Omit loading="lazy" on dynamically injected JS elements to avoid Edge/Chromium placeholder intervention
             img.decoding = 'async';
             img.width = 600;
             img.height = 800;
