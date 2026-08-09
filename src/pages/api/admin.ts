@@ -13,6 +13,9 @@ const DEFAULT_PHOTOS = [
   { title: 'Foto Produk Workshirt 7', image: '/gallery/gallery-7.jpeg' },
 ];
 
+// Fallback in-memory state for local dev mode without DB binding
+let memoryPhotos = DEFAULT_PHOTOS.map((p, i) => ({ id: i + 1, ...p }));
+
 // GET: Ambil semua foto dari D1 database
 export const GET: APIRoute = async ({ locals }) => {
   try {
@@ -20,14 +23,14 @@ export const GET: APIRoute = async ({ locals }) => {
     if (!env?.DB) {
       return new Response(JSON.stringify({ 
         success: true, 
-        photos: DEFAULT_PHOTOS.map((p, i) => ({ id: i + 1, ...p }))
+        photos: memoryPhotos 
       }), {
         status: 200,
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
 
-    // Buat tabel jika belum ada
+    // Buat tabel gallery jika belum ada
     await env.DB.prepare(`
       CREATE TABLE IF NOT EXISTS gallery (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,14 +40,23 @@ export const GET: APIRoute = async ({ locals }) => {
       )
     `).run();
 
-    // Cek apakah tabel kosong → seed default photos
-    const countResult = await env.DB.prepare('SELECT COUNT(*) as total FROM gallery').first();
-    if (countResult && countResult.total === 0) {
+    // Buat tabel gallery_settings untuk menyimpan metadata (seperti flag 'seeded')
+    await env.DB.prepare(`
+      CREATE TABLE IF NOT EXISTS gallery_settings (
+        key TEXT PRIMARY KEY,
+        value TEXT
+      )
+    `).run();
+
+    // Cek apakah sudah pernah di-seed sebelumnya
+    const seedCheck = await env.DB.prepare("SELECT value FROM gallery_settings WHERE key = 'seeded'").first();
+    if (!seedCheck) {
       for (const photo of DEFAULT_PHOTOS) {
         await env.DB.prepare('INSERT INTO gallery (title, image) VALUES (?, ?)')
           .bind(photo.title, photo.image)
           .run();
       }
+      await env.DB.prepare("INSERT OR REPLACE INTO gallery_settings (key, value) VALUES ('seeded', 'true')").run();
     }
 
     const { results } = await env.DB.prepare('SELECT * FROM gallery ORDER BY id ASC').all();
@@ -88,8 +100,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (action === 'save_photo') {
       const env = (locals as any).runtime?.env;
       if (!env?.DB) {
-        return new Response(JSON.stringify({ success: false, message: 'Database tidak tersedia. Pastikan D1 binding sudah dikonfigurasi.' }), {
-          status: 500,
+        const newId = memoryPhotos.length > 0 ? Math.max(...memoryPhotos.map(p => p.id)) + 1 : 1;
+        const newPhoto = { id: newId, title: photoData.title || 'Foto Baru', image: photoData.image };
+        memoryPhotos.push(newPhoto);
+        return new Response(JSON.stringify({ success: true, message: 'Foto berhasil disimpan!' }), {
+          status: 200,
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
       }
@@ -134,8 +149,9 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
 
     const env = (locals as any).runtime?.env;
     if (!env?.DB) {
-      return new Response(JSON.stringify({ success: false, message: 'Database tidak tersedia.' }), {
-        status: 500,
+      memoryPhotos = memoryPhotos.filter(p => String(p.id) !== String(photoId));
+      return new Response(JSON.stringify({ success: true, message: 'Foto berhasil dihapus!' }), {
+        status: 200,
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
