@@ -2,19 +2,11 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 
-// Default photos to seed into DB on first run
-const DEFAULT_PHOTOS = [
-  { title: 'Foto Produk Workshirt 1', image: '/gallery/gallery-1.jpeg', category: 'home' },
-  { title: 'Foto Produk Workshirt 2', image: '/gallery/gallery-2.jpeg', category: 'home' },
-  { title: 'Foto Produk Workshirt 3', image: '/gallery/gallery-3.jpeg', category: 'home' },
-  { title: 'Foto Produk Workshirt 4', image: '/gallery/gallery-4.jpeg', category: 'home' },
-  { title: 'Foto Produk Workshirt 5', image: '/gallery/gallery-5.jpeg', category: 'pelanggan' },
-  { title: 'Foto Produk Workshirt 6', image: '/gallery/gallery-6.jpeg', category: 'pelanggan' },
-  { title: 'Foto Produk Workshirt 7', image: '/gallery/gallery-7.jpeg', category: 'pelanggan' },
-];
+// Default photos to seed into DB on first run (empty, managed via Admin dashboard)
+const DEFAULT_PHOTOS: Array<{ title: string; image: string; category: string }> = [];
 
 // Fallback in-memory state for local dev mode without DB binding
-let memoryPhotos = DEFAULT_PHOTOS.map((p, i) => ({ id: i + 1, ...p }));
+let memoryPhotos: Array<{ id: number; title: string; image: string; category: string }> = [];
 
 // GET: Ambil semua foto dari D1 database (bisa filter berdasarkan ?category=home / pelanggan)
 export const GET: APIRoute = async ({ request, locals }) => {
