@@ -810,11 +810,31 @@ const orderSteps = [
   @media (max-width: 47.99rem) {
     .roadmap {
       gap: var(--space-6);
+      position: relative;
+    }
+
+    .roadmap::before {
+      background: linear-gradient(180deg, rgba(247, 243, 238, 0.55), rgba(247, 243, 238, 0.25));
+      bottom: 3.25rem;
+      content: "";
+      left: 1.625rem;
+      pointer-events: none;
+      position: absolute;
+      top: 1.625rem;
+      transform: translateX(-50%);
+      width: 2px;
+      z-index: 1;
+    }
+
+    .roadmap__node {
+      position: relative;
+      z-index: 2;
     }
 
     .roadmap__turn,
     .roadmap__curve,
-    .roadmap__arrow {
+    .roadmap__arrow,
+    .roadmap__step::after {
       display: none !important;
     }
 
@@ -825,35 +845,19 @@ const orderSteps = [
     }
 
     .roadmap__step {
+      align-items: flex-start;
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
       gap: var(--space-5);
       position: relative;
       width: 100%;
     }
 
-    .roadmap__step::after {
-      content: "";
-      position: absolute;
-      left: 1.625rem;
-      transform: translateX(-50%);
-      top: 3.25rem;
-      bottom: calc(var(--space-6) * -1);
-      width: 2px;
-      background: linear-gradient(180deg, rgba(247, 243, 238, 0.52), rgba(247, 243, 238, 0.22));
-      pointer-events: none;
-    }
-
-    .roadmap__row--3 .roadmap__step:last-child::after {
-      display: none;
-    }
-
     .roadmap__card {
       box-sizing: border-box;
       flex: 1;
-      min-width: 0;
       min-height: auto;
+      min-width: 0;
     }
   }
 
