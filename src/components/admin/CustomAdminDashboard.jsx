@@ -26,6 +26,7 @@ export default function CustomAdminDashboard() {
     shopee: 'https://shopee.co.id/rollerdealer'
   });
 
+  const [selectedCategory, setSelectedCategory] = useState('home'); // 'home' | 'pelanggan'
   const [newPhotoTitle, setNewPhotoTitle] = useState('');
   const [newPhotoUrl, setNewPhotoUrl] = useState('');
   const [saving, setSaving] = useState(false);
@@ -96,22 +97,22 @@ export default function CustomAdminDashboard() {
           photoData: {
             title: newPhotoTitle || 'Foto Baru',
             image: newPhotoUrl,
+            category: selectedCategory
           }
         })
       });
 
       const data = await res.json();
       if (data.success) {
-        showNotify('Foto berhasil disimpan ke database!');
+        showNotify(`Foto berhasil disimpan ke galeri ${selectedCategory === 'home' ? 'Beranda' : 'Pelanggan'}!`);
         setNewPhotoUrl('');
         setNewPhotoTitle('');
-        // Refresh daftar foto dari database
         await fetchPhotosFromDB();
       } else {
         showNotify('Gagal menyimpan: ' + (data.message || 'Error'));
       }
     } catch (err) {
-      showNotify('Gagal menyimpan foto. Pastikan sudah di-deploy ke Cloudflare.');
+      showNotify('Gagal menyimpan foto.');
       console.error(err);
     } finally {
       setSaving(false);
@@ -151,6 +152,10 @@ export default function CustomAdminDashboard() {
       reader.readAsDataURL(file);
     }
   };
+
+  const currentCategoryPhotos = galleryItems.filter(
+    (item) => (item.category || 'home') === selectedCategory
+  );
 
   // 1. Tampilan LOGIN
   if (!isAuthenticated) {
@@ -234,11 +239,39 @@ export default function CustomAdminDashboard() {
 
       {/* Main Container */}
       <div className="max-w-6xl mx-auto p-6">
+        {/* Tab Selector Category */}
+        <div className="flex items-center gap-3 mb-6 bg-[#D8CFC4] p-1.5 rounded-xl border border-[#6F6257]">
+          <button
+            onClick={() => setSelectedCategory('home')}
+            className={`flex-1 py-3 px-4 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
+              selectedCategory === 'home'
+                ? 'bg-[#1A1A1A] text-[#F7F3EE] shadow-md'
+                : 'text-[#3D352E] hover:bg-[#A79A8A]/40'
+            }`}
+          >
+            <Image className="w-4 h-4" />
+            Our Product — Beranda
+          </button>
+          <button
+            onClick={() => setSelectedCategory('pelanggan')}
+            className={`flex-1 py-3 px-4 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
+              selectedCategory === 'pelanggan'
+                ? 'bg-[#1A1A1A] text-[#F7F3EE] shadow-md'
+                : 'text-[#3D352E] hover:bg-[#A79A8A]/40'
+            }`}
+          >
+            <Image className="w-4 h-4" />
+            Our Product — Pelanggan
+          </button>
+        </div>
+
         {/* Header Title */}
         <div className="flex items-center justify-between border-b border-[#6F6257] pb-3 mb-6">
           <div className="flex items-center gap-2 font-bold text-sm text-[#1A1A1A]">
             <Image className="w-5 h-5 text-[#3D352E]" />
-            <span>Kelola Foto Lookbook ({galleryItems.length} Foto)</span>
+            <span>
+              Kelola Foto {selectedCategory === 'home' ? 'Beranda' : 'Pelanggan'} ({currentCategoryPhotos.length} Foto)
+            </span>
           </div>
         </div>
 
@@ -248,7 +281,7 @@ export default function CustomAdminDashboard() {
           <div className="bg-[#D8CFC4] p-6 rounded-2xl border border-[#6F6257] shadow-sm">
             <h2 className="text-base font-bold text-[#1A1A1A] mb-4 flex items-center gap-2">
               <Plus className="w-5 h-5 text-[#3D352E]" />
-              Tambah Foto Portofolio Baru
+              Tambah Foto {selectedCategory === 'home' ? 'Our Product Beranda' : 'Our Product Pelanggan'}
             </h2>
             <form onSubmit={handleAddPhoto} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
               <div>
@@ -295,17 +328,19 @@ export default function CustomAdminDashboard() {
           )}
 
           {/* Empty State */}
-          {!loading && galleryItems.length === 0 && (
+          {!loading && currentCategoryPhotos.length === 0 && (
             <div className="text-center py-12 bg-[#F7F3EE] rounded-xl border border-[#6F6257]">
               <Image className="w-10 h-10 text-[#6F6257] mx-auto mb-2 opacity-50" />
-              <p className="text-sm font-semibold text-[#1A1A1A]">Belum ada foto dalam galeri.</p>
-              <p className="text-xs text-[#6F6257] mt-1">Tambahkan foto portofolio baru menggunakan formulir di atas.</p>
+              <p className="text-sm font-semibold text-[#1A1A1A]">
+                Belum ada foto dalam galeri {selectedCategory === 'home' ? 'Beranda' : 'Pelanggan'}.
+              </p>
+              <p className="text-xs text-[#6F6257] mt-1">Tambahkan foto baru menggunakan formulir di atas.</p>
             </div>
           )}
 
           {/* Grid Preview Foto */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {galleryItems.map((item, idx) => (
+            {currentCategoryPhotos.map((item, idx) => (
               <div key={item.id || idx} className="bg-[#F7F3EE] rounded-xl overflow-hidden border border-[#6F6257] group relative shadow-sm">
                 <div className="aspect-square bg-stone-300 relative overflow-hidden">
                   <img src={item.image} alt={item.title} className="w-full h-full object-cover" />

@@ -1,10 +1,15 @@
 ---
 import galleryData from "../../data/gallery.json"
 
+type Props = {
+  readonly category?: "home" | "pelanggan"
+}
+
+const { category = "home" } = Astro.props
 const galleryItems = (galleryData.items || galleryData).filter((item) => item.image !== "/hero/hero.jpg")
 ---
 
-<section class="gallery" aria-labelledby="gallery-title">
+<section class="gallery" data-category={category} aria-labelledby="gallery-title">
   <div class="gallery__header">
     <span class="gallery__tag">Our Product</span>
     <h2 id="gallery-title">Our Product</h2>
@@ -70,9 +75,9 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
 <style>
   .gallery {
     background: var(--color-canvas);
-    margin: 0 auto;
+    margin: var(--space-16) auto 0;
     max-width: var(--layout-max);
-    padding: var(--space-20) var(--layout-edge) var(--space-8);
+    padding: var(--space-16) var(--layout-edge) var(--space-8);
   }
 
   .gallery__header {
@@ -389,8 +394,11 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
     // Initialize with static photos first
     initLightbox();
 
-    // Fetch photos from database/API and sync with grid
-    fetch('/api/admin')
+    var section = grid.closest('.gallery');
+    var cat = (section && section.getAttribute('data-category')) || 'home';
+
+    // Fetch photos from database/API filtered by category and sync with grid
+    fetch('/api/admin?category=' + cat)
       .then(function(res) { return res.json(); })
       .then(function(data) {
         if (data.success && Array.isArray(data.photos)) {

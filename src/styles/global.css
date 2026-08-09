@@ -22,11 +22,11 @@ body {
   font-weight: var(--font-weight-regular);
 }
 
-main:not(.home) > section:not(.hero):nth-of-type(odd) {
+main > section:not(.hero):nth-of-type(odd) {
   background-color: #d8cfc4;
 }
 
-main:not(.home) > section:not(.hero):nth-of-type(even) {
+main > section:not(.hero):nth-of-type(even) {
   --color-canvas: #d8cfc4;
   --color-ink: #f7f3ee;
   --color-mist: #4b433c;
