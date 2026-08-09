@@ -1,12 +1,9 @@
 ---
-import galleryData from "../../data/gallery.json"
-
 type Props = {
   readonly category?: "home" | "pelanggan"
 }
 
 const { category = "home" } = Astro.props
-const initialItems = (galleryData.items || galleryData).filter((item) => item.image !== "/hero/hero.jpg")
 ---
 
 <section class="gallery" data-category={category} aria-labelledby="gallery-title">
@@ -17,25 +14,14 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
   </div>
 
   <div class="gallery__grid" id="gallery-grid">
-    {initialItems.map((item, i) => (
-      <button
-        class="gallery__item"
-        data-index={i}
-        data-src={item.image}
-        data-title={item.title || `Foto produk ${i + 1}`}
-        aria-label={`Buka foto produk ${i + 1}`}
-      >
-        <img
-          src={item.image}
-          alt={item.title || `Foto produk Roller Customize ${i + 1}`}
-          loading="lazy"
-          decoding="async"
-          width="600"
-          height="800"
-        />
-        <span class="gallery__caption">{item.title || `Foto produk ${i + 1}`}</span>
-      </button>
-    ))}
+    <div class="gallery__skeleton-grid" id="gallery-skeleton">
+      <div class="gallery__skeleton-card"></div>
+      <div class="gallery__skeleton-card gallery__skeleton-card--tall"></div>
+      <div class="gallery__skeleton-card"></div>
+      <div class="gallery__skeleton-card gallery__skeleton-card--tall"></div>
+      <div class="gallery__skeleton-card gallery__skeleton-card--tall"></div>
+      <div class="gallery__skeleton-card"></div>
+    </div>
   </div>
 
   <div class="gallery__action">
@@ -128,6 +114,52 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
     column-gap: var(--space-4);
   }
 
+  .gallery__skeleton-grid {
+    columns: 2;
+    column-gap: var(--space-4);
+    width: 100%;
+  }
+
+  @media (min-width: 48rem) {
+    .gallery__grid,
+    .gallery__skeleton-grid {
+      columns: 3;
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .gallery__grid,
+    .gallery__skeleton-grid {
+      columns: 4;
+    }
+  }
+
+  .gallery__skeleton-card {
+    break-inside: avoid;
+    display: block;
+    width: 100%;
+    margin-bottom: var(--space-4);
+    border-radius: 8px;
+    background: linear-gradient(
+      110deg,
+      #2b2520 30%,
+      #38302a 50%,
+      #2b2520 70%
+    );
+    background-size: 200% 100%;
+    animation: warmShimmer 1.8s ease-in-out infinite;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gallery__skeleton-card--tall {
+    aspect-ratio: 3 / 5;
+  }
+
+  @keyframes warmShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
   .gallery__action {
     display: flex;
     justify-content: center;
@@ -158,18 +190,6 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
     transform: translateY(-2px);
   }
 
-  @media (min-width: 48rem) {
-    .gallery__grid {
-      columns: 3;
-    }
-  }
-
-  @media (min-width: 72rem) {
-    .gallery__grid {
-      columns: 4;
-    }
-  }
-
   :global(.gallery__item) {
     break-inside: avoid;
     display: block;
@@ -191,7 +211,13 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
     display: block;
     object-fit: cover;
     border-radius: 8px;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    opacity: 0;
+    transition: opacity 0.4s ease-out, transform 0.25s ease;
+  }
+
+  :global(.gallery__item img.loaded),
+  :global(.gallery__item img[complete]) {
+    opacity: 1;
   }
 
   :global(.gallery__item:hover img) {
@@ -332,6 +358,7 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById('gallery-grid');
+    const skeleton = document.getElementById('gallery-skeleton');
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
     const lbCounter = document.getElementById('lightbox-counter');
@@ -354,6 +381,14 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
       items.forEach((btn, i) => {
         btn.setAttribute('data-index', i);
         btn.onclick = () => openLightbox(i);
+        var img = btn.querySelector('img');
+        if (img) {
+          if (img.complete) {
+            img.classList.add('loaded');
+          } else {
+            img.addEventListener('load', function() { img.classList.add('loaded'); });
+          }
+        }
       });
     }
 
@@ -403,26 +438,14 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
       if (e.key === 'ArrowRight') nextPhoto();
     });
 
-    // Initialize with initial server photos first
-    initLightbox();
-
     var section = grid.closest('.gallery');
     var cat = (section && section.getAttribute('data-category')) || 'home';
 
-    // Fetch photos from database/API filtered by category and sync if DB has data
+    // Fetch latest photos from D1 database API directly
     fetch('/api/admin?category=' + cat)
       .then(function(res) { return res.json(); })
       .then(function(data) {
         if (data.success && Array.isArray(data.photos) && data.photos.length > 0) {
-          var currentItems = Array.from(grid.querySelectorAll('.gallery__item'));
-          var currentSrcs = currentItems.map(function(item) { return item.getAttribute('data-src'); });
-          var newSrcs = data.photos.map(function(photo) { return photo.image; });
-
-          // Skip DOM replacement if images match currently displayed list
-          if (currentSrcs.length === newSrcs.length && currentSrcs.every(function(src, idx) { return src === newSrcs[idx]; })) {
-            return;
-          }
-
           grid.innerHTML = '';
 
           data.photos.forEach(function(photo, i) {
@@ -440,6 +463,8 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
             img.decoding = 'async';
             img.width = 600;
             img.height = 800;
+            img.addEventListener('load', function() { img.classList.add('loaded'); });
+            if (img.complete) { img.classList.add('loaded'); }
 
             var span = document.createElement('span');
             span.className = 'gallery__caption';
@@ -451,10 +476,13 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
           });
 
           initLightbox();
+        } else if (skeleton) {
+          skeleton.style.display = 'none';
         }
       })
       .catch(function(err) {
-        console.log('Gallery: error syncing photos from API', err);
+        console.log('Gallery: error fetching photos from API', err);
+        if (skeleton) skeleton.style.display = 'none';
       });
   });
 </script>
