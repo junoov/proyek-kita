@@ -1,12 +1,9 @@
 ---
-import galleryData from "../../data/gallery.json"
-
 type Props = {
   readonly category?: "home" | "pelanggan"
 }
 
 const { category = "home" } = Astro.props
-const galleryItems = (galleryData.items || galleryData).filter((item) => item.image !== "/hero/hero.jpg")
 ---
 
 <section class="gallery" data-category={category} aria-labelledby="gallery-title">
@@ -17,25 +14,14 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   </div>
 
   <div class="gallery__grid" id="gallery-grid">
-    {galleryItems.map((item, i) => (
-      <button
-        class="gallery__item"
-        data-index={i}
-        data-src={item.image}
-        data-title={item.title || `Foto produk ${i + 1}`}
-        aria-label={`Buka foto produk ${i + 1}`}
-      >
-        <img
-          src={item.image}
-          alt={item.title || `Foto produk Roller Customize ${i + 1}`}
-          loading="lazy"
-          decoding="async"
-          width="600"
-          height="800"
-        />
-        <span class="gallery__caption">{item.title || `Foto produk ${i + 1}`}</span>
-      </button>
-    ))}
+    <div class="gallery__loading" id="gallery-loading" aria-label="Memuat foto...">
+      <div class="gallery__skeleton"></div>
+      <div class="gallery__skeleton gallery__skeleton--tall"></div>
+      <div class="gallery__skeleton"></div>
+      <div class="gallery__skeleton gallery__skeleton--tall"></div>
+      <div class="gallery__skeleton gallery__skeleton--tall"></div>
+      <div class="gallery__skeleton"></div>
+    </div>
   </div>
 
   <div class="gallery__action">
@@ -114,6 +100,38 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   .gallery__grid {
     columns: 2;
     column-gap: var(--space-4);
+  }
+
+  .gallery__loading {
+    columns: 2;
+    column-gap: var(--space-4);
+  }
+
+  @media (min-width: 48rem) {
+    .gallery__loading { columns: 3; }
+  }
+
+  @media (min-width: 72rem) {
+    .gallery__loading { columns: 4; }
+  }
+
+  .gallery__skeleton {
+    background: linear-gradient(110deg, rgba(111, 98, 87, 0.15) 40%, rgba(111, 98, 87, 0.25) 50%, rgba(111, 98, 87, 0.15) 60%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border-radius: 8px;
+    break-inside: avoid;
+    height: 14rem;
+    margin-bottom: var(--space-4);
+  }
+
+  .gallery__skeleton--tall {
+    height: 20rem;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 
   .gallery__action {
@@ -391,18 +409,14 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
       if (e.key === 'ArrowRight') nextPhoto();
     });
 
-    // Initialize with static photos first
-    initLightbox();
-
     var section = grid.closest('.gallery');
     var cat = (section && section.getAttribute('data-category')) || 'home';
 
-    // Fetch photos from database/API filtered by category and sync with grid
+    // Fetch photos from database/API filtered by category
     fetch('/api/admin?category=' + cat)
       .then(function(res) { return res.json(); })
       .then(function(data) {
-        if (data.success && Array.isArray(data.photos)) {
-          // Sync grid items with database photos (removing deleted ones)
+        if (data.success && Array.isArray(data.photos) && data.photos.length > 0) {
           grid.innerHTML = '';
 
           data.photos.forEach(function(photo, i) {
@@ -412,14 +426,14 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
             btn.setAttribute('data-src', photo.image);
             btn.setAttribute('data-title', photo.title || ('Foto produk ' + (i + 1)));
             btn.setAttribute('aria-label', 'Buka foto produk ' + (i + 1));
-            btn.style.cssText = 'break-inside:avoid;display:block;width:100%;padding:0;margin:0 0 1rem;background:none;border:none;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;';
 
             var img = document.createElement('img');
             img.src = photo.image;
             img.alt = photo.title || ('Foto produk Roller Customize ' + (i + 1));
             img.loading = 'lazy';
             img.decoding = 'async';
-            img.style.cssText = 'width:100%;height:auto;display:block;object-fit:cover;border-radius:8px;';
+            img.width = 600;
+            img.height = 800;
 
             var span = document.createElement('span');
             span.className = 'gallery__caption';
@@ -430,12 +444,18 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
             grid.appendChild(btn);
           });
 
-          // Re-initialize lightbox with current photos from DB
           initLightbox();
+        } else {
+          // No photos — remove skeleton
+          var loader = document.getElementById('gallery-loading');
+          if (loader) loader.remove();
         }
       })
       .catch(function(err) {
-        console.log('Gallery: error syncing photos from API', err);
+        console.log('Gallery: error fetching photos from API', err);
+        // Keep skeleton hidden on error
+        var loader = document.getElementById('gallery-loading');
+        if (loader) loader.remove();
       });
   });
 </script>

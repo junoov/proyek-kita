@@ -32,7 +32,13 @@ export const GET: APIRoute = async ({ request, locals }) => {
         photos: filtered 
       }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+          'CDN-Cache-Control': 'no-store',
+          'Surrogate-Control': 'no-store'
+        }
       });
     }
 
@@ -85,12 +91,22 @@ export const GET: APIRoute = async ({ request, locals }) => {
       photos: results || [] 
     }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+        'CDN-Cache-Control': 'no-store',
+        'Surrogate-Control': 'no-store'
+      }
     });
   } catch (err: any) {
     return new Response(JSON.stringify({ success: false, message: err.message }), { 
       status: 500,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0'
+      }
     });
   }
 };
