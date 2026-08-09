@@ -33,6 +33,22 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
     ))}
   </div>
 
+  <div class="gallery__action">
+    <a
+      href="https://drive.google.com/drive/folders/1dd4eTaFRED5yIjjGizIdjR4pCpfgTphp"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="button button--signal gallery__drive-btn"
+    >
+      <span>Pricelist</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+    </a>
+  </div>
+
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox foto" hidden>
     <button class="lightbox__close" id="lightbox-close" aria-label="Tutup lightbox">
@@ -56,7 +72,7 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
     background: var(--color-canvas);
     margin: 0 auto;
     max-width: var(--layout-max);
-    padding: var(--space-20) var(--layout-edge);
+    padding: var(--space-20) var(--layout-edge) var(--space-8);
   }
 
   .gallery__header {
@@ -93,6 +109,36 @@ const galleryItems = (galleryData.items || galleryData).filter((item) => item.im
   .gallery__grid {
     columns: 2;
     column-gap: var(--space-4);
+  }
+
+  .gallery__action {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-8);
+  }
+
+  .gallery__drive-btn {
+    align-items: center;
+    background: var(--color-signal);
+    border: var(--rule-width) solid var(--color-signal);
+    color: var(--color-on-signal, var(--color-text-inverse));
+    display: inline-flex;
+    font-size: var(--type-small);
+    font-weight: var(--font-weight-semibold);
+    gap: var(--space-3);
+    justify-content: center;
+    min-height: var(--space-12);
+    min-width: min(28rem, 100%);
+    padding: var(--space-3) var(--space-8);
+    text-align: center;
+    transition: background-color var(--transition-micro), border-color var(--transition-micro), transform var(--transition-micro);
+  }
+
+  .gallery__drive-btn:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-text-inverse);
+    transform: translateY(-2px);
   }
 
   @media (min-width: 48rem) {
