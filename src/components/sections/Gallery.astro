@@ -60,20 +60,31 @@ const { category = "home" } = Astro.props
 
 <style>
   .gallery {
-    background: var(--color-canvas);
-    margin: var(--space-16) auto 0;
+    background-color: #3d352e;
+    color: #f7f3ee;
+    --color-text: #f7f3ee;
+    --color-text-muted: #d8cfc4;
+    --color-signal: #d8cfc4;
+    width: 100%;
+    margin: 0;
+    padding: var(--space-20) var(--layout-edge) var(--space-16);
+  }
+
+  .gallery__header,
+  .gallery__grid,
+  .gallery__action {
+    margin-left: auto;
+    margin-right: auto;
     max-width: var(--layout-max);
-    padding: var(--space-16) var(--layout-edge) var(--space-8);
   }
 
   .gallery__header {
-    max-width: 36rem;
     margin-bottom: var(--space-12);
   }
 
   .gallery__tag {
     display: inline-block;
-    color: var(--color-signal);
+    color: #d8cfc4;
     font-size: var(--type-label);
     font-family: var(--font-display);
     font-weight: var(--font-weight-bold);
@@ -83,6 +94,7 @@ const { category = "home" } = Astro.props
   }
 
   .gallery__header h2 {
+    color: #f7f3ee;
     font-family: var(--font-display);
     font-size: var(--type-h2);
     font-weight: var(--font-weight-bold);
@@ -92,7 +104,7 @@ const { category = "home" } = Astro.props
   }
 
   .gallery__header p {
-    color: var(--color-text-muted);
+    color: #d8cfc4;
     font-size: var(--type-lead);
     margin: 0;
   }

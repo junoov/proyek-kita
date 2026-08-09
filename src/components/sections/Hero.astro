@@ -80,6 +80,18 @@ import Button from "../ui/Button.astro"
     background: var(--color-ink);
   }
 
+  .hero :global(.button--signal) {
+    background: #a79a8a;
+    border-color: #a79a8a;
+    color: #1a1a1a;
+  }
+
+  .hero :global(.button--signal:hover) {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #f7f3ee;
+  }
+
   .hero__visual {
     position: absolute;
     inset: 0;
