@@ -28,10 +28,11 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
         <img
           src={item.image}
           alt={item.title || `Foto produk Roller Customize ${i + 1}`}
-          loading={i < 4 ? "eager" : "lazy"}
+          loading="lazy"
           decoding="async"
           width="600"
           height="800"
+          onload="this.classList.add('loaded')"
         />
         <span class="gallery__caption">{item.title || `Foto produk ${i + 1}`}</span>
       </button>
@@ -176,7 +177,7 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
     width: 100%;
     padding: 0;
     margin: 0 0 var(--space-4);
-    background: rgba(216, 207, 196, 0.08);
+    background: #2b2520;
     border: none;
     cursor: pointer;
     position: relative;
@@ -191,7 +192,13 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
     display: block;
     object-fit: cover;
     border-radius: 8px;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    opacity: 0;
+    transition: opacity 0.4s ease-out, transform 0.25s ease;
+  }
+
+  :global(.gallery__item img.loaded),
+  :global(.gallery__item img[complete]) {
+    opacity: 1;
   }
 
   :global(.gallery__item:hover img) {
@@ -354,6 +361,14 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
       items.forEach((btn, i) => {
         btn.setAttribute('data-index', i);
         btn.onclick = () => openLightbox(i);
+        var img = btn.querySelector('img');
+        if (img) {
+          if (img.complete) {
+            img.classList.add('loaded');
+          } else {
+            img.addEventListener('load', function() { img.classList.add('loaded'); });
+          }
+        }
       });
     }
 
@@ -436,10 +451,12 @@ const initialItems = (galleryData.items || galleryData).filter((item) => item.im
             var img = document.createElement('img');
             img.src = photo.image;
             img.alt = photo.title || ('Foto produk Roller Customize ' + (i + 1));
-            // Omit loading="lazy" on dynamically injected JS elements to avoid Edge/Chromium placeholder intervention
+            img.loading = 'lazy';
             img.decoding = 'async';
             img.width = 600;
             img.height = 800;
+            img.addEventListener('load', function() { img.classList.add('loaded'); });
+            if (img.complete) { img.classList.add('loaded'); }
 
             var span = document.createElement('span');
             span.className = 'gallery__caption';
