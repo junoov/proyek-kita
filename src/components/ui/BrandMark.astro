@@ -26,53 +26,60 @@ const className = [
 
 <style>
   .brand-mark {
+    --mark-size: 1.65rem;
+    --mark-font: 0.88rem;
     align-items: center;
     color: var(--color-text);
     display: inline-flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     line-height: 1;
     text-decoration: none;
   }
 
+  .brand-mark--sm {
+    --mark-size: 1.35rem;
+    --mark-font: 0.72rem;
+  }
+
+  .brand-mark--lg {
+    --mark-size: 2.2rem;
+    --mark-font: 1.15rem;
+  }
+
   .brand-mark__glyph {
     display: block;
-    height: 1.875rem;
-    width: 1.875rem;
+    height: var(--mark-size);
+    width: var(--mark-size);
     flex-shrink: 0;
   }
 
   .brand-mark__copy {
-    display: grid;
-    font-family: var(--font-sans, "Helvetica Neue", Helvetica, Arial, sans-serif);
-    font-size: 0.9rem;
-    gap: 0;
-    letter-spacing: 0.04em;
-    line-height: 1.02;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: var(--mark-size);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: var(--mark-font);
+    letter-spacing: 0.02em;
+    line-height: 0.82;
   }
 
   .brand-mark__copy span {
-    font-weight: var(--font-weight-bold);
+    display: block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
     text-transform: uppercase;
+  }
+
+  .brand-mark__copy span:first-child {
+    margin-top: -0.05em;
+  }
+
+  .brand-mark__copy span:last-child {
+    margin-bottom: -0.11em;
   }
 
   .brand-mark--inverse {
     color: var(--color-text-inverse);
   }
-
-  .brand-mark--sm .brand-mark__glyph {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-  .brand-mark--sm .brand-mark__copy {
-    font-size: 0.775rem;
-  }
-
-  .brand-mark--lg .brand-mark__glyph {
-    height: 2.5rem;
-    width: 2.5rem;
-  }
-  .brand-mark--lg .brand-mark__copy {
-    font-size: 1.2rem;
-  }
 </style>
-
