@@ -5,8 +5,8 @@ type Props = {
 }
 
 const {
-  heading = "Dari brief sampai batch.",
-  lede = "Komitmen kami untuk memberikan pengalaman produksi konveksi yang mudah, tepat, dan terpercaya."
+  heading = "Komitmen kami untuk memberikan pengalaman produksi konveksi yang mudah, tepat, dan terpercaya.",
+  lede = ""
 } = Astro.props
 
 const features = [
@@ -47,7 +47,7 @@ const features = [
   <header class="services__heading">
     <p>Keunggulan & Layanan</p>
     <h2 id="services-title">{heading}</h2>
-    <span>{lede}</span>
+    {lede && <span>{lede}</span>}
   </header>
 
   <div class="features-list">
@@ -89,8 +89,9 @@ const features = [
     font-size: var(--type-h2);
     font-weight: var(--font-weight-bold);
     letter-spacing: -0.04em;
-    line-height: 1.05;
+    line-height: 1.15;
     margin: 0;
+    max-width: 48rem;
   }
 
   .services__heading span {
@@ -153,7 +154,7 @@ const features = [
   @media (min-width: 48rem) {
     .services__heading {
       align-items: start;
-      grid-template-columns: 1fr 1.6fr 1fr;
+      grid-template-columns: 1fr 2.6fr;
       gap: var(--space-8);
     }
 
