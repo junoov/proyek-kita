@@ -11,34 +11,34 @@ const {
 
 const features = [
   {
-    number: "01",
     title: "MOQ Rendah",
     description: "Fleksibilitas jumlah pemesanan mulai dari 24 pcs untuk memenuhi kebutuhan tim Anda.",
-    note: "Mulai 24 pcs"
+    note: "Mulai 24 pcs",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`
   },
   {
-    number: "02",
     title: "Form Spesifikasi",
     description: "Sistem formulir terstruktur untuk mendetailkan bahan, ukuran, warna, dan bordir secara presisi.",
-    note: "Brief terstruktur"
+    note: "Brief terstruktur",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`
   },
   {
-    number: "03",
     title: "Harga Kompetitif",
     description: "Penawaran harga rasional dan transparan sesuai rincian bahan serta spesifikasi yang Anda pilih.",
-    note: "Rincian terbuka"
+    note: "Rincian terbuka",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>`
   },
   {
-    number: "04",
     title: "Bergaransi",
     description: "Jaminan kualitas produksi dan garansi perbaikan jika terdapat ketidaksesuaian spesifikasi.",
-    note: "Kontrol mutu"
+    note: "Kontrol mutu",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`
   },
   {
-    number: "05",
     title: "Pengiriman ke Seluruh Indonesia",
     description: "Jangkauan pengiriman aman dan terpercaya ke seluruh wilayah dan pelosok Indonesia.",
-    note: "Jangkauan nasional"
+    note: "Jangkauan nasional",
+    icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`
   }
 ]
 ---
@@ -53,7 +53,7 @@ const features = [
   <div class="features-list">
     {features.map((item) => (
       <article class="feature-item">
-        <span class="feature-item__number" aria-hidden="true">{item.number}</span>
+        <span class="feature-item__icon" aria-hidden="true" set:html={item.icon} />
         <h3>{item.title}</h3>
         <p class="feature-item__description">{item.description}</p>
         <span class="feature-item__note">{item.note}</span>
@@ -113,32 +113,44 @@ const features = [
     padding: var(--space-6) 0;
   }
 
-  .feature-item__number {
+  .feature-item__icon {
+    align-items: center;
+    align-self: center;
     color: var(--color-signal);
-    font-family: var(--font-display);
-    font-size: var(--type-small);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.08em;
-    line-height: 1.5;
+    display: flex;
+    grid-column: 1;
+    grid-row: 1;
+    height: 2.5rem;
+    justify-content: center;
+    width: 2.5rem;
+  }
+
+  .feature-item__icon :global(svg) {
+    height: 1.75rem;
+    width: 1.75rem;
   }
 
   .feature-item h3 {
+    align-self: center;
+    color: var(--color-text);
     font-family: var(--font-display);
     font-size: var(--type-h3);
     font-weight: var(--font-weight-bold);
+    grid-column: 2;
+    grid-row: 1;
     letter-spacing: -0.02em;
-    margin: 0;
     line-height: 1.3;
-    color: var(--color-text);
+    margin: 0;
   }
 
   .feature-item__description {
     color: var(--color-text-muted);
     font-size: var(--type-body);
+    grid-column: 2;
+    grid-row: 2;
     line-height: 1.55;
     margin: 0;
     max-width: 50rem;
-    grid-column: 2;
   }
 
   .feature-item__note {
@@ -146,6 +158,7 @@ const features = [
     font-size: var(--type-label);
     font-weight: var(--font-weight-bold);
     grid-column: 2;
+    grid-row: 3;
     letter-spacing: 0.06em;
     line-height: 1.4;
     text-transform: uppercase;
@@ -154,23 +167,43 @@ const features = [
   @media (min-width: 48rem) {
     .services__heading {
       align-items: start;
-      grid-template-columns: 1fr 2.6fr;
       gap: var(--space-8);
+      grid-template-columns: 1fr 2.6fr;
     }
 
     .feature-item {
+      align-items: start;
       gap: var(--space-2) var(--space-6);
       grid-template-columns: 3rem minmax(0, 1fr) 10rem;
       padding: var(--space-8) var(--space-4);
     }
 
-    .feature-item h3,
+    .feature-item__icon {
+      align-self: center;
+      grid-column: 1;
+      grid-row: 1;
+      height: 3rem;
+      width: 3rem;
+    }
+
+    .feature-item__icon :global(svg) {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    .feature-item h3 {
+      align-self: center;
+      grid-column: 2;
+      grid-row: 1;
+    }
+
     .feature-item__description {
       grid-column: 2;
+      grid-row: 2;
     }
 
     .feature-item__note {
-      align-self: start;
+      align-self: center;
       grid-column: 3;
       grid-row: 1 / span 2;
       text-align: right;
@@ -179,16 +212,33 @@ const features = [
 
   @media (min-width: 64rem) {
     .feature-item {
-      align-items: start;
+      align-items: center;
       gap: var(--space-6);
-      grid-template-columns: 3rem 12rem minmax(0, 1fr) 10.5rem;
+      grid-template-columns: 3rem 13rem minmax(0, 1fr) 10.5rem;
     }
 
-    .feature-item h3,
-    .feature-item__description,
+    .feature-item__icon {
+      align-self: center;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .feature-item h3 {
+      align-self: center;
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .feature-item__description {
+      align-self: center;
+      grid-column: 3;
+      grid-row: 1;
+    }
+
     .feature-item__note {
-      grid-column: auto;
-      grid-row: auto;
+      align-self: center;
+      grid-column: 4;
+      grid-row: 1;
     }
   }
 </style>
